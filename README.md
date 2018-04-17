@@ -58,3 +58,8 @@ pylab.ion()
 pylab.figure()
 pypoman.plot_polygon(vertices)
 ```
+
+## See also
+
+- The
+  [Polyhedron](http://doc.sagemath.org/html/en/reference/discrete_geometry/sage/geometry/polyhedron/constructor.html) class in [Sage](http://www.sagemath.org/)
