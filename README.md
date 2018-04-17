@@ -1,4 +1,4 @@
-# Convex Polyhedron Manipulation in Python
+# Polyhedron Manipulation in Python
 
 This library implements common operations over [convex
 polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron):
