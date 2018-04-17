@@ -63,3 +63,5 @@ pypoman.plot_polygon(vertices)
 
 - The
   [Polyhedron](http://doc.sagemath.org/html/en/reference/discrete_geometry/sage/geometry/polyhedron/constructor.html) class in [Sage](http://www.sagemath.org/)
+- The [StabiliPy](https://github.com/haudren/stabilipy) package provides a more
+  general recursive projection method
