@@ -1,5 +1,8 @@
 # Convex Polyhedron Manipulation in Python
 
+This library implements common operations over [convex
+polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron):
+
 - Conversion between halfspace (H-rep) and vertex (V-rep) representations
 - Polytope projection
 
@@ -11,9 +14,9 @@ sudo apt-get install cython libglpk-dev python python-dev python-pip python-scip
 CVXOPT_BUILD_GLPK=1 pip install cvxopt --user
 pip install pycddlib --user
 ```
-Remove ``--user`` arguments to install Python modules system-wide.
+You can remove all ``--user`` arguments to install these Python modules system-wide.
 
-Finally, clone this repository and run the setup script:
+Finally, clone this repository and run its setup script:
 ```
 git clone https://github.com/stephane-caron/pypoman.git && cd pypoman
 python setup.py build
