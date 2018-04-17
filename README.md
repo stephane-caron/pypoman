@@ -61,6 +61,7 @@ pypoman.plot_polygon(vertices)
 
 ## See also
 
+- Komei Fukuda's [Frequently Asked Questions in Polyhedral Computation](http://www.cs.mcgill.ca/~fukuda/soft/polyfaq/polyfaq.html)
 - The
   [Polyhedron](http://doc.sagemath.org/html/en/reference/discrete_geometry/sage/geometry/polyhedron/constructor.html) class in [Sage](http://www.sagemath.org/)
 - The [StabiliPy](https://github.com/haudren/stabilipy) package provides a more
