@@ -145,7 +145,7 @@ def project_polytope(proj, ineq, eq=None, method='cdd'):
     return vertices
 
 
-def project_polytope_bretl(proj, ineq, eq, max_radius=42.):
+def project_polytope_bretl(proj, ineq, eq, max_radius=1e5):
     """
     Project a polytope into a 2D polygon using the incremental projection
     algorithm from [Bretl08]_. The 2D affine projection :math:`y = E x + f` is
@@ -166,7 +166,7 @@ def project_polytope_bretl(proj, ineq, eq, max_radius=42.):
         Pair (`C`, `d`) describing the equality constraint.
     max_radius : scalar, optional
         Maximum distance from origin (in [m]) used to make sure the output
-        is bounded. Default is 42 [m].
+        is bounded.
 
     Returns
     -------
