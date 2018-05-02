@@ -25,11 +25,13 @@ from intersection import intersect_line_cylinder
 from intersection import intersect_line_polygon
 from intersection import intersect_polygons
 from plot import plot_polygon
+from polygon import compute_polygon_hull
 from projection import project_polytope
 from projection import project_polytope_bretl
 
 __all__ = [
     'compute_cone_face_matrix',
+    'compute_polygon_hull',
     'compute_polytope_halfspaces',
     'compute_polytope_vertices',
     'intersect_line_cylinder',
