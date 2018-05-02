@@ -18,16 +18,17 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with pypoman. If not, see <http://www.gnu.org/licenses/>.
 
-from duality import compute_cone_face_matrix
-from duality import compute_polytope_halfspaces
-from duality import compute_polytope_vertices
-from intersection import intersect_line_cylinder
-from intersection import intersect_line_polygon
-from intersection import intersect_polygons
-from plot import plot_polygon
-from polygon import compute_polygon_hull
-from projection import project_polytope
-from projection import project_polytope_bretl
+from .duality import compute_cone_face_matrix
+from .duality import compute_polytope_halfspaces
+from .duality import compute_polytope_vertices
+from .intersection import intersect_line_cylinder
+from .intersection import intersect_line_polygon
+from .intersection import intersect_polygons
+from .lp import solve_lp
+from .plot import plot_polygon
+from .polygon import compute_polygon_hull
+from .projection import project_polytope
+from .projection import project_polytope_bretl
 
 __all__ = [
     'compute_cone_face_matrix',
@@ -40,4 +41,5 @@ __all__ = [
     'plot_polygon',
     'project_polytope',
     'project_polytope_bretl',
+    'solve_lp',
 ]
