@@ -2,22 +2,22 @@
 # -*- coding: utf-8 -*-
 #
 # Copyright (C) 2016 Quang-Cuong Pham <cuong.pham@normalesup.org>
-# Copyright (C) 2017 Stephane Caron <stephane.caron@lirmm.fr>
+# Copyright (C) 2017-2018 Stephane Caron <stephane.caron@lirmm.fr>
 #
-# This file is part of pymanoid <https://github.com/stephane-caron/pymanoid>.
+# This file is part of pypoman <https://github.com/stephane-caron/pypoman>.
 #
-# pymanoid is free software: you can redistribute it and/or modify it under the
+# pypoman is free software: you can redistribute it and/or modify it under the
 # terms of the GNU Lesser General Public License as published by the Free
 # Software Foundation, either version 3 of the License, or (at your option) any
 # later version.
 #
-# pymanoid is distributed in the hope that it will be useful, but WITHOUT ANY
+# pypoman is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
 # A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
 # details.
 #
 # You should have received a copy of the GNU Lesser General Public License
-# along with pymanoid. If not, see <http://www.gnu.org/licenses/>.
+# along with pypoman. If not, see <http://www.gnu.org/licenses/>.
 
 from numpy import array, cos, cross, pi, sin
 from numpy.random import random
@@ -136,7 +136,7 @@ def optimize_direction(vdir, lp, solver=GLPK_IF_AVAILABLE):
         Direction in which the optimization is performed.
     lp : array tuple
         Tuple `(q, G, h, A, b)` defining the LP. See
-        :func:`pymanoid.thirdparty.cvxopt_.solve_lp` for details.
+        :func:`pypoman.lp..solve_lp` for details.
     solver : string, optional
         Backend LP solver to call.
 
@@ -166,7 +166,7 @@ def optimize_angle(theta, lp, solver=GLPK_IF_AVAILABLE):
         Angle of the direction in which the optimization is performed.
     lp : array tuple
         Tuple `(q, G, h, A, b)` defining the LP. See
-        :func:`pymanoid.thirdparty.cvxopt_.solve_lp` for details.
+        :func:`pypoman.lp..solve_lp` for details.
     solver : string, optional
         Backend LP solver to call.
 
@@ -191,7 +191,7 @@ def compute_polygon(lp, max_iter=1000, solver=GLPK_IF_AVAILABLE):
     ----------
     lp : array tuple
         Tuple `(q, G, h, A, b)` defining the linear program. See
-        :func:`pymanoid.thirdparty.cvxopt_.solve_lp` for details.
+        :func:`pypoman.lp.solve_lp` for details.
     max_iter : integer, optional
         Maximum number of calls to the LP solver.
     solver : string, optional
