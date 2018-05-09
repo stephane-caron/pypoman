@@ -70,8 +70,8 @@ n = 10  # dimension of the original polytope
 p = 2   # dimension of the projected polytope
 
 # Original polytope:
-# - Inequality constraints: \forall i, |x_i| <= 1
-# - Equality constraint: sum_i x_i = 0
+# - inequality constraints: \forall i, |x_i| <= 1
+# - equality constraint: sum_i x_i = 0
 A = vstack([+eye(n), -eye(n)])
 b = ones(2 * n)
 C = ones(n).reshape((1, n))
@@ -87,18 +87,12 @@ f = zeros(p)
 proj = (E, f)  # proj(x) = E * x + f
 
 vertices = pypoman.project_polytope(proj, ineq, eq, method='bretl')
-```
 
-### Plotting a 2D polygon
-
-You can try the following on any of the sets ``vertices`` computed above:
-
-```python
-import pylab
-
-pylab.ion()
-pylab.figure()
-pypoman.plot_polygon(vertices)
+if __name__ == "__main__":   # plot projected polytope
+    import pylab
+    pylab.ion()
+    pylab.figure()
+    pypoman.plot_polygon(vertices)
 ```
 
 ## See also
