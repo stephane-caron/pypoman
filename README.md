@@ -99,7 +99,7 @@ if __name__ == "__main__":   # plot projected polytope
 
 - A short introduction to [Polyhedra and
   polytopes](https://scaron.info/teaching/polyhedra-and-polytopes.html)
-- Komei Fukuda's [Frequently Asked Questions in Polyhedral Computation](http://www.cs.mcgill.ca/~fukuda/soft/polyfaq/polyfaq.html)
+- Komei Fukuda's [Frequently Asked Questions in Polyhedral Computation](http://www.cs.mcgill.ca/~fukuda/soft/polyfaq/)
 - The
   [Polyhedron](http://doc.sagemath.org/html/en/reference/discrete_geometry/sage/geometry/polyhedron/constructor.html) class in [Sage](http://www.sagemath.org/)
 - The [StabiliPy](https://github.com/haudren/stabilipy) package provides a more
