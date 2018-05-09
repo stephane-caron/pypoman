@@ -25,7 +25,7 @@ python setup.py install --user
 
 ## Examples
 
-### Enumerating vertices of a polytope
+### Vertex enumeration
 
 We can compute the list of vertices of a polytope described in halfspace
 representation by ``A * x <= b``:
