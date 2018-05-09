@@ -55,7 +55,6 @@ A = numpy.array([
     [0,  1,  0,  0,  1,  0,  0,  1,  0,  0,  1,  0],
     [0,  0,  1,  0,  0,  1,  0,  0,  1,  0,  0,  1]])
 b = numpy.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 2, 3])
-
 vertices = pypoman.compute_polytope_vertices(A, b)
 ```
 
@@ -92,7 +91,9 @@ vertices = pypoman.project_polytope(proj, ineq, eq, method='bretl')
 
 ### Plotting a 2D polygon
 
-```
+You can try the following on any of the sets ``vertices`` computed above:
+
+```python
 import pylab
 
 pylab.ion()
