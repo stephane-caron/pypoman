@@ -7,7 +7,7 @@ polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron):
 - [Duality](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality): conversion between halfspace and vertex representations
 - [Chebyshev center](https://scaron.info/doc/pypoman/index.html#chebyshev-center) calculation
 
-See the [pypoman API documentation](https://scaron.info/doc/pypoman/) for
+See the complete [API documentation](https://scaron.info/doc/pypoman/) for
 details.
 
 ## Installation
