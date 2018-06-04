@@ -25,8 +25,8 @@ from .intersection import intersect_line_cylinder
 from .intersection import intersect_line_polygon
 from .intersection import intersect_polygons
 from .lp import solve_lp
-from .plot import plot_polygon
 from .polygon import compute_polygon_hull
+from .polygon import plot_polygon
 from .projection import project_polytope
 from .projection import project_polytope_bretl
 

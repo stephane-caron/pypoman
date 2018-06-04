@@ -3,8 +3,12 @@
 This library implements common operations over [convex
 polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron):
 
-- Conversion between halfspace (H-rep) and vertex (V-rep) representations
-- Polytope projection
+- [Polytope projection](https://scaron.info/doc/pypoman/index.html#module-pypoman.projection)
+- [Duality](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality): conversion between halfspace and vertex representations
+- [Chebyshev center](https://scaron.info/doc/pypoman/index.html#chebyshev-center) calculation
+
+See the [pypoman API documentation](https://scaron.info/doc/pypoman/) for
+details.
 
 ## Installation
 

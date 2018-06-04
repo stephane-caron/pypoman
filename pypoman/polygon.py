@@ -18,7 +18,9 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with pypoman. If not, see <http://www.gnu.org/licenses/>.
 
+from matplotlib.patches import Polygon
 from numpy import array, dot, hstack
+from pylab import axis, gca
 from scipy.spatial import ConvexHull
 
 from .polyhedron import compute_chebyshev_center
@@ -125,3 +127,39 @@ def compute_polygon_hull(B, c):
     if x is not None:
         vertices = [v + x for v in vertices]
     return vertices
+
+
+def plot_polygon(points, alpha=.4, color='g', linestyle='solid', fill=True,
+                 linewidth=None):
+    """
+    Plot a polygon in matplotlib.
+
+    Parameters
+    ----------
+    points : list of arrays
+        List of poitns.
+    alpha : scalar, optional
+        Transparency value.
+    color : string, optional
+        Color in matplotlib format.
+    linestyle : scalar, optional
+        Line style in matplotlib format.
+    fill : bool, optional
+        When ``True``, fills the area inside the polygon.
+    linewidth : scalar, optional
+        Line width in matplotlib format.
+    """
+    if type(points) is list:
+        points = array(points)
+    ax = gca()
+    hull = ConvexHull(points)
+    points = points[hull.vertices, :]
+    xmin1, xmax1, ymin1, ymax1 = axis()
+    xmin2, ymin2 = 1.5 * points.min(axis=0)
+    xmax2, ymax2 = 1.5 * points.max(axis=0)
+    axis((min(xmin1, xmin2), max(xmax1, xmax2),
+          min(ymin1, ymin2), max(ymax1, ymax2)))
+    patch = Polygon(
+        points, alpha=alpha, color=color, linestyle=linestyle, fill=fill,
+        linewidth=linewidth)
+    ax.add_patch(patch)
