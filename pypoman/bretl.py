@@ -215,6 +215,8 @@ def compute_polygon(lp, max_iter=1000, solver=GLPK_IF_AVAILABLE):
         if all([norm(z - z0) > 1e-5 for z0 in init_vertices]):
             init_vertices.append(z)
         max_iter -= 1
+    if len(init_vertices) < 3:
+        raise Exception("problem is not linearly feasible")
     v0 = Vertex(init_vertices[0])
     v1 = Vertex(init_vertices[1])
     v2 = Vertex(init_vertices[2])
