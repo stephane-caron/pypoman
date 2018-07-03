@@ -52,7 +52,7 @@ See the complete `API documentation <%s>`_ for details.
 Installation
 ------------
 
-Install dependencies by:
+First, install all dependencies:
 
 .. code-block::
 
@@ -60,16 +60,13 @@ Install dependencies by:
     CVXOPT_BUILD_GLPK=1 pip install cvxopt --user
     pip install pycddlib --user
 
-You can remove all ``--user`` arguments to install these Python modules
-system-wide.
-
-Finally, clone this repository and run its setup script:
+Then, install the module itself:
 
 .. code-block::
 
-    git clone https://github.com/stephane-caron/pypoman.git && cd pypoman
-    python setup.py build
-    python setup.py install --user
+    pip install pypoman --user
+
+You can remove the ``--user`` options to install modules system-wide.
 
 Examples
 --------
@@ -150,7 +147,7 @@ first two coordinates ``proj(x) = [x_1 x_2]``:
 
 setup(
     name='pypoman',
-    version='0.4.3',
+    version='0.4.4',
     description="Python Polyhedron Manipulation",
     long_description=long_description,
     url="https://github.com/stephane-caron/pypoman",
