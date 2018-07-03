@@ -147,7 +147,7 @@ first two coordinates ``proj(x) = [x_1 x_2]``:
 
 setup(
     name='pypoman',
-    version='0.4.4',
+    version='0.5.0',
     description="Python Polyhedron Manipulation",
     long_description=long_description,
     url="https://github.com/stephane-caron/pypoman",
