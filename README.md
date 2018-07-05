@@ -4,17 +4,14 @@ This library implements common operations over [convex polyhedra](https://en.wik
 
 ## Installation
 
-First, install all dependencies:
+Make sure you have all system-wide dependencies by:
 ```
 sudo apt-get install cython libglpk-dev python python-dev python-pip python-scipy
-CVXOPT_BUILD_GLPK=1 pip install cvxopt --user
-pip install pycddlib --user
 ```
 Then, install the module itself:
 ```
-pip install pypoman --user
+pip install pypoman
 ```
-You can remove the ``--user`` options to install modules system-wide.
 
 ## Examples
 

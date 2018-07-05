@@ -18,7 +18,9 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with pypoman. If not, see <http://www.gnu.org/licenses/>.
 
-from distutils.core import setup
+import os
+
+from setuptools import setup
 
 classifiers = """\
 Development Status :: 5 - Production/Stable
@@ -49,21 +51,17 @@ halfspace and vertex representations), `Chebyshev center <%s>`_ computation,
 Installation
 ------------
 
-First, install all dependencies:
+Make sure you have all system-wide dependencies by:
 
 .. code-block::
 
     sudo apt-get install %s
-    CVXOPT_BUILD_GLPK=1 pip install cvxopt --user
-    pip install pycddlib --user
 
 Then, install the module itself:
 
 .. code-block::
 
-    pip install pypoman --user
-
-You can remove the ``--user`` options to install modules system-wide.
+    pip install pypoman
 
 Examples
 --------
@@ -142,9 +140,11 @@ first two coordinates ``proj(x) = [x_1 x_2]``:
         pypoman.plot_polygon(vertices)
 """ % tuple(links + packages)
 
+os.environ['CVXOPT_BUILD_GLPK'] = '1'
+
 setup(
     name='pypoman',
-    version='0.5.0',
+    version='0.5.1',
     description="Python Polyhedron Manipulation",
     long_description=long_description,
     url="https://github.com/stephane-caron/pypoman",
@@ -153,5 +153,6 @@ setup(
     license="LGPL",
     keywords="convex, polyhedron, polytope, projection, duality",
     classifiers=classifiers.split('\n'),
-    packages=['pypoman']
+    packages=['pypoman'],
+    install_requires=['cvxopt', 'pycddlib']
 )
