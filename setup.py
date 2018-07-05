@@ -50,21 +50,6 @@ etc.
 
 See the complete `API documentation <%s>`_ for details.
 
-Installation
-------------
-
-Make sure you have all system-wide dependencies by:
-
-.. code-block::
-
-    sudo apt-get install %s
-
-Then, install the module itself:
-
-.. code-block::
-
-    pip install pypoman
-
 Examples
 --------
 
