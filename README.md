@@ -1,14 +1,6 @@
 # Polyhedron Manipulation in Python
 
-This library implements common operations over [convex
-polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron):
-
-- [Polytope projection](https://scaron.info/doc/pypoman/index.html#module-pypoman.projection)
-- [Duality](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality): conversion between halfspace and vertex representations
-- [Chebyshev center](https://scaron.info/doc/pypoman/index.html#chebyshev-center) calculation
-
-See the complete [API documentation](https://scaron.info/doc/pypoman/) for
-details.
+This library implements common operations over [convex polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron) such as [polytope projection](https://scaron.info/doc/pypoman/index.html#module-pypoman.projection), [double description](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality) (conversions between halfspace and vertex representations), [Chebyshev center](https://scaron.info/doc/pypoman/index.html#chebyshev-center) computation, ... See the complete [API documentation](https://scaron.info/doc/pypoman/) for details.
 
 ## Installation
 
@@ -103,5 +95,5 @@ if __name__ == "__main__":   # plot projected polytope
 - Komei Fukuda's [Frequently Asked Questions in Polyhedral Computation](http://www.cs.mcgill.ca/~fukuda/soft/polyfaq/)
 - The
   [Polyhedron](http://doc.sagemath.org/html/en/reference/discrete_geometry/sage/geometry/polyhedron/constructor.html) class in [Sage](http://www.sagemath.org/)
-- The [StabiliPy](https://github.com/haudren/stabilipy) package provides a more
-  general recursive projection method
+- [StabiliPy](https://github.com/haudren/stabilipy): a Python package
+  implementing a more general recursive method for polytope projection

@@ -41,13 +41,10 @@ links = [
 packages = ["cython libglpk-dev python python-dev python-pip python-scipy"]
 
 long_description = """\
-This library implements common operations over `convex polyhedra <%s>`_:
-
-- `Polytope projection <%s>`_
-- `Duality <%s>`_: conversion between halfspace and vertex representations
-- `Chebyshev center <%s>`_ calculation
-
-See the complete `API documentation <%s>`_ for details.
+This library implements common operations over `convex polyhedra <%s>`_ such
+as `polytope projection <%s>`_, `double description <%s>`_ (conversion between
+halfspace and vertex representations), `Chebyshev center <%s>`_ computation,
+... See the complete `API documentation <%s>`_ for details.
 
 Installation
 ------------
