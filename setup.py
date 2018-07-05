@@ -45,8 +45,10 @@ packages = ["cython libglpk-dev python python-dev python-pip python-scipy"]
 long_description = """\
 This library implements common operations over `convex polyhedra <%s>`_ such
 as `polytope projection <%s>`_, `double description <%s>`_ (conversion between
-halfspace and vertex representations), `Chebyshev center <%s>`_ computation,
-... See the complete `API documentation <%s>`_ for details.
+halfspace and vertex representations), computing the `Chebyshev center <%s>`_,
+etc.
+
+See the complete `API documentation <%s>`_ for details.
 
 Installation
 ------------
@@ -144,14 +146,14 @@ os.environ['CVXOPT_BUILD_GLPK'] = '1'
 
 setup(
     name='pypoman',
-    version='0.5.1',
-    description="Python Polyhedron Manipulation",
+    version='0.5.3',
+    description="Polyhedron and polytope manipulation in Python",
     long_description=long_description,
     url="https://github.com/stephane-caron/pypoman",
     author="Stéphane Caron",
     author_email="stephane.caron@lirmm.fr",
     license="LGPL",
-    keywords="convex, polyhedron, polytope, projection, duality",
+    keywords="convex, polyhedron, polyhedra, polytope, projection, duality",
     classifiers=classifiers.split('\n'),
     packages=['pypoman'],
     install_requires=['cvxopt', 'pycddlib']

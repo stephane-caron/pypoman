@@ -1,6 +1,8 @@
 # Polyhedron Manipulation in Python
 
-This library implements common operations over [convex polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron) such as [polytope projection](https://scaron.info/doc/pypoman/index.html#module-pypoman.projection), [double description](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality) (conversions between halfspace and vertex representations), [Chebyshev center](https://scaron.info/doc/pypoman/index.html#chebyshev-center) computation, ... See the complete [API documentation](https://scaron.info/doc/pypoman/) for details.
+This library implements common operations over [convex polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron) such as [polytope projection](https://scaron.info/doc/pypoman/index.html#module-pypoman.projection), [double description](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality) (conversions between halfspace and vertex representations), computing the [Chebyshev center](https://scaron.info/doc/pypoman/index.html#chebyshev-center), etc.
+
+See the complete [API documentation](https://scaron.info/doc/pypoman/) for details.
 
 ## Installation
 
