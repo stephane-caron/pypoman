@@ -40,8 +40,6 @@ links = [
     'https://scaron.info/doc/pypoman/index.html#chebyshev-center',
     'https://scaron.info/doc/pypoman/']
 
-packages = ["cython libglpk-dev python python-dev python-pip python-scipy"]
-
 long_description = """\
 This library implements common operations over `convex polyhedra <%s>`_ such
 as `polytope projection <%s>`_, `double description <%s>`_ (conversion between
@@ -125,7 +123,7 @@ first two coordinates ``proj(x) = [x_1 x_2]``:
         pylab.ion()
         pylab.figure()
         pypoman.plot_polygon(vertices)
-""" % tuple(links + packages)
+""" % tuple(links)
 
 os.environ['CVXOPT_BUILD_GLPK'] = '1'
 
