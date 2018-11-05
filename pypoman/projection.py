@@ -106,7 +106,7 @@ def project_polyhedron(proj, ineq, eq=None, canonicalize=True):
     return vertices, rays
 
 
-def project_polytope(proj, ineq, eq=None, method='cdd', max_iter=1000):
+def project_polytope(proj, ineq, eq=None, method='cdd', **kwargs):
     """
     Apply the affine projection :math:`y = E x + f` to the polytope defined by:
 
@@ -125,13 +125,17 @@ def project_polytope(proj, ineq, eq=None, method='cdd', max_iter=1000):
         Pair (`C`, `d`) describing the equality constraint.
     method : string, optional
         Choice between 'bretl' and 'cdd'.
-    max_iter : integer, optional
-        Maximum number of calls to the LP solver when method is 'bretl'.
 
     Returns
     -------
     vertices : list of arrays
         List of vertices of the projection.
+
+    Note
+    ----
+    Additional keyword arguments can be provided when the method is 'bretl'.
+    They are passed directly to the corresponding function
+    :func:`pypoman.projection.project_polytope_bretl`.
 
     Notes
     -----
@@ -141,13 +145,14 @@ def project_polytope(proj, ineq, eq=None, method='cdd', max_iter=1000):
     """
     if method == 'bretl':
         assert eq is not None, "Bretl method requires = constraints for now"
-        return project_polytope_bretl(proj, ineq, eq, max_iter=max_iter)
+        return project_polytope_bretl(proj, ineq, eq, **kwargs)
     vertices, rays = project_polyhedron(proj, ineq, eq)
     assert not rays, "Projection is not a polytope"
     return vertices
 
 
-def project_polytope_bretl(proj, ineq, eq, max_radius=1e5, max_iter=1000):
+def project_polytope_bretl(proj, ineq, eq, max_radius=1e5, max_iter=1000,
+                           init_angle=None):
     """
     Project a polytope into a 2D polygon using the incremental projection
     algorithm from [Bretl08]_. The 2D affine projection :math:`y = E x + f` is
@@ -171,6 +176,8 @@ def project_polytope_bretl(proj, ineq, eq, max_radius=1e5, max_iter=1000):
         is bounded.
     max_iter : integer, optional
         Maximum number of calls to the LP solver.
+    init_angle : scalar, optional
+        Direction of initial ray cast.
 
     Returns
     -------
@@ -210,7 +217,8 @@ def project_polytope_bretl(proj, ineq, eq, max_radius=1e5, max_iter=1000):
 
     lp_obj = cvxopt.matrix(zeros(A.shape[1] + 2))
     lp = lp_obj, A_ext, b_ext, C_ext, d_ext
-    polygon = bretl_compute_polygon(lp, max_iter=max_iter)
+    polygon = bretl_compute_polygon(lp, max_iter=max_iter,
+                                    init_angle=init_angle)
     polygon.sort_vertices()
     vertices_list = polygon.export_vertices()
     vertices = [array([v.x, v.y]) for v in vertices_list]

@@ -183,7 +183,8 @@ def optimize_angle(theta, lp, solver=GLPK_IF_AVAILABLE):
     return z
 
 
-def compute_polygon(lp, max_iter=1000, solver=GLPK_IF_AVAILABLE):
+def compute_polygon(lp, max_iter=1000, solver=GLPK_IF_AVAILABLE,
+                    init_angle=None):
     """
     Expand a polygon iteratively.
 
@@ -196,21 +197,22 @@ def compute_polygon(lp, max_iter=1000, solver=GLPK_IF_AVAILABLE):
         Maximum number of calls to the LP solver.
     solver : string, optional
         Name of backend LP solver.
+    init_angle : scalar, optional
+        Direction of initial ray cast.
 
     Returns
     -------
     poly : Polygon
         Output polygon.
     """
-    two_pi = 2 * pi
-    theta = pi * random()
+    theta = init_angle if init_angle is not None else pi * random()
     init_vertices = [optimize_angle(theta, lp, solver)]
-    step = two_pi / 3
+    step = 2. * pi / 3.
     while len(init_vertices) < 3 and max_iter >= 0:
         theta += step
-        if theta >= two_pi:
+        if theta >= 2. * pi:
             step *= 0.25 + 0.5 * random()
-            theta += step - two_pi
+            theta += step - 2. * pi
         z = optimize_angle(theta, lp, solver)
         if all([norm(z - z0) > 1e-5 for z0 in init_vertices]):
             init_vertices.append(z)
