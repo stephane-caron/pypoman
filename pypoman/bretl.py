@@ -198,7 +198,7 @@ def compute_polygon(lp, max_iter=1000, solver=GLPK_IF_AVAILABLE,
     solver : string, optional
         Name of backend LP solver.
     init_angle : scalar, optional
-        Direction of initial ray cast.
+        Angle in [rad] giving the direction of the initial ray cast.
 
     Returns
     -------

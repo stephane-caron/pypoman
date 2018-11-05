@@ -177,7 +177,7 @@ def project_polytope_bretl(proj, ineq, eq, max_radius=1e5, max_iter=1000,
     max_iter : integer, optional
         Maximum number of calls to the LP solver.
     init_angle : scalar, optional
-        Direction of initial ray cast.
+        Angle in [rad] giving the direction of the initial ray cast.
 
     Returns
     -------
