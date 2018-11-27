@@ -4,3 +4,4 @@
 MANIFEST
 build/
 dist/
+pypoman.egg-info/
