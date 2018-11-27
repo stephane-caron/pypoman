@@ -21,6 +21,7 @@
 import cdd
 
 from numpy import array, hstack, ones, vstack, zeros
+from scipy.spatial import ConvexHull
 
 from .misc import norm
 
@@ -130,3 +131,21 @@ def compute_polytope_vertices(A, b):
         elif i not in g.lin_set:
             vertices.append(V[i, 1:])
     return vertices
+
+
+def convex_hull(points):
+    """
+    Compute the convex hull of a set of points.
+
+    Parameters
+    ----------
+    points : list of arrays
+        Set of points.
+
+    Returns
+    -------
+    vertices : list of arrays
+        List of polytope vertices.
+    """
+    hull = ConvexHull(points)
+    return [points[i] for i in hull.vertices]

@@ -129,7 +129,7 @@ os.environ['CVXOPT_BUILD_GLPK'] = '1'
 
 setup(
     name='pypoman',
-    version='0.5.3',
+    version='0.5.4',
     description="Polyhedron and polytope manipulation in Python",
     long_description=long_description,
     url="https://github.com/stephane-caron/pypoman",
