@@ -52,7 +52,7 @@ class Vertex:
             self.expanded = True
             return None
         xopt, yopt = z
-        if abs(cross([xopt-v1.x, yopt-v1.y], [v1.x-v2.x, v1.y-v2.y])) < 1e-2:
+        if abs(cross([xopt-v1.x, yopt-v1.y], [v1.x-v2.x, v1.y-v2.y])) < 1e-4:
             self.expanded = True
             return None
         else:
