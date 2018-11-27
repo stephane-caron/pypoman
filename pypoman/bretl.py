@@ -41,7 +41,7 @@ class Vertex:
         v1 = self
         v2 = self.next
         v = array([v2.y - v1.y, v1.x - v2.x])  # orthogonal direction to edge
-        v = 1 / norm(v) * v
+        v /= norm(v)
         try:
             z = optimize_direction(v, lp)
         except ValueError:
