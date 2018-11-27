@@ -38,6 +38,10 @@ class Vertex:
         return norm([self.x-self.next.x, self.y-self.next.y])
 
     def expand(self, lp):
+        """
+        Returns true if there's a edge that can be expanded, and expands that
+        edge, otherwise returns False.
+        """
         v1 = self
         v2 = self.next
         v = array([v2.y - v1.y, v1.x - v2.x])  # orthogonal direction to edge
@@ -68,6 +72,14 @@ class Polygon:
         self.vertices = [v1, v2, v3]
 
     def all_expanded(self):
+        """
+        Check for unexpanded vertices.
+
+        Returns
+        -------
+        all_expanded : bool
+            True if and only if all vertices have been expanded.
+        """
         for v in self.vertices:
             if not v.expanded:
                 return False
@@ -75,8 +87,16 @@ class Polygon:
 
     def iter_expand(self, lp, max_iter):
         """
-        Returns true if there's a edge that can be expanded, and expands that
-        edge, otherwise returns False.
+        Extend polygon until there is no more vertex to expand or maximum
+        number of iterations is reached.
+
+        Parameters
+        ----------
+        lp : array tuple
+            Tuple `(q, G, h, A, b)` defining the linear program. See
+            :func:`pypoman.lp.solve_lp` for details.
+        max_iter : int
+            Maximum number of iterations.
         """
         nb_iter = 0
         v = self.vertices[0]
@@ -92,7 +112,10 @@ class Polygon:
 
     def sort_vertices(self):
         """
-        Export vertices starting from the left-most and going clockwise.
+        Export vertices starting from the leftmost one and going clockwise.
+
+        Note
+        ----
         Assumes all vertices are on the positive halfplane.
         """
         minsd = 1e10
