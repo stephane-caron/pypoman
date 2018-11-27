@@ -21,20 +21,24 @@
 from .duality import compute_cone_face_matrix
 from .duality import compute_polytope_halfspaces
 from .duality import compute_polytope_vertices
+from .duality import convex_hull
 from .intersection import intersect_line_cylinder
 from .intersection import intersect_line_polygon
 from .intersection import intersect_polygons
 from .lp import solve_lp
 from .polygon import compute_polygon_hull
 from .polygon import plot_polygon
+from .polyhedron import compute_chebyshev_center
 from .projection import project_polytope
 from .projection import project_polytope_bretl
 
 __all__ = [
+    'compute_chebyshev_center',
     'compute_cone_face_matrix',
     'compute_polygon_hull',
     'compute_polytope_halfspaces',
     'compute_polytope_vertices',
+    'convex_hull',
     'intersect_line_cylinder',
     'intersect_line_polygon',
     'intersect_polygons',
