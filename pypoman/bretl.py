@@ -33,6 +33,14 @@ class Vertex:
     """
 
     def __init__(self, p):
+        """
+        Initialize vertex from point coordinates.
+
+        Parameters
+        ----------
+        p : array
+            2D coordinates.
+        """
         self.x = p[0]
         self.y = p[1]
         self.next = None
@@ -40,8 +48,13 @@ class Vertex:
 
     def expand(self, lp):
         """
-        Returns true if there's a edge that can be expanded, and expands that
-        edge, otherwise returns False.
+        Expand the edge from the vertex to its successor.
+
+        Parameters
+        ----------
+        lp : array tuple
+            Tuple `(q, G, h, A, b)` defining the linear program. See
+            :func:`pypoman.lp.solve_lp` for details.
         """
         v1 = self
         v2 = self.next
@@ -251,7 +264,7 @@ def compute_polygon(lp, max_iter=1000, solver=GLPK_IF_AVAILABLE,
 
     Returns
     -------
-    poly : Polygon
+    polygon : Polygon
         Output polygon.
     """
     theta = init_angle if init_angle is not None else pi * random()
