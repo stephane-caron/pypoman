@@ -28,14 +28,15 @@ from .lp import solve_lp, GLPK_IF_AVAILABLE
 
 class Vertex:
 
+    """
+    Vertex of the projected polygon, with a pointer to its successor.
+    """
+
     def __init__(self, p):
         self.x = p[0]
         self.y = p[1]
         self.next = None
         self.expanded = False
-
-    def length(self):
-        return norm([self.x-self.next.x, self.y-self.next.y])
 
     def expand(self, lp):
         """
@@ -65,7 +66,19 @@ class Vertex:
 
 class Polygon:
 
-    def from_vertices(self, v1, v2, v3):
+    def __init__(self, v1, v2, v3):
+        """
+        Initialize polygon from inscribed triangle.
+
+        Parameters
+        ----------
+        v1 : array
+            First vertex of the initial triangle.
+        v2 : array
+            Second vertex of the initial triangle.
+        v3 : array
+            Third vertex of the initial triangle.
+        """
         v1.next = v2
         v2.next = v3
         v3.next = v1
@@ -138,15 +151,28 @@ class Polygon:
         newvertices.insert(0, vfirst)
         self.vertices = newvertices
 
-    def export_vertices(self, threshold=1e-2):
-        export_list = [self.vertices[0]]
+    def export_vertices(self, min_dist=1e-2):
+        """
+        Get list of vertices.
+
+        Parameters
+        ----------
+        min_dist : scalar, optional
+            Minimum distance between two consecutive vertices.
+
+        Returns
+        -------
+        vertices : list of arrays
+            List of vertices.
+        """
+        vertices = [self.vertices[0]]
         for i in range(1, len(self.vertices)-1):
             vcur = self.vertices[i]
-            vlast = export_list[-1]
-            if norm([vcur.x-vlast.x, vcur.y-vlast.y]) > threshold:
-                export_list.append(vcur)
-        export_list.append(self.vertices[-1])  # always add last vertex
-        return export_list
+            vlast = vertices[-1]
+            if norm([vcur.x - vlast.x, vcur.y - vlast.y]) > min_dist:
+                vertices.append(vcur)
+        vertices.append(self.vertices[-1])  # always add last vertex
+        return vertices
 
 
 def optimize_direction(vdir, lp, solver=GLPK_IF_AVAILABLE):
@@ -245,7 +271,6 @@ def compute_polygon(lp, max_iter=1000, solver=GLPK_IF_AVAILABLE,
     v0 = Vertex(init_vertices[0])
     v1 = Vertex(init_vertices[1])
     v2 = Vertex(init_vertices[2])
-    polygon = Polygon()
-    polygon.from_vertices(v0, v1, v2)
+    polygon = Polygon(v0, v1, v2)
     polygon.iter_expand(lp, max_iter)
     return polygon
