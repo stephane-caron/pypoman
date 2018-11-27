@@ -46,17 +46,17 @@ class Vertex:
             z = optimize_direction(v, lp)
         except ValueError:
             self.expanded = True
-            return False, None
+            return None
         xopt, yopt = z
         if abs(cross([xopt-v1.x, yopt-v1.y], [v1.x-v2.x, v1.y-v2.y])) < 1e-2:
             self.expanded = True
-            return False, None
+            return None
         else:
             vnew = Vertex([xopt, yopt])
             vnew.next = self.next
             self.next = vnew
             self.expanded = False
-            return True, vnew
+            return vnew
 
 
 class Polygon:
@@ -73,7 +73,7 @@ class Polygon:
                 return False
         return True
 
-    def iter_expand(self, qpconstraints, max_iter):
+    def iter_expand(self, lp, max_iter):
         """
         Returns true if there's a edge that can be expanded, and expands that
         edge, otherwise returns False.
@@ -84,8 +84,8 @@ class Polygon:
             if v.expanded:
                 v = v.next
                 continue
-            res, vnew = v.expand(qpconstraints)
-            if not res:
+            vnew = v.expand(lp)
+            if vnew is None:
                 continue
             self.vertices.append(vnew)
             nb_iter += 1
