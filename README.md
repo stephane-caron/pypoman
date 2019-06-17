@@ -23,10 +23,10 @@ We can compute the list of vertices of a polytope described in halfspace
 representation by ``A * x <= b``:
 
 ```python
-import numpy
-import pypoman
+from numpy import array
+from pypoman import compute_polytope_vertices
 
-A = numpy.array([
+A = array([
     [-1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
     [0, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
     [0,  0, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0],
@@ -46,8 +46,21 @@ A = numpy.array([
     [1,  0,  0,  1,  0,  0,  1,  0,  0,  1,  0,  0],
     [0,  1,  0,  0,  1,  0,  0,  1,  0,  0,  1,  0],
     [0,  0,  1,  0,  0,  1,  0,  0,  1,  0,  0,  1]])
-b = numpy.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 2, 3])
-vertices = pypoman.compute_polytope_vertices(A, b)
+b = array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 2, 3])
+vertices = compute_polytope_vertices(A, b)
+```
+
+### Halfspace enumeration
+
+The other way round, assume we know the vertices of a polytope, and want to get
+its halfspace representation ``A * x <= b``.
+
+```
+from numpy import array
+from pypoman import compute_polytope_halfspaces
+
+vertices = map(array, [[1, 0, 0], [0, 1, 0], [1, 1, 0], [0, 0, 1], [0, 1, 1]])
+A, b = compute_polytope_halfspaces(vertices)
 ```
 
 ### Polytope projection
