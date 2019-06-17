@@ -55,7 +55,7 @@ vertices = compute_polytope_vertices(A, b)
 The other way round, assume we know the vertices of a polytope, and want to get
 its halfspace representation ``A * x <= b``.
 
-```
+```python
 from numpy import array
 from pypoman import compute_polytope_halfspaces
 
@@ -68,8 +68,8 @@ A, b = compute_polytope_halfspaces(vertices)
 Let us project an n-dimensional polytope over ``x = [x_1 ... x_n]`` onto its first two coordinates ``proj(x) = [x_1 x_2]``:
 
 ```python
-import pypoman
 from numpy import array, eye, ones, vstack, zeros
+from pypoman import plot_polygon, project_polytope
 
 n = 10  # dimension of the original polytope
 p = 2   # dimension of the projected polytope
@@ -91,13 +91,13 @@ E[1, 1] = 1.
 f = zeros(p)
 proj = (E, f)  # proj(x) = E * x + f
 
-vertices = pypoman.project_polytope(proj, ineq, eq, method='bretl')
+vertices = project_polytope(proj, ineq, eq, method='bretl')
 
 if __name__ == "__main__":   # plot projected polytope
     import pylab
     pylab.ion()
     pylab.figure()
-    pypoman.plot_polygon(vertices)
+    plot_polygon(vertices)
 ```
 
 ## See also
