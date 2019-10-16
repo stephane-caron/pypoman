@@ -48,8 +48,8 @@ b = numpy.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 2, 3])
 vertices = pypoman.compute_polytope_vertices(A, b)
 
 if __name__ == "__main__":
-    print "Polytope has %d vertices:" % len(vertices)
+    print("Polytope has %d vertices:" % len(vertices))
     for i, vertex in enumerate(vertices):
-        print "Vertex %3d:" % i, vertex
+        print("Vertex %3d:" % i, vertex)
     if IPython.get_ipython() is None:  # give the user a prompt
         IPython.embed()
