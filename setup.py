@@ -3,20 +3,19 @@
 #
 # Copyright (C) 2018 Stephane Caron <stephane.caron@lirmm.fr>
 #
-# This file is part of pypoman.
+# This file is part of pypoman <https://github.com/stephane-caron/pypoman>.
 #
 # pypoman is free software: you can redistribute it and/or modify it under the
-# terms of the GNU Lesser General Public License as published by the Free
-# Software Foundation, either version 3 of the License, or (at your option) any
-# later version.
+# terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
 #
 # pypoman is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
-# A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more
-# details.
+# A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 #
-# You should have received a copy of the GNU Lesser General Public License
-# along with pypoman. If not, see <http://www.gnu.org/licenses/>.
+# You should have received a copy of the GNU General Public License along with
+# pypoman. If not, see <http://www.gnu.org/licenses/>.
 
 import os
 
@@ -24,7 +23,7 @@ from setuptools import setup
 
 classifiers = """\
 Development Status :: 5 - Production/Stable
-License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)
+License :: OSI Approved :: GNU General Public License v3 (GPLv3)
 Intended Audience :: Developers
 Intended Audience :: Science/Research
 Topic :: Scientific/Engineering :: Mathematics
