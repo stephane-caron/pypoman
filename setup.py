@@ -134,7 +134,7 @@ setup(
     url="https://github.com/stephane-caron/pypoman",
     author="Stéphane Caron",
     author_email="stephane.caron@lirmm.fr",
-    license="LGPL",
+    license="GPL",
     keywords="convex, polyhedron, polyhedra, polytope, projection, duality",
     classifiers=classifiers.split('\n'),
     packages=['pypoman'],
