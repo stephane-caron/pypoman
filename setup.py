@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2018 Stephane Caron <stephane.caron@lirmm.fr>
+# Copyright (C) 2018-2020 Stephane Caron <stephane.caron@normalesup.org>
 #
 # This file is part of pypoman <https://github.com/stephane-caron/pypoman>.
 #
@@ -133,7 +133,7 @@ setup(
     long_description=long_description,
     url="https://github.com/stephane-caron/pypoman",
     author="Stéphane Caron",
-    author_email="stephane.caron@lirmm.fr",
+    author_email="stephane.caron@normalesup.org",
     license="GPL",
     keywords="convex, polyhedron, polyhedra, polytope, projection, duality",
     classifiers=classifiers.split('\n'),

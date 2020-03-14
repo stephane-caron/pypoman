@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Copyright (C) 2016 Quang-Cuong Pham <cuong.pham@normalesup.org>
-# Copyright (C) 2017-2018 Stephane Caron <stephane.caron@lirmm.fr>
+# Copyright (C) 2017-2020 Stephane Caron <stephane.caron@normalesup.org>
 #
 # This file is part of pypoman <https://github.com/stephane-caron/pypoman>.
 #
