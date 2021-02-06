@@ -85,6 +85,14 @@ def compute_polytope_halfspaces(vertices):
         Matrix of halfspace representation.
     b : array, shape=(m,)
         Vector of halfspace representation.
+
+    Notes
+    -----
+    This method won't work well if your halfspace representation includes
+    equality constraints :math:`A x == b` written as :math:`A x \\leq b \\wedge
+    -A x \\leq -b`. If this is your use case, consider using directly the
+    linear set ``lin_set`` of equality-constraint generators in `pycddlib
+    <https://pycddlib.readthedocs.io/en/latest/matrix.html>`_.
     """
     V = vstack(vertices)
     t = ones((V.shape[0], 1))  # first column is 1 for vertices
