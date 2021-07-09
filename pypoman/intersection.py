@@ -84,7 +84,7 @@ def intersect_line_polygon(line, vertices, apply_hull):
         L2 = line_coordinates(v1, v2)
         p = intersection(L1, L2)
         if p is not None:
-            if not (x_min <= p[0] <= x_max and y_min <= p[1] <= y_max):
+            if not (x_min - PREC_TOL <= p[0] <= x_max + PREC_TOL and y_min - PREC_TOL <= p[1] <= y_max + PREC_TOL):
                 continue
             vx_min, vx_max = min(v1[0], v2[0]), max(v1[0], v2[0])
             vy_min, vy_max = min(v1[1], v2[1]), max(v1[1], v2[1])
