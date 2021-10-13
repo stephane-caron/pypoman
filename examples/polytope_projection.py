@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License along with
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
-import IPython
+import pylab
 
 from numpy import array, eye, ones, vstack, zeros
 
@@ -47,9 +47,7 @@ proj = (E, f)  # proj(x) = E * x + f
 vertices = pypoman.project_polytope(proj, ineq, eq, method='bretl')
 
 if __name__ == "__main__":   # plot projected polytope
-    import pylab
     pylab.ion()
     pylab.figure()
-    pypoman.plot_polygon(vertices)
-    if IPython.get_ipython() is None:  # give the user a prompt
-        IPython.embed()
+    pypoman.plot_polygon(vertices, resize=True)
+    pylab.show(block=True)

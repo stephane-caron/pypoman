@@ -18,8 +18,6 @@
 # You should have received a copy of the GNU General Public License along with
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
-import IPython
-
 import numpy
 import pypoman
 
@@ -50,5 +48,3 @@ if __name__ == "__main__":
     print("Polytope has %d vertices:" % len(vertices))
     for i, vertex in enumerate(vertices):
         print("Vertex %3d:" % i, vertex)
-    if IPython.get_ipython() is None:  # give the user a prompt
-        IPython.embed()

@@ -17,7 +17,6 @@
 # You should have received a copy of the GNU General Public License along with
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
-import IPython
 import pylab
 
 from numpy import arange, array, cos, pi, sin
@@ -39,5 +38,4 @@ if __name__ == "__main__":  # plot projected polytope
     pylab.plot([point[0]], [point[1]], marker='o', markersize=3, color='r')
     pylab.plot([proj[0]], [proj[1]], marker='o', markersize=3, color='b')
     pylab.plot([point[0], proj[0]], [point[1], proj[1]], 'b--')
-    if IPython.get_ipython() is None:  # give the user a prompt
-        IPython.embed()
+    pylab.show(block=True)
