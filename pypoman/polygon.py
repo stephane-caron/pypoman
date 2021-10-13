@@ -57,20 +57,25 @@ def __compute_polygon_hull(B, c):
     be executed when some coordinates :math:`c_i < 0`, but the result would be
     wrong.
     """
-    assert B.shape[1] == 2, \
-        "Input (B, c) is not a polygon: B.shape = %s" % str(B.shape)
-    assert all(c > 0), \
-        "Polygon should contain the origin, but min(c) = %.2f" % min(c)
+    assert (
+        B.shape[1] == 2
+    ), "Input (B, c) is not a polygon: B.shape = %s" % str(B.shape)
+    assert all(
+        c > 0
+    ), "Polygon should contain the origin, but min(c) = %.2f" % min(c)
 
-    B_polar = hstack([
-        (B[:, column] * 1. / c).reshape((B.shape[0], 1))
-        for column in range(2)])
+    B_polar = hstack(
+        [
+            (B[:, column] * 1.0 / c).reshape((B.shape[0], 1))
+            for column in range(2)
+        ]
+    )
 
     def axis_intersection(i, j):
         ai, bi = c[i], B[i]
         aj, bj = c[j], B[j]
-        x = (ai * bj[1] - aj * bi[1]) * 1. / (bi[0] * bj[1] - bj[0] * bi[1])
-        y = (bi[0] * aj - bj[0] * ai) * 1. / (bi[0] * bj[1] - bj[0] * bi[1])
+        x = (ai * bj[1] - aj * bi[1]) * 1.0 / (bi[0] * bj[1] - bj[0] * bi[1])
+        y = (bi[0] * aj - bj[0] * ai) * 1.0 / (bi[0] * bj[1] - bj[0] * bi[1])
         return array([x, y])
 
     # QHULL OPTIONS:
@@ -82,13 +87,15 @@ def __compute_polygon_hull(B, c):
     # It slightly diminishes computation times (0.9 -> 0.8 ms on my machine)
     # but raises QhullError at the first sight of precision errors.
     #
-    hull = ConvexHull([row for row in B_polar], qhull_options='Pp Q0')
+    hull = ConvexHull([row for row in B_polar], qhull_options="Pp Q0")
     #
     # contrary to hull.simplices (which was not in practice), hull.vertices is
     # guaranteed to be in counterclockwise order for 2-D (see scipy doc)
     #
-    simplices = [(hull.vertices[i], hull.vertices[i + 1])
-                 for i in range(len(hull.vertices) - 1)]
+    simplices = [
+        (hull.vertices[i], hull.vertices[i + 1])
+        for i in range(len(hull.vertices) - 1)
+    ]
     simplices.append((hull.vertices[-1], hull.vertices[0]))
     vertices = [axis_intersection(i, j) for (i, j) in simplices]
     return vertices
@@ -128,8 +135,15 @@ def compute_polygon_hull(B, c):
     return vertices
 
 
-def plot_polygon(points, alpha=.4, color='g', linestyle='solid', fill=True,
-                 linewidth=None):
+def plot_polygon(
+    points,
+    alpha=0.4,
+    color="g",
+    linestyle="solid",
+    fill=True,
+    linewidth=None,
+    resize=True,
+):
     """
     Plot a polygon in matplotlib.
 
@@ -159,6 +173,11 @@ def plot_polygon(points, alpha=.4, color='g', linestyle='solid', fill=True,
     axis((min(xmin1, xmin2), max(xmax1, xmax2),
           min(ymin1, ymin2), max(ymax1, ymax2)))
     patch = Polygon(
-        points, alpha=alpha, color=color, linestyle=linestyle, fill=fill,
-        linewidth=linewidth)
+        points,
+        alpha=alpha,
+        color=color,
+        linestyle=linestyle,
+        fill=fill,
+        linewidth=linewidth,
+    )
     ax.add_patch(patch)
