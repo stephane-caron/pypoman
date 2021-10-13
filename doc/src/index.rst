@@ -1,9 +1,5 @@
 .. title:: Table of Contents
 
-*******
-pypoman
-*******
-
 Welcome to the documentation of pypoman, a PYthon module for POlyhedral
 MANipulations.
 
