@@ -235,7 +235,7 @@ def project_point_to_polytope(point, ineq, solver='quadprog', **kwargs):
     ineq : pair of arrays
         Pair (`A`, `b`) describing the inequality constraint.
     solver : string
-        Name of QP solver.
+        Name of the quadratic programming solver to use.
 
     Returns
     -------
@@ -246,7 +246,6 @@ def project_point_to_polytope(point, ineq, solver='quadprog', **kwargs):
     ----
     This function requires `qpsolvers <https://pypi.org/project/qpsolvers/>`_.
     """
-    from qpsolvers import solve_qp
+    from qpsolvers import solve_ls
     P = eye(len(point))
-    q = -point
-    return solve_qp(P, q, G=ineq[0], h=ineq[1], solver=solver, **kwargs)
+    return solve_ls(P, point, G=ineq[0], h=ineq[1], solver=solver, **kwargs)
