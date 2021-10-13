@@ -161,17 +161,26 @@ def plot_polygon(
         When ``True``, fills the area inside the polygon.
     linewidth : scalar, optional
         Line width in matplotlib format.
+    resize : bool, optional
+        When ``True``, resets axis limits to center on the polygon.
     """
     if type(points) is list:
         points = array(points)
     ax = gca()
     hull = ConvexHull(points)
     points = points[hull.vertices, :]
-    xmin1, xmax1, ymin1, ymax1 = axis()
-    xmin2, ymin2 = 1.5 * points.min(axis=0)
-    xmax2, ymax2 = 1.5 * points.max(axis=0)
-    axis((min(xmin1, xmin2), max(xmax1, xmax2),
-          min(ymin1, ymin2), max(ymax1, ymax2)))
+    if resize:
+        xmin1, xmax1, ymin1, ymax1 = axis()
+        xmin2, ymin2 = 1.5 * points.min(axis=0)
+        xmax2, ymax2 = 1.5 * points.max(axis=0)
+        axis(
+            (
+                min(xmin1, xmin2),
+                max(xmax1, xmax2),
+                min(ymin1, ymin2),
+                max(ymax1, ymax2),
+            )
+        )
     patch = Polygon(
         points,
         alpha=alpha,
