@@ -142,7 +142,7 @@ def plot_polygon(
     linestyle="solid",
     fill=True,
     linewidth=None,
-    resize=True,
+    resize=False,
 ):
     """
     Plot a polygon in matplotlib.
