@@ -20,7 +20,7 @@
 import cdd
 import cvxopt
 
-from numpy import array, dot, hstack, zeros
+from numpy import array, dot, eye, hstack, zeros
 
 from .bretl import compute_polygon as bretl_compute_polygon
 
@@ -222,3 +222,31 @@ def project_polytope_bretl(proj, ineq, eq, max_radius=1e5, max_iter=1000,
     vertices_list = polygon.export_vertices()
     vertices = [array([v.x, v.y]) for v in vertices_list]
     return vertices
+
+
+def project_point_to_polytope(point, ineq, solver='quadprog', **kwargs):
+    """
+    Projet a point onto a polytope in H-representation.
+
+    Parameters
+    ----------
+    point : array
+        Point to project.
+    ineq : pair of arrays
+        Pair (`A`, `b`) describing the inequality constraint.
+    solver : string
+        Name of QP solver.
+
+    Returns
+    -------
+    projection : array
+        Projected point.
+
+    Note
+    ----
+    This function requires `qpsolvers <https://pypi.org/project/qpsolvers/>`_.
+    """
+    from qpsolvers import solve_qp
+    P = eye(len(point))
+    q = -point
+    return solve_qp(P, q, G=ineq[0], h=ineq[1], solver=solver, **kwargs)
