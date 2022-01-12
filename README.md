@@ -1,5 +1,9 @@
 # Polyhedron Manipulation in Python
 
+[![PyPI package](https://img.shields.io/pypi/v/pypoman)](https://pypi.org/project/pypoman/)
+[![Documentation](https://img.shields.io/badge/documentation-online-brightgreen?logo=read-the-docs&style=flat)](https://scaron.info/doc/pypoman/)
+![Status](https://img.shields.io/pypi/status/pypoman)
+
 This library implements common operations over [convex polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron) such as [polytope projection](https://scaron.info/doc/pypoman/index.html#module-pypoman.projection) and [vertex enumeration](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality).
 
 See the complete [API documentation](https://scaron.info/doc/pypoman/) for details.
