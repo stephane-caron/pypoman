@@ -1,26 +1,28 @@
-# Polyhedron Manipulation in Python
+# Polyhedron manipulation in Python
 
-This library implements common operations over [convex polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron) such as [polytope projection](https://scaron.info/doc/pypoman/index.html#module-pypoman.projection) and [vertex enumeration](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality).
+This library allows common operations over [convex polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron) such as [polytope projection](https://scaron.info/doc/pypoman/index.html#module-pypoman.projection) and [vertex enumeration](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality).
 
-See the complete [API documentation](https://scaron.info/doc/pypoman/) for details.
+See the [API documentation](https://scaron.info/doc/pypoman/) for details.
 
 ## Installation
 
-Make sure you have all system-wide dependencies by:
+Install system packages (here for Debian-based distributions) for Python and GLPK by:
+
+```console
+$ sudo apt-get install cython libglpk-dev python python-dev python-pip python-scipy
 ```
-sudo apt-get install cython libglpk-dev python python-dev python-pip python-scipy
-```
-Then, install the module itself:
-```
-pip install pypoman
+
+Then, install the library by:
+
+```console
+$ pip install pypoman
 ```
 
 ## Examples
 
 ### Vertex enumeration
 
-We can compute the list of vertices of a polytope described in halfspace
-representation by ``A * x <= b``:
+We can compute the list of vertices of a polytope described in halfspace representation by $A x \leq b$:
 
 ```python
 from numpy import array
