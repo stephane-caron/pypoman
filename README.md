@@ -25,10 +25,10 @@ $ pip install pypoman
 We can compute the list of vertices of a polytope described in halfspace representation by $A x \leq b$:
 
 ```python
-from numpy import array
+import numpy as np
 from pypoman import compute_polytope_vertices
 
-A = array([
+A = np.array([
     [-1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
     [0, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0],
     [0,  0, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0],
@@ -48,26 +48,25 @@ A = array([
     [1,  0,  0,  1,  0,  0,  1,  0,  0,  1,  0,  0],
     [0,  1,  0,  0,  1,  0,  0,  1,  0,  0,  1,  0],
     [0,  0,  1,  0,  0,  1,  0,  0,  1,  0,  0,  1]])
-b = array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 2, 3])
+b = np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 2, 3])
 vertices = compute_polytope_vertices(A, b)
 ```
 
 ### Halfspace enumeration
 
-The other way round, assume we know the vertices of a polytope, and want to get
-its halfspace representation ``A * x <= b``.
+The other way round, assume we know the vertices of a polytope, and want to get its halfspace representation $A x \leq b$.
 
 ```python
-from numpy import array
+import numpy as np
 from pypoman import compute_polytope_halfspaces
 
-vertices = map(array, [[1, 0, 0], [0, 1, 0], [1, 1, 0], [0, 0, 1], [0, 1, 1]])
+vertices = map(np.array, [[1, 0, 0], [0, 1, 0], [1, 1, 0], [0, 0, 1], [0, 1, 1]])
 A, b = compute_polytope_halfspaces(vertices)
 ```
 
 ### Polytope projection
 
-Let us project an n-dimensional polytope over ``x = [x_1 ... x_n]`` onto its first two coordinates ``proj(x) = [x_1 x_2]``:
+Let us project an $n$-dimensional polytope $A x \leq b$ over $x = [x_1\ \ldots\ x_n]$ onto its first two coordinates $proj(x) = [x_1 x_2]$:
 
 ```python
 from numpy import array, eye, ones, vstack, zeros
