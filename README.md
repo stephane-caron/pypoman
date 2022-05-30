@@ -49,6 +49,7 @@ A = np.array([
     [0,  1,  0,  0,  1,  0,  0,  1,  0,  0,  1,  0],
     [0,  0,  1,  0,  0,  1,  0,  0,  1,  0,  0,  1]])
 b = np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 2, 3])
+
 vertices = compute_polytope_vertices(A, b)
 ```
 
@@ -60,7 +61,11 @@ The other way round, assume we know the vertices of a polytope, and want to get 
 import numpy as np
 from pypoman import compute_polytope_halfspaces
 
-vertices = map(np.array, [[1, 0, 0], [0, 1, 0], [1, 1, 0], [0, 0, 1], [0, 1, 1]])
+vertices = map(
+    np.array,
+    [[1, 0, 0], [0, 1, 0], [1, 1, 0], [0, 0, 1], [0, 1, 1]],
+)
+
 A, b = compute_polytope_halfspaces(vertices)
 ```
 
@@ -103,10 +108,7 @@ if __name__ == "__main__":   # plot projected polytope
 
 ## See also
 
-- A short introduction to [Polyhedra and
-  polytopes](https://scaron.info/teaching/polyhedra-and-polytopes.html)
+- A short introduction to [Polyhedra and polytopes](https://scaron.info/teaching/polyhedra-and-polytopes.html)
 - Komei Fukuda's [Frequently Asked Questions in Polyhedral Computation](https://www.inf.ethz.ch/personal/fukudak/polyfaq/polyfaq.html)
-- The
-  [Polyhedron](http://doc.sagemath.org/html/en/reference/discrete_geometry/sage/geometry/polyhedron/constructor.html) class in [Sage](http://www.sagemath.org/)
-- [StabiliPy](https://github.com/haudren/stabilipy): a Python package
-  implementing a more general recursive method for polytope projection
+- The [Polyhedron](http://doc.sagemath.org/html/en/reference/discrete_geometry/sage/geometry/polyhedron/constructor.html) class in [Sage](http://www.sagemath.org/)
+- [StabiliPy](https://github.com/haudren/stabilipy): a Python package implementing a more general recursive method for polytope projection
