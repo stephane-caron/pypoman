@@ -78,12 +78,11 @@ class Vertex:
         ):
             self.expanded = True
             return None
-        else:
-            vnew = Vertex([xopt, yopt])
-            vnew.next = self.next
-            self.next = vnew
-            self.expanded = False
-            return vnew
+        vnew = Vertex([xopt, yopt])
+        vnew.next = self.next
+        self.next = vnew
+        self.expanded = False
+        return vnew
 
 
 class Polygon:
