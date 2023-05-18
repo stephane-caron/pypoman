@@ -137,20 +137,20 @@ def intersect_line_cylinder(
     return inter_points
 
 
-def intersect_polygons(polygon1, polygon2):
+def intersect_polygons(polygon1: List[np.ndarray], polygon2: List[np.ndarray]) -> List[np.ndarray]:
     """
     Intersect two polygons.
 
     Parameters
     ----------
-    polygon1 : list of arrays
+    polygon1 :
         Vertices of the first polygon in counterclockwise order.
-    polygon1 : list of arrays
+    polygon1 :
         Vertices of the second polygon in counterclockwise order.
 
     Returns
     -------
-    intersection : list of arrays
+    :
         Vertices of the intersection in counterclockwise order.
     """
     from pyclipper import (

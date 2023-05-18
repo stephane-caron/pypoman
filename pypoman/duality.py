@@ -88,10 +88,8 @@ def compute_polytope_halfspaces(
 
     Returns
     -------
-    A : array, shape=(m, k)
-        Matrix of halfspace representation.
-    b : array, shape=(m,)
-        Vector of halfspace representation.
+    :
+        Tuple ``(A, b)`` of the halfspace representation.
     """
     V = np.vstack(vertices)
     t = np.ones((V.shape[0], 1))  # first column is 1 for vertices
@@ -107,21 +105,23 @@ def compute_polytope_halfspaces(
     return (A, b)
 
 
-def compute_polytope_vertices(A, b):
+def compute_polytope_vertices(
+    A: np.ndarray, b: np.ndarray
+) -> List[np.ndarray]:
     r"""Compute the vertices of a polytope.
 
     The polytope is given in halfspace representation by :math:`A x \leq b`.
 
     Parameters
     ----------
-    A : array, shape=(m, k)
+    A :
         Matrix of halfspace representation.
-    b : array, shape=(m,)
+    b :
         Vector of halfspace representation.
 
     Returns
     -------
-    vertices : list of arrays
+    :
         List of polytope vertices.
 
     Notes
@@ -147,18 +147,17 @@ def compute_polytope_vertices(A, b):
     return vertices
 
 
-def convex_hull(points):
-    """
-    Compute the convex hull of a set of points.
+def convex_hull(points: List[np.ndarray]) -> List[np.ndarray]:
+    """Compute the convex hull of a set of points.
 
     Parameters
     ----------
-    points : list of arrays
+    points :
         Set of points.
 
     Returns
     -------
-    vertices : list of arrays
+    :
         List of polytope vertices.
     """
     hull = ConvexHull(points)

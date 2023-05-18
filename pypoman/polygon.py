@@ -21,13 +21,14 @@
 
 from matplotlib.patches import Polygon
 from numpy import array, dot, hstack
+import numpy as np
 from pylab import axis, gca
 from scipy.spatial import ConvexHull
 
 from .polyhedron import compute_chebyshev_center
 
 
-def __compute_polygon_hull(B, c):
+def __compute_polygon_hull(B: np.ndarray, c: np.ndarray):
     r"""Compute the vertex representation of a polygon.
 
     The polygon is defined by:
@@ -40,10 +41,10 @@ def __compute_polygon_hull(B, c):
 
     Parameters
     ----------
-    B : array, shape=(2, K)
-        Linear inequality matrix.
-    c : array, shape=(K,)
-        Linear inequality vector with positive coordinates.
+    B :
+        Linear inequality matrix of size :math:`2 \times K`.
+    c :
+        Linear inequality vector of with positive coordinates.
 
     Returns
     -------
