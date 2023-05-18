@@ -19,7 +19,7 @@
 
 """Functions to switch between halfspace and vertex representations."""
 
-from typing import List, Tuple
+from typing import List, Tuple, Union
 
 import cdd
 import numpy as np
@@ -70,7 +70,7 @@ def compute_cone_face_matrix(S: np.ndarray) -> np.ndarray:
 
 def compute_polytope_halfspaces(
     vertices: List[np.ndarray],
-) -> Tuple[np.ndarray, np.ndarray]:
+) -> Union[np.ndarray, Tuple[np.ndarray, np.ndarray]]:
     r"""Compute the halfspace representation (H-rep) of a polytope.
 
     The polytope is defined as convex hull of a set of vertices:
@@ -89,7 +89,8 @@ def compute_polytope_halfspaces(
     Returns
     -------
     :
-        Tuple ``(A, b)`` of the halfspace representation.
+        Tuple ``(A, b)`` of the halfspace representation, or empty array if it
+        is empty.
     """
     V = np.vstack(vertices)
     t = np.ones((V.shape[0], 1))  # first column is 1 for vertices
