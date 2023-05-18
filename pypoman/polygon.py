@@ -24,6 +24,7 @@ from matplotlib.patches import Polygon
 from numpy import array, dot, hstack
 from pylab import axis, gca
 from scipy.spatial import ConvexHull
+from typing import List
 
 from .polyhedron import compute_chebyshev_center
 
@@ -105,7 +106,7 @@ def __compute_polygon_hull(B: np.ndarray, c: np.ndarray):
     return vertices
 
 
-def compute_polygon_hull(B, c):
+def compute_polygon_hull(B: np.ndarray, c: np.ndarray) -> List[np.ndarray]:
     r"""Compute the vertex representation of a polygon.
 
     The polygon is defined by:
@@ -118,14 +119,14 @@ def compute_polygon_hull(B, c):
 
     Parameters
     ----------
-    B : array, shape=(2, K)
-        Linear inequality matrix.
-    c : array, shape=(K,)
+    B :
+        Linear inequality matrix of size :math:`2 \times K`.
+    c :
         Linear inequality vector.
 
     Returns
     -------
-    vertices : list of arrays
+    :
         List of 2D vertices in counterclockwise order.
     """
     x = None

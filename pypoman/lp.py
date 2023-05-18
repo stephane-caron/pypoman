@@ -77,17 +77,17 @@ def solve_lp(
 
     Parameters
     ----------
-    c : array, shape=(n,)
+    c :
         Linear-cost vector.
-    G : array, shape=(m, n)
+    G :
         Linear inequality constraint matrix.
-    h : array, shape=(m,)
+    h :
         Linear inequality constraint vector.
-    A : array, shape=(meq, n), optional
+    A :
         Linear equality constraint matrix.
-    b : array, shape=(meq,), optional
+    b :
         Linear equality constraint vector.
-    solver : string, optional
+    solver :
         Solver to use, default is GLPK if available
 
     Returns

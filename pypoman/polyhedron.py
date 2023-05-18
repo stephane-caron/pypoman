@@ -40,21 +40,21 @@ except ImportError:
     cvxopt = None
 
 
-def compute_chebyshev_center(A, b):
+def compute_chebyshev_center(A: np.ndarray, b: np.ndarray) -> np.ndarray:
     """Compute the Chebyshev center of a polyhedron.
 
     The Chebyshev center is the point furthest away from all inequalities.
 
     Parameters
     ----------
-    A : array, shape=(m, k)
+    A :
         Matrix of halfspace representation.
-    b : array, shape=(m,)
+    b :
         Vector of halfspace representation.
 
     Returns
     -------
-    z : array, shape=(k,)
+    :
         Point further away from all inequalities.
 
     Notes
