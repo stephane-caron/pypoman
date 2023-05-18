@@ -77,7 +77,8 @@ class Vertex:
         except ValueError:
             self.expanded = True
             return None
-        xopt, yopt = z
+        xopt: float = z[0]
+        yopt: float = z[1]
         if (
             abs(
                 np.cross(
