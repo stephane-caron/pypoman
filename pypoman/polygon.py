@@ -19,9 +19,9 @@
 
 """Functions on polygons, that is, 2D polyhedra."""
 
+import numpy as np
 from matplotlib.patches import Polygon
 from numpy import array, dot, hstack
-import numpy as np
 from pylab import axis, gca
 from scipy.spatial import ConvexHull
 
