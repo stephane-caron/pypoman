@@ -20,7 +20,7 @@
 
 """Iterative projection algorithm by [Bretl08]_."""
 
-from typing import Any, List, Optional, Tuple
+from typing import Any, List, Optional, Tuple, Union
 
 import numpy as np
 from numpy.random import random
@@ -37,7 +37,7 @@ class Vertex:
     x: float
     y: float
 
-    def __init__(self, p: np.ndarray):
+    def __init__(self, p: Union[List[float], np.ndarray]):
         """
         Initialize vertex from point coordinates.
 
@@ -99,7 +99,9 @@ class Vertex:
 class Polygon:
     """Polygon, that is, 2D polyhedron."""
 
-    def __init__(self, v1: np.ndarray, v2: np.ndarray, v3: np.ndarray):
+    vertices: List[Vertex]
+
+    def __init__(self, v1: Vertex, v2: Vertex, v3: Vertex):
         """
         Initialize polygon from inscribed triangle.
 
@@ -153,6 +155,8 @@ class Polygon:
         v = self.vertices[0]
         while not self.all_expanded() and nb_iter < max_iter:
             if v.expanded:
+                if v.next is None:
+                    raise ValueError("Invalid expanded vertex with no successor")
                 v = v.next
                 continue
             vnew = v.expand(lp)
@@ -188,7 +192,7 @@ class Polygon:
         newvertices.insert(0, vfirst)
         self.vertices = newvertices
 
-    def export_vertices(self, min_dist: float = 1e-2) -> List[np.ndarray]:
+    def export_vertices(self, min_dist: float = 1e-2) -> List[Vertex]:
         """Get list of vertices.
 
         Parameters
@@ -201,7 +205,7 @@ class Polygon:
         :
             List of vertices.
         """
-        vertices = [self.vertices[0]]
+        vertices: List[Vertex] = [self.vertices[0]]
         for i in range(1, len(self.vertices) - 1):
             vcur = self.vertices[i]
             vlast = vertices[-1]

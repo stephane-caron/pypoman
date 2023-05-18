@@ -7,6 +7,8 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Add type hints to function prototypes
+- Bretl: Raise an error when trying to expand a successor-less vertex
+- Continuous integration for Linux, macOS and Windows
 - Document all public modules
 - Point to polytope projection (thanks to @peekxc)
 - Unit test fixtures for vertex and halfspace enumeration
