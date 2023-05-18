@@ -71,7 +71,7 @@ def warn(msg: str) -> None:
 
     Parameters
     ----------
-    msg : str
+    msg :
         Warning message.
     """
     date = datetime.now().strftime("%Y-%m-%d %H:%M:%S,%f")[:-3]

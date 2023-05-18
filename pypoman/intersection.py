@@ -29,24 +29,27 @@ from .misc import norm
 PREC_TOL = 1e-10  # numerical tolerance
 
 
-def intersect_line_polygon(line, vertices, apply_hull):
-    """
-    Intersect a line segment with a polygon.
+def intersect_line_polygon(
+    line: Tuple[np.ndarray, np.ndarray],
+    vertices: List[np.ndarray],
+    apply_hull: bool,
+) -> List[np.ndarray]:
+    """Intersect a line segment with a polygon.
 
     Parameters
     ----------
-    line : couple of arrays
+    line :
         End points of the line segment (2D or 3D).
-    vertices : list of arrays
+    vertices :
         Vertices of the polygon.
-    apply_hull : bool
+    apply_hull :
         Set to `True` to apply a convex hull algorithm to `vertices`.
         Otherwise, the function assumes that vertices are already sorted in
         clockwise or counterclockwise order.
 
     Returns
     -------
-    inter_points : list of array
+    :
         List of intersection points between the line segment and the polygon.
 
     Notes
