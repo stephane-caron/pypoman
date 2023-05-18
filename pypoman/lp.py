@@ -19,7 +19,7 @@
 
 """Functions for linear programming."""
 
-from typing import Optional
+from typing import Optional, Union
 
 import cvxopt
 import cvxopt.solvers
@@ -30,6 +30,7 @@ from .misc import warn
 
 cvxopt.solvers.options["show_progress"] = False  # disable cvxopt output
 
+GLPK_IF_AVAILABLE: Optional[str] = None
 try:
     import cvxopt.glpk
 
@@ -43,10 +44,9 @@ try:
 except ImportError:
     # issue a warning as GLPK is the best LP solver in practice
     warn("GLPK solver not found")
-    GLPK_IF_AVAILABLE = None
 
 
-def cvxmat(M: np.ndarray) -> cvxopt.matrix:
+def cvxmat(M: Union[np.ndarray, cvxopt.matrix]) -> cvxopt.matrix:
     """Convert a NumPy array to a CVXOPT matrix."""
     if isinstance(M, cvxopt.matrix):
         return M
@@ -59,7 +59,7 @@ def solve_lp(
     h: np.ndarray,
     A: Optional[np.ndarray] = None,
     b: Optional[np.ndarray] = None,
-    solver: str = GLPK_IF_AVAILABLE,
+    solver: Optional[str] = GLPK_IF_AVAILABLE,
 ):
     r"""Solve a linear program (LP).
 

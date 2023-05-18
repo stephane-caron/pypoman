@@ -70,6 +70,7 @@ def compute_chebyshev_center(A, b):
         raise Exception("Polytope is empty (margin violation %.2f)" % z[-1])
     return z[:-1]
 
+
 __all__ = [
     "cdd",
     "compute_chebyshev_center",
