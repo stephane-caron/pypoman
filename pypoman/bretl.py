@@ -18,18 +18,17 @@
 # You should have received a copy of the GNU General Public License along with
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
+"""Iterative projection algorithm by [Bretl08]_."""
+
 from numpy import array, cos, cross, pi, sin
 from numpy.random import random
 from scipy.linalg import norm
 
-from .lp import solve_lp, GLPK_IF_AVAILABLE
+from .lp import GLPK_IF_AVAILABLE, solve_lp
 
 
 class Vertex:
-
-    """
-    Vertex of the projected polygon, with a pointer to its successor.
-    """
+    """Vertex of the projected polygon, with a pointer to its successor."""
 
     def __init__(self, p):
         """
@@ -77,7 +76,6 @@ class Vertex:
 
 
 class Polygon:
-
     def __init__(self, v1, v2, v3):
         """
         Initialize polygon from inscribed triangle.
