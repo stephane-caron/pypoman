@@ -17,44 +17,58 @@
 # You should have received a copy of the GNU General Public License along with
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
+"""Functions for linear programming."""
+
+from typing import Optional
+
 import cvxopt
 import cvxopt.solvers
+import numpy as np
 from cvxopt.solvers import lp
-from numpy import array
 
 from .misc import warn
 
-cvxopt.solvers.options['show_progress'] = False  # disable cvxopt output
+cvxopt.solvers.options["show_progress"] = False  # disable cvxopt output
 
 try:
     import cvxopt.glpk
-    GLPK_IF_AVAILABLE = 'glpk'
+
+    GLPK_IF_AVAILABLE = "glpk"
     # GLPK is the fastest LP solver I could find so far:
     # <https://scaron.info/blog/linear-programming-in-python-with-cvxopt.html>
     # ... however, it's verbose by default, so tell it to STFU:
-    cvxopt.solvers.options['glpk'] = {'msg_lev': 'GLP_MSG_OFF'}  # cvxopt 1.1.8
-    cvxopt.solvers.options['msg_lev'] = 'GLP_MSG_OFF'  # cvxopt 1.1.7
-    cvxopt.solvers.options['LPX_K_MSGLEV'] = 0  # previous versions
+    cvxopt.solvers.options["glpk"] = {"msg_lev": "GLP_MSG_OFF"}  # cvxopt 1.1.8
+    cvxopt.solvers.options["msg_lev"] = "GLP_MSG_OFF"  # cvxopt 1.1.7
+    cvxopt.solvers.options["LPX_K_MSGLEV"] = 0  # previous versions
 except ImportError:
     # issue a warning as GLPK is the best LP solver in practice
     warn("GLPK solver not found")
     GLPK_IF_AVAILABLE = None
 
 
-def cvxmat(M):
+def cvxmat(M: np.ndarray) -> cvxopt.matrix:
+    """Convert a NumPy array to a CVXOPT matrix."""
     if isinstance(M, cvxopt.matrix):
         return M
     return cvxopt.matrix(M)
 
 
-def solve_lp(c, G, h, A=None, b=None, solver=GLPK_IF_AVAILABLE):
-    """
-    Solve a linear program defined by:
+def solve_lp(
+    c: np.ndarray,
+    G: np.ndarray,
+    h: np.ndarray,
+    A: Optional[np.ndarray] = None,
+    b: Optional[np.ndarray] = None,
+    solver: str = GLPK_IF_AVAILABLE,
+):
+    r"""Solve a linear program (LP).
+
+    The linear program is defined by:
 
     .. math::
 
-        \\mathrm{minimize} \\ & c^T x \\\\
-        \\mathrm{subject\\ to} \\ & G x \\leq h \\\\
+        \mathrm{minimize} \ & c^T x \\
+        \mathrm{subject\ to} \ & G x \leq h \\
             & A x = b
 
     using the `CVXOPT
@@ -90,6 +104,6 @@ def solve_lp(c, G, h, A=None, b=None, solver=GLPK_IF_AVAILABLE):
     if A is not None:
         args.extend([cvxmat(A), cvxmat(b)])
     sol = lp(*args, solver=solver)
-    if 'optimal' not in sol['status']:
-        raise ValueError("LP optimum not found: %s" % sol['status'])
-    return array(sol['x']).reshape((array(c).shape[0],))
+    if "optimal" not in sol["status"]:
+        raise ValueError("LP optimum not found: %s" % sol["status"])
+    return np.array(sol["x"]).reshape((np.array(c).shape[0],))
