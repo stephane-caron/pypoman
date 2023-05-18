@@ -1,0 +1,71 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "pypoman"
+readme = "README.md"
+authors = [
+    {name = "Stéphane Caron", email = "stephane.caron@normalesup.org"},
+]
+maintainers = [
+    {name = "Stéphane Caron", email = "stephane.caron@normalesup.org"},
+]
+dynamic = ['version', 'description']
+requires-python = ">=3.7"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+]
+dependencies = [
+    "cvxopt",
+    "matplotlib",
+    "numpy",
+    "pycddlib",
+    "scipy",
+]
+keywords = ["convex, polyhedron, polyhedra, polytope, projection, duality"]
+
+[project.urls]
+Documentation = "https://scaron.info/doc/pypoman/"
+Source = "https://github.com/stephane-caron/pypoman"
+Tracker = "https://github.com/stephane-caron/pypoman/issues"
+Changelog = "https://github.com/stephane-caron/pypoman/blob/master/CHANGELOG.md"
+
+[tool.black]
+line-length = 79
+
+[tool.coverage]
+report.include = ["pypoman/*"]
+
+[tool.ruff]
+line-length = 79
+select = [
+    # pyflakes
+    "F",
+    # pycodestyle
+    "E",
+    "W",
+    # isort
+    "I001",
+    # pydocstyle
+    "D"
+]
+ignore = [
+    "D401",  # good for methods but not for class docstrings
+    "D405",  # British-style section names are also "proper"!
+]
+
+[tool.ruff.pydocstyle]
+convention = "numpy"

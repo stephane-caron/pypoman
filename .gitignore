@@ -1,6 +1,8 @@
 *.pyc
 *.pyo
+.coverage
 .ropeproject
+.tox
 MANIFEST
 build/
 dist/

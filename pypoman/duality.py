@@ -17,38 +17,43 @@
 # You should have received a copy of the GNU General Public License along with
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
-import cdd
+"""Functions to switch between halfspace and vertex representations."""
 
-from numpy import array, hstack, ones, vstack, zeros
+from typing import List, Tuple, Union
+
+import cdd
+import numpy as np
 from scipy.spatial import ConvexHull
 
 from .misc import norm
 
 
-def compute_cone_face_matrix(S):
-    """
-    Compute the face matrix of a polyhedral convex cone from its span matrix.
+def compute_cone_face_matrix(S: np.ndarray) -> np.ndarray:
+    r"""Compute the face matrix of a polyhedral cone from its span matrix.
 
     Parameters
     ----------
-    S : array, shape=(n, m)
-        Span matrix defining the cone as :math:`x = S \\lambda` with
-        :math:`\\lambda \\geq 0`.
+    S :
+        Span matrix defining the cone as :math:`x = S \lambda` with
+        :math:`\lambda \geq 0`.
 
     Returns
     -------
-    F : array, shape=(k, n)
+    :
         Face matrix defining the cone equivalently by :math:`F x \\leq 0`.
     """
-    V = vstack([
-        hstack([zeros((S.shape[1], 1)), S.T]),
-        hstack([1, zeros(S.shape[0])])])
+    V = np.vstack(
+        [
+            np.hstack([np.zeros((S.shape[1], 1)), S.T]),
+            np.hstack([1, np.zeros(S.shape[0])]),
+        ]
+    )
     # V-representation: first column is 0 for rays
-    mat = cdd.Matrix(V, number_type='float')
+    mat = cdd.Matrix(V, number_type="float")
     mat.rep_type = cdd.RepType.GENERATOR
     P = cdd.Polyhedron(mat)
     ineq = P.get_inequalities()
-    H = array(ineq)
+    H = np.array(ineq)
     if H.shape == (0,):  # H == []
         return H
     A = []
@@ -60,61 +65,64 @@ def compute_cone_face_matrix(S):
             raise Exception("Polyhedron is not a cone")
         elif i not in ineq.lin_set:
             A.append(-H[i, 1:])
-    return array(A)
+    return np.array(A)
 
 
-def compute_polytope_halfspaces(vertices):
-    """
-    Compute the halfspace representation (H-rep) of a polytope defined as
-    convex hull of a set of vertices:
+def compute_polytope_halfspaces(
+    vertices: List[np.ndarray],
+) -> Union[np.ndarray, Tuple[np.ndarray, np.ndarray]]:
+    r"""Compute the halfspace representation (H-rep) of a polytope.
+
+    The polytope is defined as convex hull of a set of vertices:
 
     .. math::
 
-        A x \\leq b
-        \\quad \\Leftrightarrow \\quad
-        x \\in \\mathrm{conv}(\\mathrm{vertices})
+        A x \leq b
+        \quad \Leftrightarrow \quad
+        x \in \mathrm{conv}(\mathrm{vertices})
 
     Parameters
     ----------
-    vertices : list of arrays
+    vertices :
         List of polytope vertices.
 
     Returns
     -------
-    A : array, shape=(m, k)
-        Matrix of halfspace representation.
-    b : array, shape=(m,)
-        Vector of halfspace representation.
+    :
+        Tuple ``(A, b)`` of the halfspace representation, or empty array if it
+        is empty.
     """
-    V = vstack(vertices)
-    t = ones((V.shape[0], 1))  # first column is 1 for vertices
-    tV = hstack([t, V])
-    mat = cdd.Matrix(tV, number_type='float')
+    V = np.vstack(vertices)
+    t = np.ones((V.shape[0], 1))  # first column is 1 for vertices
+    tV = np.hstack([t, V])
+    mat = cdd.Matrix(tV, number_type="float")
     mat.rep_type = cdd.RepType.GENERATOR
     P = cdd.Polyhedron(mat)
-    bA = array(P.get_inequalities())
+    bA = np.array(P.get_inequalities())
     if bA.shape == (0,):  # bA == []
         return bA
     # the polyhedron is given by b + A x >= 0 where bA = [b|A]
-    b, A = array(bA[:, 0]), -array(bA[:, 1:])
+    b, A = np.array(bA[:, 0]), -np.array(bA[:, 1:])
     return (A, b)
 
 
-def compute_polytope_vertices(A, b):
-    """
-    Compute the vertices of a polytope given in halfspace representation by
-    :math:`A x \\leq b`.
+def compute_polytope_vertices(
+    A: np.ndarray, b: np.ndarray
+) -> List[np.ndarray]:
+    r"""Compute the vertices of a polytope.
+
+    The polytope is given in halfspace representation by :math:`A x \leq b`.
 
     Parameters
     ----------
-    A : array, shape=(m, k)
+    A :
         Matrix of halfspace representation.
-    b : array, shape=(m,)
+    b :
         Vector of halfspace representation.
 
     Returns
     -------
-    vertices : list of arrays
+    :
         List of polytope vertices.
 
     Notes
@@ -126,11 +134,11 @@ def compute_polytope_vertices(A, b):
     <https://pycddlib.readthedocs.io/en/latest/matrix.html>`_.
     """
     b = b.reshape((b.shape[0], 1))
-    mat = cdd.Matrix(hstack([b, -A]), number_type='float')
+    mat = cdd.Matrix(np.hstack([b, -A]), number_type="float")
     mat.rep_type = cdd.RepType.INEQUALITY
     P = cdd.Polyhedron(mat)
     g = P.get_generators()
-    V = array(g)
+    V = np.array(g)
     vertices = []
     for i in range(V.shape[0]):
         if V[i, 0] != 1:  # 1 = vertex, 0 = ray
@@ -140,18 +148,17 @@ def compute_polytope_vertices(A, b):
     return vertices
 
 
-def convex_hull(points):
-    """
-    Compute the convex hull of a set of points.
+def convex_hull(points: List[np.ndarray]) -> List[np.ndarray]:
+    """Compute the convex hull of a set of points.
 
     Parameters
     ----------
-    points : list of arrays
+    points :
         Set of points.
 
     Returns
     -------
-    vertices : list of arrays
+    :
         List of polytope vertices.
     """
     hull = ConvexHull(points)
