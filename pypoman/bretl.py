@@ -156,7 +156,9 @@ class Polygon:
         while not self.all_expanded() and nb_iter < max_iter:
             if v.expanded:
                 if v.next is None:
-                    raise ValueError("Invalid expanded vertex with no successor")
+                    raise ValueError(
+                        "Invalid expanded vertex with no successor"
+                    )
                 v = v.next
                 continue
             vnew = v.expand(lp)
