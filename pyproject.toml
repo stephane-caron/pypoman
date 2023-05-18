@@ -36,18 +36,6 @@ dependencies = [
 ]
 keywords = ["convex, polyhedron, polyhedra, polytope, projection, duality"]
 
-[project.optional-dependencies]
-open_source_solvers = [
-    "clarabel >=0.4.1",
-    "cvxopt >=1.2.6",
-    "ecos >=2.0.8",
-    "highspy >=1.1.2.dev3",
-    "osqp >=0.6.2",
-    "proxsuite >=0.2.9",
-    "quadprog >=0.1.11",
-    "scs >=3.2.0",
-]
-
 [project.urls]
 Documentation = "https://scaron.info/doc/pypoman/"
 Source = "https://github.com/stephane-caron/pypoman"
