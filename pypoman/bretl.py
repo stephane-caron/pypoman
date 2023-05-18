@@ -20,7 +20,7 @@
 
 """Iterative projection algorithm by [Bretl08]_."""
 
-from typing import List, Optional, Tuple, Union
+from typing import Any, List, Optional, Tuple, Union
 
 import numpy as np
 from numpy.random import random
@@ -31,6 +31,11 @@ from .lp import GLPK_IF_AVAILABLE, solve_lp
 
 class Vertex:
     """Vertex of the projected polygon, with a pointer to its successor."""
+
+    expanded: bool
+    next: Optional[Any]
+    x: float
+    y: float
 
     def __init__(self, p: np.ndarray):
         """
