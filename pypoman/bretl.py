@@ -66,6 +66,8 @@ class Vertex:
         """
         v1 = self
         v2 = self.next
+        if v2 is None:
+            raise ValueError("cannot expand vertex as it has no successor")
         v = np.array(
             [v2.y - v1.y, v1.x - v2.x]
         )  # orthogonal direction to edge
