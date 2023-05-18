@@ -20,7 +20,7 @@
 
 """Iterative projection algorithm by [Bretl08]_."""
 
-from typing import Tuple
+from typing import List, Optional, Tuple, Union
 
 import numpy as np
 from numpy.random import random
@@ -32,7 +32,7 @@ from .lp import GLPK_IF_AVAILABLE, solve_lp
 class Vertex:
     """Vertex of the projected polygon, with a pointer to its successor."""
 
-    def __init__(self, p):
+    def __init__(self, p: np.ndarray):
         """
         Initialize vertex from point coordinates.
 
@@ -46,13 +46,16 @@ class Vertex:
         self.next = None
         self.expanded = False
 
-    def expand(self, lp):
+    def expand(
+        self,
+        lp: Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray],
+    ):
         """
         Expand the edge from the vertex to its successor.
 
         Parameters
         ----------
-        lp : array tuple
+        lp :
             Tuple `(q, G, h, A, b)` defining the linear program. See
             :func:`pypoman.lp.solve_lp` for details.
         """
@@ -88,7 +91,7 @@ class Vertex:
 class Polygon:
     """Polygon, that is, 2D polyhedron."""
 
-    def __init__(self, v1, v2, v3):
+    def __init__(self, v1: np.ndarray, v2: np.ndarray, v3: np.ndarray):
         """
         Initialize polygon from inscribed triangle.
 
@@ -106,13 +109,13 @@ class Polygon:
         v3.next = v1
         self.vertices = [v1, v2, v3]
 
-    def all_expanded(self):
+    def all_expanded(self) -> bool:
         """
         Check for unexpanded vertices.
 
         Returns
         -------
-        all_expanded : bool
+        :
             True if and only if all vertices have been expanded.
         """
         for v in self.vertices:
@@ -124,7 +127,7 @@ class Polygon:
         self,
         lp: Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray],
         max_iter: int,
-    ):
+    ) -> None:
         """Extend polygon until the termination condition is reached.
 
         Termination condition: there is no other vertex to expand, or the
@@ -151,8 +154,7 @@ class Polygon:
             nb_iter += 1
 
     def sort_vertices(self):
-        """
-        Export vertices starting from the leftmost one and going clockwise.
+        """Export vertices starting from the leftmost one and going clockwise.
 
         Note
         ----
@@ -178,18 +180,17 @@ class Polygon:
         newvertices.insert(0, vfirst)
         self.vertices = newvertices
 
-    def export_vertices(self, min_dist=1e-2):
-        """
-        Get list of vertices.
+    def export_vertices(self, min_dist: float = 1e-2) -> List[np.ndarray]:
+        """Get list of vertices.
 
         Parameters
         ----------
-        min_dist : scalar, optional
+        min_dist :
             Minimum distance between two consecutive vertices.
 
         Returns
         -------
-        vertices : list of arrays
+        :
             List of vertices.
         """
         vertices = [self.vertices[0]]
@@ -202,7 +203,11 @@ class Polygon:
         return vertices
 
 
-def optimize_direction(vdir, lp, solver=GLPK_IF_AVAILABLE):
+def optimize_direction(
+    vdir: np.ndarray,
+    lp: Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray],
+    solver: Optional[str] = GLPK_IF_AVAILABLE,
+) -> Tuple[bool, Union[int, np.ndarray]]:
     """Optimize in one direction.
 
     Parameters
@@ -217,11 +222,10 @@ def optimize_direction(vdir, lp, solver=GLPK_IF_AVAILABLE):
 
     Returns
     -------
-    succ : bool
-        Success boolean.
-    z : (3,) array, or 0
-        Maximum vertex of the polygon in the direction `vdir`, or 0 in case of
-        solver failure.
+    :
+        Tuple ``(succ, z)``, where ``succ`` is a success boolean and ``z`` is
+        the maximum vertex of the polygon in the direction `vdir`, or 0 in case
+        of solver failure.
     """
     lp_q, lp_Gextended, lp_hextended, lp_A, lp_b = lp
     lp_q[-2] = -vdir[0]
@@ -257,25 +261,28 @@ def optimize_angle(theta, lp, solver=GLPK_IF_AVAILABLE):
 
 
 def compute_polygon(
-    lp, max_iter=1000, solver=GLPK_IF_AVAILABLE, init_angle=None
-):
+    lp: Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray],
+    max_iter: int = 1000,
+    solver: Optional[str] = GLPK_IF_AVAILABLE,
+    init_angle: Optional[float] = None,
+) -> Polygon:
     """Expand a polygon iteratively.
 
     Parameters
     ----------
-    lp : array tuple
+    lp :
         Tuple `(q, G, h, A, b)` defining the linear program. See
         :func:`pypoman.lp.solve_lp` for details.
-    max_iter : integer, optional
+    max_iter :
         Maximum number of calls to the LP solver.
-    solver : string, optional
+    solver :
         Name of backend LP solver.
-    init_angle : scalar, optional
+    init_angle :
         Angle in [rad] giving the direction of the initial ray cast.
 
     Returns
     -------
-    polygon : Polygon
+    :
         Output polygon.
     """
     theta = init_angle if init_angle is not None else np.pi * random()
