@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License along with
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
+"""Python module for polyhedral geometry."""
+
 from .duality import compute_cone_face_matrix
 from .duality import compute_polytope_halfspaces
 from .duality import compute_polytope_vertices
@@ -31,6 +33,8 @@ from .polyhedron import compute_chebyshev_center
 from .projection import project_polytope
 from .projection import project_polytope_bretl
 from .projection import project_point_to_polytope
+
+__version__ = "0.6.0rc0"
 
 __all__ = [
     "compute_chebyshev_center",
