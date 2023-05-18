@@ -137,7 +137,9 @@ def intersect_line_cylinder(
     return inter_points
 
 
-def intersect_polygons(polygon1: List[np.ndarray], polygon2: List[np.ndarray]) -> List[np.ndarray]:
+def intersect_polygons(
+    polygon1: List[np.ndarray], polygon2: List[np.ndarray],
+) -> List[np.ndarray]:
     """
     Intersect two polygons.
 
