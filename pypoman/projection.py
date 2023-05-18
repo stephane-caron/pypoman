@@ -19,7 +19,7 @@
 
 """Polytope projection functions."""
 
-from typing import Tuple
+from typing import List, Optional, Tuple
 
 import cdd
 import cvxopt
@@ -29,16 +29,21 @@ from .bretl import compute_polygon as bretl_compute_polygon
 
 
 def project_polyhedron(
-    proj: Tuple[np.ndarray, np.ndarray], ineq, eq=None, canonicalize=True
-):
+    proj: Tuple[np.ndarray, np.ndarray],
+    ineq: Tuple[np.ndarray, np.ndarray],
+    eq: Optional[Tuple[np.ndarray, np.ndarray]] = None,
+    canonicalize: bool = True,
+) -> Tuple[List[np.ndarray], List[np.ndarray]]:
     r"""Apply the affine projection :math:`y = E x + f` to a polyhedron.
 
     The polyhedron is defined by:
 
     .. math::
 
-        A x & \leq b \\
-        C x & = d
+        \begin{split}\begin{array}{ll}
+            A x & \leq b \\
+            C x & = d
+        \end{array}\end{split}
 
     Parameters
     ----------
@@ -258,7 +263,9 @@ def project_point_to_polytope(point, ineq, solver="quadprog", **kwargs):
     try:
         from qpsolvers import solve_ls
     except ImportError as e:
-        raise ImportError("This function requires qpsolvers: pip install qpsolvers") from e
+        raise ImportError(
+            "This function requires qpsolvers: pip install qpsolvers"
+        ) from e
 
     P = np.eye(len(point))
     return solve_ls(P, point, G=ineq[0], h=ineq[1], solver=solver, **kwargs)

@@ -17,14 +17,15 @@
 # You should have received a copy of the GNU General Public License along with
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
+"""Other utility functions."""
+
 from datetime import datetime
 
 from numpy import dot, sqrt
 
 
 def norm(v):
-    """
-    Euclidean norm.
+    """Euclidean norm.
 
     Parameters
     ----------
