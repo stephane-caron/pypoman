@@ -20,7 +20,9 @@
 
 """Iterative projection algorithm by [Bretl08]_."""
 
-from numpy import array, cos, cross, pi, sin
+from typing import Tuple
+
+import numpy as np
 from numpy.random import random
 from scipy.linalg import norm
 
@@ -56,7 +58,9 @@ class Vertex:
         """
         v1 = self
         v2 = self.next
-        v = array([v2.y - v1.y, v1.x - v2.x])  # orthogonal direction to edge
+        v = np.array(
+            [v2.y - v1.y, v1.x - v2.x]
+        )  # orthogonal direction to edge
         v /= norm(v)
         try:
             z = optimize_direction(v, lp)
@@ -65,7 +69,11 @@ class Vertex:
             return None
         xopt, yopt = z
         if (
-            abs(cross([xopt - v1.x, yopt - v1.y], [v1.x - v2.x, v1.y - v2.y]))
+            abs(
+                np.cross(
+                    [xopt - v1.x, yopt - v1.y], [v1.x - v2.x, v1.y - v2.y]
+                )
+            )
             < 1e-4
         ):
             self.expanded = True
@@ -79,6 +87,8 @@ class Vertex:
 
 
 class Polygon:
+    """Polygon, that is, 2D polyhedron."""
+
     def __init__(self, v1, v2, v3):
         """
         Initialize polygon from inscribed triangle.
@@ -111,17 +121,22 @@ class Polygon:
                 return False
         return True
 
-    def iter_expand(self, lp, max_iter):
-        """
-        Extend polygon until there is no more vertex to expand or maximum
-        number of iterations is reached.
+    def iter_expand(
+        self,
+        lp: Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray],
+        max_iter: int,
+    ):
+        """Extend polygon until the termination condition is reached.
+
+        Termination condition: there is no other vertex to expand, or the
+        maximum number of iterations has been reached.
 
         Parameters
         ----------
-        lp : array tuple
+        lp :
             Tuple `(q, G, h, A, b)` defining the linear program. See
             :func:`pypoman.lp.solve_lp` for details.
-        max_iter : int
+        max_iter :
             Maximum number of iterations.
         """
         nb_iter = 0
@@ -237,7 +252,7 @@ def optimize_angle(theta, lp, solver=GLPK_IF_AVAILABLE):
         Maximum vertex of the polygon in the direction `vdir`, or 0 in case of
         solver failure.
     """
-    d = array([cos(theta), sin(theta)])
+    d = np.array([np.cos(theta), np.sin(theta)])
     z = optimize_direction(d, lp, solver=solver)
     return z
 
@@ -264,14 +279,14 @@ def compute_polygon(
     polygon : Polygon
         Output polygon.
     """
-    theta = init_angle if init_angle is not None else pi * random()
+    theta = init_angle if init_angle is not None else np.pi * random()
     init_vertices = [optimize_angle(theta, lp, solver)]
-    step = 2.0 * pi / 3.0
+    step = 2.0 * np.pi / 3.0
     while len(init_vertices) < 3 and max_iter >= 0:
         theta += step
-        if theta >= 2.0 * pi:
+        if theta >= 2.0 * np.pi:
             step *= 0.25 + 0.5 * random()
-            theta += step - 2.0 * pi
+            theta += step - 2.0 * np.pi
         z = optimize_angle(theta, lp, solver)
         if all([norm(z - z0) > 1e-5 for z0 in init_vertices]):
             init_vertices.append(z)
