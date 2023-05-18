@@ -18,6 +18,7 @@
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
 from datetime import datetime
+
 from numpy import dot, sqrt
 
 

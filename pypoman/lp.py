@@ -19,12 +19,10 @@
 
 import cvxopt
 import cvxopt.solvers
-
 from cvxopt.solvers import lp
 from numpy import array
 
 from .misc import warn
-
 
 cvxopt.solvers.options['show_progress'] = False  # disable cvxopt output
 

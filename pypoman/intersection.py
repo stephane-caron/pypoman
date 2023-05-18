@@ -22,7 +22,6 @@ from scipy.spatial import ConvexHull
 
 from .misc import norm
 
-
 PREC_TOL = 1e-10  # numerical tolerance
 
 
@@ -139,8 +138,14 @@ def intersect_polygons(polygon1, polygon2):
     intersection : list of arrays
         Vertices of the intersection in counterclockwise order.
     """
-    from pyclipper import Pyclipper, PT_CLIP, PT_SUBJECT, CT_INTERSECTION
-    from pyclipper import scale_to_clipper, scale_from_clipper
+    from pyclipper import (
+        CT_INTERSECTION,
+        PT_CLIP,
+        PT_SUBJECT,
+        Pyclipper,
+        scale_from_clipper,
+        scale_to_clipper,
+    )
     # could be accelerated by removing the scale_to/from_clipper()
     subj, clip = (polygon1,), polygon2
     pc = Pyclipper()

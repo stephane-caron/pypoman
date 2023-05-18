@@ -17,27 +17,32 @@
 # You should have received a copy of the GNU General Public License along with
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
+"""Polytope projection functions."""
+
+from typing import Tuple
+
 import cdd
 import cvxopt
-
-from numpy import array, dot, eye, hstack, zeros
+import numpy as np
 
 from .bretl import compute_polygon as bretl_compute_polygon
 
 
-def project_polyhedron(proj, ineq, eq=None, canonicalize=True):
-    """
-    Apply the affine projection :math:`y = E x + f` to the polyhedron defined
-    by:
+def project_polyhedron(
+    proj: Tuple[np.ndarray, np.ndarray], ineq, eq=None, canonicalize=True
+):
+    r"""Apply the affine projection :math:`y = E x + f` to a polyhedron.
+
+    The polyhedron is defined by:
 
     .. math::
 
-        A x & \\leq b \\\\
+        A x & \leq b \\
         C x & = d
 
     Parameters
     ----------
-    proj : pair of arrays
+    proj :
         Pair (`E`, `f`) describing the affine projection.
     ineq : pair of arrays
         Pair (`A`, `b`) describing the inequality constraint.
@@ -72,7 +77,7 @@ def project_polyhedron(proj, ineq, eq=None, canonicalize=True):
     # see ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cddlibman/node3.html
     (A, b) = ineq
     b = b.reshape((b.shape[0], 1))
-    linsys = cdd.Matrix(hstack([b, -A]), number_type='float')
+    linsys = cdd.Matrix(np.hstack([b, -A]), number_type="float")
     linsys.rep_type = cdd.RepType.INEQUALITY
 
     # the input [d, -C] to cdd.Matrix.extend represents (d - C * x == 0)
@@ -80,7 +85,7 @@ def project_polyhedron(proj, ineq, eq=None, canonicalize=True):
     if eq is not None:
         (C, d) = eq
         d = d.reshape((d.shape[0], 1))
-        linsys.extend(hstack([d, -C]), linear=True)
+        linsys.extend(np.hstack([d, -C]), linear=True)
         if canonicalize:
             linsys.canonicalize()
 
@@ -89,7 +94,7 @@ def project_polyhedron(proj, ineq, eq=None, canonicalize=True):
     generators = P.get_generators()
     if generators.lin_set:
         print("Generators have linear set: {}".format(generators.lin_set))
-    V = array(generators)
+    V = np.array(generators)
 
     # Project output wrenches to 2D set
     (E, f) = proj
@@ -97,21 +102,22 @@ def project_polyhedron(proj, ineq, eq=None, canonicalize=True):
     free_coordinates = []
     for i in range(V.shape[0]):
         if generators.lin_set and i in generators.lin_set:
-            free_coordinates.append(list(V[i, 1:]).index(1.))
+            free_coordinates.append(list(V[i, 1:]).index(1.0))
         elif V[i, 0] == 1:  # vertex
-            vertices.append(dot(E, V[i, 1:]) + f)
+            vertices.append(np.dot(E, V[i, 1:]) + f)
         else:  # ray
-            rays.append(dot(E, V[i, 1:]))
+            rays.append(np.dot(E, V[i, 1:]))
     return vertices, rays
 
 
-def project_polytope(proj, ineq, eq=None, method='cdd', **kwargs):
-    """
-    Apply the affine projection :math:`y = E x + f` to the polytope defined by:
+def project_polytope(proj, ineq, eq=None, method="cdd", **kwargs):
+    r"""Apply the affine projection :math:`y = E x + f` to a polytope.
+
+    The polytope is defined by:
 
     .. math::
 
-        A x & \\leq b \\\\
+        A x & \leq b \\
         C x & = d
 
     Parameters
@@ -142,7 +148,7 @@ def project_polytope(proj, ineq, eq=None, method='cdd', **kwargs):
     dimension of the input space, while the number of lines of `E` corresponds
     to the dimension of the output space.
     """
-    if method == 'bretl':
+    if method == "bretl":
         assert eq is not None, "Bretl method requires = constraints for now"
         return project_polytope_bretl(proj, ineq, eq, **kwargs)
     vertices, rays = project_polyhedron(proj, ineq, eq)
@@ -150,16 +156,18 @@ def project_polytope(proj, ineq, eq=None, method='cdd', **kwargs):
     return vertices
 
 
-def project_polytope_bretl(proj, ineq, eq, max_radius=1e5, max_iter=1000,
-                           init_angle=None):
-    """
-    Project a polytope into a 2D polygon using the incremental projection
-    algorithm from [Bretl08]_. The 2D affine projection :math:`y = E x + f` is
-    applied to the polyhedron defined by:
+def project_polytope_bretl(
+    proj, ineq, eq, max_radius=1e5, max_iter=1000, init_angle=None
+):
+    r"""Project a polytope into a 2D polygon using the IP algorithm.
+
+    The incremental projection algorithm is detailed in [Bretl08]_. The 2D
+    affine projection :math:`y = E x + f` is applied to the polyhedron defined
+    by:
 
     .. math::
 
-        A x & \\leq b \\\\
+        A x & \leq b \\
         C x & = d
 
     Parameters
@@ -188,7 +196,7 @@ def project_polytope_bretl(proj, ineq, eq, max_radius=1e5, max_iter=1000,
 
     # Inequality constraints: A_ext * [ x  u  v ] <= b_ext iff
     # (1) A * x <= b and (2) |u|, |v| <= max_radius
-    A_ext = zeros((A.shape[0] + 4, A.shape[1] + 2))
+    A_ext = np.zeros((A.shape[0] + 4, A.shape[1] + 2))
     A_ext[:-4, :-2] = A
     A_ext[-4, -2] = 1
     A_ext[-3, -2] = -1
@@ -196,35 +204,36 @@ def project_polytope_bretl(proj, ineq, eq, max_radius=1e5, max_iter=1000,
     A_ext[-1, -1] = -1
     A_ext = cvxopt.matrix(A_ext)
 
-    b_ext = zeros(b.shape[0] + 4)
+    b_ext = np.zeros(b.shape[0] + 4)
     b_ext[:-4] = b
-    b_ext[-4:] = array([max_radius] * 4)
+    b_ext[-4:] = np.array([max_radius] * 4)
     b_ext = cvxopt.matrix(b_ext)
 
     # Equality constraints: C_ext * [ x  u  v ] == d_ext iff
     # (1) C * x == d and (2) [ u  v ] == E * x + f
-    C_ext = zeros((C.shape[0] + 2, C.shape[1] + 2))
+    C_ext = np.zeros((C.shape[0] + 2, C.shape[1] + 2))
     C_ext[:-2, :-2] = C
     C_ext[-2:, :-2] = E[:2]
-    C_ext[-2:, -2:] = array([[-1, 0], [0, -1]])
+    C_ext[-2:, -2:] = np.array([[-1, 0], [0, -1]])
     C_ext = cvxopt.matrix(C_ext)
 
-    d_ext = zeros(d.shape[0] + 2)
+    d_ext = np.zeros(d.shape[0] + 2)
     d_ext[:-2] = d
     d_ext[-2:] = -f[:2]
     d_ext = cvxopt.matrix(d_ext)
 
-    lp_obj = cvxopt.matrix(zeros(A.shape[1] + 2))
+    lp_obj = cvxopt.matrix(np.zeros(A.shape[1] + 2))
     lp = lp_obj, A_ext, b_ext, C_ext, d_ext
-    polygon = bretl_compute_polygon(lp, max_iter=max_iter,
-                                    init_angle=init_angle)
+    polygon = bretl_compute_polygon(
+        lp, max_iter=max_iter, init_angle=init_angle
+    )
     polygon.sort_vertices()
     vertices_list = polygon.export_vertices()
-    vertices = [array([v.x, v.y]) for v in vertices_list]
+    vertices = [np.array([v.x, v.y]) for v in vertices_list]
     return vertices
 
 
-def project_point_to_polytope(point, ineq, solver='quadprog', **kwargs):
+def project_point_to_polytope(point, ineq, solver="quadprog", **kwargs):
     """
     Projet a point onto a polytope in H-representation.
 
@@ -246,6 +255,10 @@ def project_point_to_polytope(point, ineq, solver='quadprog', **kwargs):
     ----
     This function requires `qpsolvers <https://pypi.org/project/qpsolvers/>`_.
     """
-    from qpsolvers import solve_ls
-    P = eye(len(point))
+    try:
+        from qpsolvers import solve_ls
+    except ImportError as e:
+        raise ImportError("This function requires qpsolvers: pip install qpsolvers") from e
+
+    P = np.eye(len(point))
     return solve_ls(P, point, G=ineq[0], h=ineq[1], solver=solver, **kwargs)

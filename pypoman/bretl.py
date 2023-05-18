@@ -64,7 +64,10 @@ class Vertex:
             self.expanded = True
             return None
         xopt, yopt = z
-        if abs(cross([xopt-v1.x, yopt-v1.y], [v1.x-v2.x, v1.y-v2.y])) < 1e-4:
+        if (
+            abs(cross([xopt - v1.x, yopt - v1.y], [v1.x - v2.x, v1.y - v2.y]))
+            < 1e-4
+        ):
             self.expanded = True
             return None
         else:
@@ -176,7 +179,7 @@ class Polygon:
             List of vertices.
         """
         vertices = [self.vertices[0]]
-        for i in range(1, len(self.vertices)-1):
+        for i in range(1, len(self.vertices) - 1):
             vcur = self.vertices[i]
             vlast = vertices[-1]
             if norm([vcur.x - vlast.x, vcur.y - vlast.y]) > min_dist:
@@ -186,8 +189,7 @@ class Polygon:
 
 
 def optimize_direction(vdir, lp, solver=GLPK_IF_AVAILABLE):
-    """
-    Optimize in one direction.
+    """Optimize in one direction.
 
     Parameters
     ----------
@@ -210,14 +212,12 @@ def optimize_direction(vdir, lp, solver=GLPK_IF_AVAILABLE):
     lp_q, lp_Gextended, lp_hextended, lp_A, lp_b = lp
     lp_q[-2] = -vdir[0]
     lp_q[-1] = -vdir[1]
-    x = solve_lp(
-        lp_q, lp_Gextended, lp_hextended, lp_A, lp_b, solver=solver)
+    x = solve_lp(lp_q, lp_Gextended, lp_hextended, lp_A, lp_b, solver=solver)
     return x[-2:]
 
 
 def optimize_angle(theta, lp, solver=GLPK_IF_AVAILABLE):
-    """
-    Optimize in one direction.
+    """Optimize in one direction.
 
     Parameters
     ----------
@@ -242,10 +242,10 @@ def optimize_angle(theta, lp, solver=GLPK_IF_AVAILABLE):
     return z
 
 
-def compute_polygon(lp, max_iter=1000, solver=GLPK_IF_AVAILABLE,
-                    init_angle=None):
-    """
-    Expand a polygon iteratively.
+def compute_polygon(
+    lp, max_iter=1000, solver=GLPK_IF_AVAILABLE, init_angle=None
+):
+    """Expand a polygon iteratively.
 
     Parameters
     ----------
@@ -266,12 +266,12 @@ def compute_polygon(lp, max_iter=1000, solver=GLPK_IF_AVAILABLE,
     """
     theta = init_angle if init_angle is not None else pi * random()
     init_vertices = [optimize_angle(theta, lp, solver)]
-    step = 2. * pi / 3.
+    step = 2.0 * pi / 3.0
     while len(init_vertices) < 3 and max_iter >= 0:
         theta += step
-        if theta >= 2. * pi:
+        if theta >= 2.0 * pi:
             step *= 0.25 + 0.5 * random()
-            theta += step - 2. * pi
+            theta += step - 2.0 * pi
         z = optimize_angle(theta, lp, solver)
         if all([norm(z - z0) > 1e-5 for z0 in init_vertices]):
             init_vertices.append(z)

@@ -24,7 +24,6 @@ from numpy import array, hstack, zeros
 from .lp import solve_lp
 from .misc import norm, warn
 
-
 try:
     import cdd
 except ImportError:

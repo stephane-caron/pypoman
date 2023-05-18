@@ -19,20 +19,25 @@
 
 """Python module for polyhedral geometry."""
 
-from .duality import compute_cone_face_matrix
-from .duality import compute_polytope_halfspaces
-from .duality import compute_polytope_vertices
-from .duality import convex_hull
-from .intersection import intersect_line_cylinder
-from .intersection import intersect_line_polygon
-from .intersection import intersect_polygons
+from .duality import (
+    compute_cone_face_matrix,
+    compute_polytope_halfspaces,
+    compute_polytope_vertices,
+    convex_hull,
+)
+from .intersection import (
+    intersect_line_cylinder,
+    intersect_line_polygon,
+    intersect_polygons,
+)
 from .lp import solve_lp
-from .polygon import compute_polygon_hull
-from .polygon import plot_polygon
+from .polygon import compute_polygon_hull, plot_polygon
 from .polyhedron import compute_chebyshev_center
-from .projection import project_polytope
-from .projection import project_polytope_bretl
-from .projection import project_point_to_polytope
+from .projection import (
+    project_point_to_polytope,
+    project_polytope,
+    project_polytope_bretl,
+)
 
 __version__ = "0.6.0rc0"
 

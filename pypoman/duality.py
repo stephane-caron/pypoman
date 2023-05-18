@@ -18,7 +18,6 @@
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
 import cdd
-
 from numpy import array, hstack, ones, vstack, zeros
 from scipy.spatial import ConvexHull
 
