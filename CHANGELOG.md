@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Add type hints to function prototypes
 - Document all public modules
 - Point to polytope projection (thanks to @peekxc)
 - Unit test fixtures for vertex and halfspace enumeration
