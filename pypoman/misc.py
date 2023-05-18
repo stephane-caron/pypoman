@@ -21,42 +21,41 @@
 
 from datetime import datetime
 
-from numpy import dot, sqrt
+import numpy as np
 
 
-def norm(v):
+def norm(v: np.ndarray) -> float:
     """Euclidean norm.
 
     Parameters
     ----------
-    v : array
-        Any vector.
+    v :
+        Vector.
 
     Returns
     -------
-    n : scalar
-        Euclidean norm of `v`.
+    :
+        Euclidean norm of the input vector.
 
     Notes
     -----
     This straightforward function is 2x faster than :func:`numpy.linalg.norm`
     on my machine.
     """
-    return sqrt(dot(v, v))
+    return np.sqrt(np.dot(v, v))
 
 
-def normalize(v):
-    """
-    Normalize a vector.
+def normalize(v: np.ndarray) -> np.ndarray:
+    """Normalize a vector.
 
     Parameters
     ----------
-    v : array
+    v :
         Any vector.
 
     Returns
     -------
-    nv : array
+    :
         Unit vector directing `v`.
 
     Notes
@@ -66,7 +65,7 @@ def normalize(v):
     return v / norm(v)
 
 
-def warn(msg):
+def warn(msg: str) -> None:
     """
     Log a warning message (in yellow) to stdout.
 

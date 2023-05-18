@@ -20,7 +20,7 @@
 
 """Iterative projection algorithm by [Bretl08]_."""
 
-from typing import Any, List, Optional, Tuple, Union
+from typing import Any, List, Optional, Tuple
 
 import numpy as np
 from numpy.random import random
@@ -214,7 +214,7 @@ def optimize_direction(
     vdir: np.ndarray,
     lp: Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray],
     solver: Optional[str] = GLPK_IF_AVAILABLE,
-) -> Tuple[bool, Union[int, np.ndarray]]:
+) -> np.ndarray:
     """Optimize in one direction.
 
     Parameters
@@ -230,9 +230,8 @@ def optimize_direction(
     Returns
     -------
     :
-        Tuple ``(succ, z)``, where ``succ`` is a success boolean and ``z`` is
-        the maximum vertex of the polygon in the direction `vdir`, or 0 in case
-        of solver failure.
+        Vector ``z`` representing the maximum vertex of the polygon in the
+        direction `vdir`.
     """
     lp_q, lp_Gextended, lp_hextended, lp_A, lp_b = lp
     lp_q[-2] = -vdir[0]
@@ -241,12 +240,16 @@ def optimize_direction(
     return x[-2:]
 
 
-def optimize_angle(theta, lp, solver=GLPK_IF_AVAILABLE):
+def optimize_angle(
+    theta: float,
+    lp: Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray],
+    solver: Optional[str] = GLPK_IF_AVAILABLE,
+) -> np.ndarray:
     """Optimize in one direction.
 
     Parameters
     ----------
-    theta : scalar
+    theta :
         Angle of the direction in which the optimization is performed.
     lp : array tuple
         Tuple `(q, G, h, A, b)` defining the LP. See
@@ -256,11 +259,9 @@ def optimize_angle(theta, lp, solver=GLPK_IF_AVAILABLE):
 
     Returns
     -------
-    succ : bool
-        Success boolean.
-    z : (3,) array, or 0
-        Maximum vertex of the polygon in the direction `vdir`, or 0 in case of
-        solver failure.
+    :
+        Vector ``z`` representing the maximum vertex of the polygon in the
+        direction `vdir`.
     """
     d = np.array([np.cos(theta), np.sin(theta)])
     z = optimize_direction(d, lp, solver=solver)

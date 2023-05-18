@@ -60,7 +60,7 @@ def solve_lp(
     A: Optional[np.ndarray] = None,
     b: Optional[np.ndarray] = None,
     solver: Optional[str] = GLPK_IF_AVAILABLE,
-):
+) -> np.ndarray:
     r"""Solve a linear program (LP).
 
     The linear program is defined by:
@@ -92,8 +92,8 @@ def solve_lp(
 
     Returns
     -------
-    x : array, shape=(n,)
-        Optimal solution to the LP, if found, otherwise ``None``.
+    :
+        Optimal solution to the LP.
 
     Raises
     ------
