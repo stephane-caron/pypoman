@@ -31,6 +31,8 @@ classifiers = [
 dependencies = [
     "cvxopt",
     "pycddlib",
+    "numpy",
+    "scipy",
 ]
 keywords = ["convex, polyhedron, polyhedra, polytope, projection, duality"]
 
