@@ -30,7 +30,6 @@ class TestVertexEnumeration(unittest.TestCase):
     """Test fixture for vertex enumeration problems."""
 
     def test_vertex_enumeration(self):
-
         A = np.array(
             [
                 [-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -56,4 +55,5 @@ class TestVertexEnumeration(unittest.TestCase):
         )
         b = np.array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 2, 1, 2, 3])
         vertices = compute_polytope_vertices(A, b)
-        self.assertGreater(len(vertices), 10)
+        self.assertGreater(len(vertices), 50)
+        self.assertLess(len(vertices), 500)
