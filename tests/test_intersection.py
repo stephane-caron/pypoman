@@ -75,3 +75,19 @@ class TestIntersection(unittest.TestCase):
         ]
         inter = intersect_polygons(polygon1, polygon2)
         self.assertEqual(len(inter), 4)
+
+    def test_empty_polygon_intersection(self):
+        polygon1 = [
+            np.array([0.0, 0.0]),
+            np.array([1.0, 0.0]),
+            np.array([1.0, 1.0]),
+            np.array([0.0, 1.0]),
+        ]
+        polygon2 = [
+            np.array([10.5, 10.5]),
+            np.array([11.5, 10.5]),
+            np.array([11.5, 11.5]),
+            np.array([10.5, 11.5]),
+        ]
+        inter = intersect_polygons(polygon1, polygon2)
+        self.assertEqual(len(inter), 0)
