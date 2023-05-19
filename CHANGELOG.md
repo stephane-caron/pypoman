@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- Cover all submodules with unit tests
+
 ### Changed
 
 - Raise ``ValueError`` exception when polyhedron is empty
