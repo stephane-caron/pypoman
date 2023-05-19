@@ -43,8 +43,8 @@ class Vertex:
 
         Parameters
         ----------
-        p : array
-            2D coordinates.
+        p :
+            2D coordinates of the vertex.
         """
         self.x = p[0]
         self.y = p[1]
@@ -107,11 +107,11 @@ class Polygon:
 
         Parameters
         ----------
-        v1 : array
+        v1 :
             First vertex of the initial triangle.
-        v2 : array
+        v2 :
             Second vertex of the initial triangle.
-        v3 : array
+        v3 :
             Third vertex of the initial triangle.
         """
         v1.next = v2
@@ -226,12 +226,12 @@ def optimize_direction(
 
     Parameters
     ----------
-    vdir : (3,) array
-        Direction in which the optimization is performed.
-    lp : array tuple
+    vdir :
+        Direction (3D vector) in which the optimization is performed.
+    lp :
         Tuple `(q, G, h, A, b)` defining the LP. See
         :func:`pypoman.lp..solve_lp` for details.
-    solver : string, optional
+    solver :
         Backend LP solver to call.
 
     Returns
@@ -258,10 +258,10 @@ def optimize_angle(
     ----------
     theta :
         Angle of the direction in which the optimization is performed.
-    lp : array tuple
+    lp :
         Tuple `(q, G, h, A, b)` defining the LP. See
         :func:`pypoman.lp..solve_lp` for details.
-    solver : string, optional
+    solver :
         Backend LP solver to call.
 
     Returns

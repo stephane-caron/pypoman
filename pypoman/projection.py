@@ -238,22 +238,27 @@ def project_polytope_bretl(
     return vertices
 
 
-def project_point_to_polytope(point, ineq, solver="quadprog", **kwargs):
+def project_point_to_polytope(
+    point: np.ndarray,
+    ineq: Tuple[np.ndarray, np.ndarray],
+    solver: str = "quadprog",
+    **kwargs
+) -> np.ndarray:
     """
     Projet a point onto a polytope in H-representation.
 
     Parameters
     ----------
-    point : array
+    point :
         Point to project.
-    ineq : pair of arrays
+    ineq :
         Pair (`A`, `b`) describing the inequality constraint.
-    solver : string
+    solver :
         Name of the quadratic programming solver to use.
 
     Returns
     -------
-    projection : array
+    :
         Projected point.
 
     Note
