@@ -55,7 +55,7 @@ def __compute_polygon_hull(B: np.ndarray, c: np.ndarray):
 
     Notes
     -----
-    The origin [0, 0] should lie inside the polygon (:math:`c \\geq 0`) in
+    The origin [0, 0] should lie inside the polygon (:math:`c \geq 0`) in
     order to build the polar form. If you don't have this guarantee, call
     ``compute_polar_polygon()`` instead.
 

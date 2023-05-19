@@ -40,7 +40,7 @@ def compute_cone_face_matrix(S: np.ndarray) -> np.ndarray:
     Returns
     -------
     :
-        Face matrix defining the cone equivalently by :math:`F x \\leq 0`.
+        Face matrix defining the cone equivalently by :math:`F x \leq 0`.
     """
     V = np.vstack(
         [
@@ -128,8 +128,8 @@ def compute_polytope_vertices(
     Notes
     -----
     This method won't work well if your halfspace representation includes
-    equality constraints :math:`A x = b` written as :math:`(A x \\leq b \\wedge
-    -A x \\leq -b)`. If this is your use case, consider using directly the
+    equality constraints :math:`A x = b` written as :math:`(A x \leq b \wedge
+    -A x \leq -b)`. If this is your use case, consider using directly the
     linear set ``lin_set`` of `equality-constraint generatorsin pycddlib
     <https://pycddlib.readthedocs.io/en/latest/matrix.html>`_.
     """
