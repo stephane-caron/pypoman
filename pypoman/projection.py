@@ -162,8 +162,13 @@ def project_polytope(proj, ineq, eq=None, method="cdd", **kwargs):
 
 
 def project_polytope_bretl(
-    proj, ineq, eq, max_radius=1e5, max_iter=1000, init_angle=None
-):
+    proj: Tuple[np.ndarray, np.ndarray],
+    ineq: Tuple[np.ndarray, np.ndarray],
+    eq: Tuple[np.ndarray, np.ndarray],
+    max_radius: float = 1e5,
+    max_iter: int = 1000,
+    init_angle: Optional[float] = None,
+) -> List[np.ndarray]:
     r"""Project a polytope into a 2D polygon using the IP algorithm.
 
     The incremental projection algorithm is detailed in [Bretl08]_. The 2D
@@ -177,23 +182,23 @@ def project_polytope_bretl(
 
     Parameters
     ----------
-    proj : pair of arrays
+    proj :
         Pair (`E`, `f`) describing the affine projection.
-    ineq : pair of arrays
+    ineq :
         Pair (`A`, `b`) describing the inequality constraint.
-    eq : pair of arrays, optional
+    eq :
         Pair (`C`, `d`) describing the equality constraint.
-    max_radius : scalar, optional
+    max_radius :
         Maximum distance from origin (in [m]) used to make sure the output
         is bounded.
-    max_iter : integer, optional
+    max_iter :
         Maximum number of calls to the LP solver.
-    init_angle : scalar, optional
+    init_angle :
         Angle in [rad] giving the direction of the initial ray cast.
 
     Returns
     -------
-    vertices : list of arrays
+    :
         List of vertices of the projected polygon.
     """
     (E, f), (A, b), (C, d) = proj, ineq, eq
