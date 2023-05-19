@@ -6,4 +6,5 @@
 MANIFEST
 build/
 dist/
+htmlcov/
 pypoman.egg-info/
