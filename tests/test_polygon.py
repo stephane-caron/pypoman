@@ -57,3 +57,4 @@ class TestPolygon(unittest.TestCase):
             np.array([0.5, 1.5]),
         ]
         plot_polygon(vertices)
+        plot_polygon(vertices, resize=True)

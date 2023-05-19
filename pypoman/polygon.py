@@ -19,7 +19,7 @@
 
 """Functions on polygons, that is, 2D polyhedra."""
 
-from typing import List
+from typing import List, Optional
 
 import numpy as np
 from matplotlib.patches import Polygon
@@ -143,32 +143,32 @@ def compute_polygon_hull(B: np.ndarray, c: np.ndarray) -> List[np.ndarray]:
 
 
 def plot_polygon(
-    points,
-    alpha=0.4,
-    color="g",
-    linestyle="solid",
-    fill=True,
-    linewidth=None,
-    resize=False,
-):
+    points: List[np.ndarray],
+    alpha: float = 0.4,
+    color: str = "g",
+    linestyle: str = "solid",
+    fill: bool = True,
+    linewidth: Optional[float] = None,
+    resize: bool = False,
+) -> None:
     """
     Plot a polygon in matplotlib.
 
     Parameters
     ----------
-    points : list of arrays
-        List of poitns.
-    alpha : scalar, optional
+    points :
+        List of points.
+    alpha :
         Transparency value.
-    color : string, optional
+    color :
         Color in matplotlib format.
-    linestyle : scalar, optional
+    linestyle :
         Line style in matplotlib format.
-    fill : bool, optional
+    fill :
         When ``True``, fills the area inside the polygon.
-    linewidth : scalar, optional
+    linewidth :
         Line width in matplotlib format.
-    resize : bool, optional
+    resize :
         When ``True``, resets axis limits to center on the polygon.
     """
     if type(points) is list:
