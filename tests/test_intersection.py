@@ -23,7 +23,7 @@ import unittest
 
 import numpy as np
 
-from pypoman import intersect_line_polygon
+from pypoman import intersect_line_cylinder, intersect_line_polygon
 
 
 class TestIntersection(unittest.TestCase):
@@ -45,4 +45,13 @@ class TestIntersection(unittest.TestCase):
         ]
         line = (np.array([2.1, 1.9]), np.array([0.0, 0.0]))
         inter = intersect_line_polygon(line, vertices, apply_hull=True)
+        self.assertEqual(len(inter), 1)
+
+    def test_intersect_line_cylinder(self):
+        vertices = [
+            (np.cos(theta), np.sin(theta))
+            for theta in np.arange(0, 2 * np.pi, np.pi / 6)
+        ]
+        line = (np.array([2.1, 1.9, -1.1]), np.array([0.0, 0.0, 0.0]))
+        inter = intersect_line_cylinder(line, vertices)
         self.assertEqual(len(inter), 1)
