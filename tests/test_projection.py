@@ -62,9 +62,12 @@ class TestProjection(unittest.TestCase):
         f = np.zeros(p)
         proj = (E, f)  # proj(x) = E * x + f
 
-        vertices = project_polytope(proj, ineq, eq, method="bretl")
-        self.assertGreater(len(vertices), 3)
-        self.assertLess(len(vertices), 20)
+        vertices_bretl = project_polytope(proj, ineq, eq, method="bretl")
+        vertices_cdd = project_polytope(proj, ineq, eq, method="cdd")
+        self.assertGreater(len(vertices_bretl), 3)
+        self.assertGreater(len(vertices_cdd), 3)
+        self.assertLess(len(vertices_bretl), 20)
+        self.assertLess(len(vertices_cdd), 1000)
 
     def test_project_point_to_polytope(self):
         vertices = [
