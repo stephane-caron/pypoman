@@ -73,5 +73,5 @@ class TestProjection(unittest.TestCase):
         ]
         A, b = compute_polytope_halfspaces(vertices)
         point = np.array([2.1, 1.9])
-        proj = project_point_to_polytope(point, (A, b))
+        proj = project_point_to_polytope(point, (A, b), qpsolver="cvxopt")
         self.assertEqual(proj.shape, (2,))
