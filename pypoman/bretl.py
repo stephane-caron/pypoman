@@ -313,7 +313,7 @@ def compute_polygon(
             init_vertices.append(z)
         max_iter -= 1
     if len(init_vertices) < 3:
-        raise Exception("problem is not linearly feasible")
+        raise ValueError("problem is not linearly feasible")
     v0 = Vertex(init_vertices[0])
     v1 = Vertex(init_vertices[1])
     v2 = Vertex(init_vertices[2])

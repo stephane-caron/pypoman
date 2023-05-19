@@ -62,7 +62,7 @@ def compute_cone_face_matrix(S: np.ndarray) -> np.ndarray:
         if norm(H[i, 1:]) < 1e-10:
             continue
         elif abs(H[i, 0]) > 1e-10:  # b should be zero for a cone
-            raise Exception("Polyhedron is not a cone")
+            raise ValueError("Polyhedron is not a cone")
         elif i not in ineq.lin_set:
             A.append(-H[i, 1:])
     return np.array(A)
@@ -142,7 +142,7 @@ def compute_polytope_vertices(
     vertices = []
     for i in range(V.shape[0]):
         if V[i, 0] != 1:  # 1 = vertex, 0 = ray
-            raise Exception("Polyhedron is not a polytope")
+            raise ValueError("Polyhedron is not a polytope")
         elif i not in g.lin_set:
             vertices.append(V[i, 1:])
     return vertices

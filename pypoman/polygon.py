@@ -135,7 +135,7 @@ def compute_polygon_hull(B: np.ndarray, c: np.ndarray) -> List[np.ndarray]:
         x = compute_chebyshev_center(B, c)
         c = c - dot(B, x)
     if not all(c > 0):
-        raise Exception("Polygon is empty (min. dist. to edge %.2f)" % min(c))
+        raise ValueError("Polygon is empty (min. dist. to edge %.2f)" % min(c))
     vertices = __compute_polygon_hull(B, c)
     if x is not None:
         vertices = [v + x for v in vertices]
