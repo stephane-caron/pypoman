@@ -17,26 +17,21 @@
 # You should have received a copy of the GNU General Public License along with
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
-"""Unit tests for polyhedron submodule."""
+"""Unit tests for polygon submodule."""
 
 import unittest
 
 import numpy as np
 
-from pypoman import compute_chebyshev_center
+from pypoman import compute_polygon_hull
 
 
-class TestPolyhedron(unittest.TestCase):
-    """Test fixture for polyhedron submodule."""
+class TestPolygon(unittest.TestCase):
+    """Test fixture for polygon submodule."""
 
-    def test_compute_chebyshev_center(self):
-        G = np.array([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -2.0]])
-        h = np.zeros(4)
-        x = compute_chebyshev_center(G, h)
-        self.assertEqual(x.shape, (2,))
-
-    def test_chebyshev_center_unbounded(self):
-        G = np.array([[1.0, 0.0], [0.0, 1.0]])
-        h = np.zeros(2)
-        with self.assertRaises(ValueError):
-            compute_chebyshev_center(G, h)
+    def test_compute_polygon_hull(self):
+        B = np.array([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -2.0]])
+        c = np.ones(4)
+        x = compute_polygon_hull(B, c)
+        self.assertGreater(len(x), 3)
+        self.assertLess(len(x), 30)
