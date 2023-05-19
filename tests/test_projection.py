@@ -22,15 +22,24 @@
 import unittest
 
 import numpy as np
-from pypoman import project_polytope
+
+from pypoman import (
+    compute_polytope_halfspaces,
+    project_point_to_polytope,
+    project_polytope,
+)
 
 
 class TestProjection(unittest.TestCase):
     """Test fixture for projection algorithms."""
 
     def test_project_polytope(self, n: int = 10, p: int = 2):
-        """
-        Test polytope projection.
+        r"""Test polytope projection.
+
+        The original polytope is defined by:
+
+        - Inequality constraints: \forall i, |x_i| <= 1
+        - Equality constraint: sum_i x_i = 0
 
         Parameters
         ----------
@@ -39,9 +48,6 @@ class TestProjection(unittest.TestCase):
         p :
             Dimension of the projected polytope
         """
-        # Original polytope:
-        # - inequality constraints: \forall i, |x_i| <= 1
-        # - equality constraint: sum_i x_i = 0
         A = np.vstack([+np.eye(n), -np.eye(n)])
         b = np.ones(2 * n)
         C = np.ones(n).reshape((1, n))
@@ -59,3 +65,13 @@ class TestProjection(unittest.TestCase):
         vertices = project_polytope(proj, ineq, eq, method="bretl")
         self.assertGreater(len(vertices), 3)
         self.assertLess(len(vertices), 10)
+
+    def test_project_point_to_polytope(self):
+        vertices = [
+            (np.cos(theta), np.sin(theta))
+            for theta in np.arange(0, 2 * np.pi, np.pi / 6)
+        ]
+        A, b = compute_polytope_halfspaces(vertices)
+        point = np.array([2.1, 1.9])
+        proj = project_point_to_polytope(point, (A, b))
+        self.assertEqual(proj.shape, (2,))
