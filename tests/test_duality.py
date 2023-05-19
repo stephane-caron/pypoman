@@ -17,17 +17,27 @@
 # You should have received a copy of the GNU General Public License along with
 # pypoman. If not, see <http://www.gnu.org/licenses/>.
 
-"""Unit tests for vertex enumeration."""
+"""Unit tests for duality conversions."""
 
 import unittest
 
 import numpy as np
 
-from pypoman import compute_polytope_vertices
+from pypoman import compute_polytope_halfspaces, compute_polytope_vertices
 
 
-class TestVertexEnumeration(unittest.TestCase):
-    """Test fixture for vertex enumeration problems."""
+class TestDuality(unittest.TestCase):
+    """Test fixture for duality conversions."""
+
+    def test_halfspace_enumeration(self):
+        vertices = map(
+            np.array,
+            [[1, 0, 0], [0, 1, 0], [1, 1, 0], [0, 0, 1], [0, 1, 1]],
+        )
+        A, b = compute_polytope_halfspaces(vertices)
+        self.assertEqual(A.shape[0], b.shape[0])
+        self.assertGreater(len(b), 4)
+        self.assertLess(len(b), 10)
 
     def test_vertex_enumeration(self):
         A = np.array(
