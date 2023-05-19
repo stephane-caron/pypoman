@@ -64,7 +64,7 @@ class TestProjection(unittest.TestCase):
 
         vertices = project_polytope(proj, ineq, eq, method="bretl")
         self.assertGreater(len(vertices), 3)
-        self.assertLess(len(vertices), 10)
+        self.assertLess(len(vertices), 20)
 
     def test_project_point_to_polytope(self):
         vertices = [

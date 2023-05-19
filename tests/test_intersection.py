@@ -23,7 +23,11 @@ import unittest
 
 import numpy as np
 
-from pypoman import intersect_line_cylinder, intersect_line_polygon
+from pypoman import (
+    intersect_line_cylinder,
+    intersect_line_polygon,
+    intersect_polygons,
+)
 
 
 class TestIntersection(unittest.TestCase):
@@ -55,3 +59,19 @@ class TestIntersection(unittest.TestCase):
         line = (np.array([2.1, 1.9, -1.1]), np.array([0.0, 0.0, 0.0]))
         inter = intersect_line_cylinder(line, vertices)
         self.assertEqual(len(inter), 1)
+
+    def test_intersect_polygons(self):
+        polygon1 = [
+            np.array([0.0, 0.0]),
+            np.array([1.0, 0.0]),
+            np.array([1.0, 1.0]),
+            np.array([0.0, 1.0]),
+        ]
+        polygon2 = [
+            np.array([0.5, 0.5]),
+            np.array([1.5, 0.5]),
+            np.array([1.5, 1.5]),
+            np.array([0.5, 1.5]),
+        ]
+        inter = intersect_polygons(polygon1, polygon2)
+        self.assertEqual(len(inter), 4)

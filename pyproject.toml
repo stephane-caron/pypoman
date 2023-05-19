@@ -39,6 +39,7 @@ keywords = ["convex, polyhedron, polyhedra, polytope, projection, duality"]
 
 [project.optional-dependencies]
 all = [
+    "pyclipper >=1.3.0",
     "qpsolvers >=3.3.1",
 ]
 
