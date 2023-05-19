@@ -23,7 +23,7 @@ import unittest
 
 import numpy as np
 
-from pypoman import compute_polygon_hull
+from pypoman import compute_polygon_hull, plot_polygon
 
 
 class TestPolygon(unittest.TestCase):
@@ -35,3 +35,12 @@ class TestPolygon(unittest.TestCase):
         x = compute_polygon_hull(B, c)
         self.assertGreater(len(x), 3)
         self.assertLess(len(x), 30)
+
+    def test_plot_polygon(self):
+        vertices = [
+            np.array([0.5, 0.5]),
+            np.array([1.5, 0.5]),
+            np.array([1.5, 1.5]),
+            np.array([0.5, 1.5]),
+        ]
+        plot_polygon(vertices)
