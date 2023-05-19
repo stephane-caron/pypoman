@@ -19,12 +19,13 @@
 
 """Functions on polygons, that is, 2D polyhedra."""
 
+from typing import List
+
 import numpy as np
 from matplotlib.patches import Polygon
 from numpy import array, dot, hstack
 from pylab import axis, gca
 from scipy.spatial import ConvexHull
-from typing import List
 
 from .polyhedron import compute_chebyshev_center
 
