@@ -20,13 +20,12 @@
 """Functions for linear programming."""
 
 from typing import Optional, Union
+from warnings import warn
 
 import cvxopt
 import cvxopt.solvers
 import numpy as np
 from cvxopt.solvers import lp
-
-from .misc import warn
 
 cvxopt.solvers.options["show_progress"] = False  # disable cvxopt output
 

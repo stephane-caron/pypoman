@@ -19,8 +19,6 @@
 
 """Other utility functions."""
 
-from datetime import datetime
-
 import numpy as np
 
 
@@ -43,16 +41,3 @@ def norm(v: np.ndarray) -> float:
     on my machine.
     """
     return np.sqrt(np.dot(v, v))
-
-
-def warn(msg: str) -> None:
-    """
-    Log a warning message (in yellow) to stdout.
-
-    Parameters
-    ----------
-    msg :
-        Warning message.
-    """
-    date = datetime.now().strftime("%Y-%m-%d %H:%M:%S,%f")[:-3]
-    print("%c[0;%d;48m%s pypoman [WARN] %s%c[m" % (0x1B, 33, date, msg, 0x1B))
