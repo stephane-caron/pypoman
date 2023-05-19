@@ -36,6 +36,13 @@ class TestPolygon(unittest.TestCase):
         self.assertGreater(len(x), 3)
         self.assertLess(len(x), 30)
 
+    def test_compute_polygon_hull_offset(self):
+        B = np.array([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -2.0]])
+        c = np.array([1.0, 1.0, -0.1, 2.0])
+        x = compute_polygon_hull(B, c)
+        self.assertGreater(len(x), 3)
+        self.assertLess(len(x), 30)
+
     def test_plot_polygon(self):
         vertices = [
             np.array([0.5, 0.5]),
