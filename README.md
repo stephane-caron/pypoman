@@ -101,12 +101,16 @@ f = zeros(p)
 proj = (E, f)  # proj(x) = E * x + f
 
 vertices = project_polytope(proj, ineq, eq, method='bretl')
+```
 
-if __name__ == "__main__":   # plot projected polytope
-    import pylab
-    pylab.ion()
-    pylab.figure()
-    plot_polygon(vertices)
+We can then plot the projected polytope:
+
+```python
+import pylab
+
+pylab.ion()
+pylab.figure()
+plot_polygon(vertices)
 ```
 
 ## See also
