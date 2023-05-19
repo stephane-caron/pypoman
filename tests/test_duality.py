@@ -23,7 +23,7 @@ import unittest
 
 import numpy as np
 
-from pypoman import compute_polytope_halfspaces, compute_polytope_vertices
+from pypoman import compute_polytope_halfspaces, compute_polytope_vertices, compute_cone_face_matrix
 
 
 class TestDuality(unittest.TestCase):
@@ -67,3 +67,10 @@ class TestDuality(unittest.TestCase):
         vertices = compute_polytope_vertices(A, b)
         self.assertGreater(len(vertices), 50)
         self.assertLess(len(vertices), 500)
+
+    def test_compute_cone_face_matrix(self):
+        S = np.array([
+            [1.0, 0.0],
+            [0.0, 1.0]])
+        F = compute_cone_face_matrix(S)
+        self.assertEqual(len(F), 2)
