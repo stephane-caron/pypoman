@@ -21,10 +21,12 @@
 
 from __future__ import division
 
+from warnings import warn
+
 import numpy as np
 
 from .lp import solve_lp
-from .misc import norm, warn
+from .misc import norm
 
 try:
     import cdd
