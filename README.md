@@ -5,16 +5,14 @@
 [![PyPI package](https://img.shields.io/pypi/v/pypoman)](https://pypi.org/project/pypoman/)
 ![Status](https://img.shields.io/pypi/status/pypoman)
 
-This library allows common operations over [convex polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron) such as [polytope projection](https://scaron.info/doc/pypoman/index.html#module-pypoman.projection) and [vertex enumeration](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality).
-
-See the [API documentation](https://scaron.info/doc/pypoman/) for details.
+This library allows common operations over [convex polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron) such as [polytope projection](https://scaron.info/doc/pypoman/index.html#module-pypoman.projection) and [vertex enumeration](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality). Check out the [API documentation](https://scaron.info/doc/pypoman/) for details.
 
 ## Installation
 
-Install system packages (here for Debian-based distributions) for Python and GLPK by:
+Install system packages for Python and GLPK, for instance for Debian-based Linux distributions:
 
 ```console
-$ sudo apt-get install cython libglpk-dev python python-dev python-pip python-scipy
+$ sudo apt-get install cython libglpk-dev python python-dev python-pip
 ```
 
 Then, install the library by:
