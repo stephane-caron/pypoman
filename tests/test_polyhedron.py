@@ -40,3 +40,9 @@ class TestPolyhedron(unittest.TestCase):
         h = np.zeros(2)
         with self.assertRaises(ValueError):
             compute_chebyshev_center(G, h)
+
+    def test_chebyshev_center_empty(self):
+        G = np.array([[1.0, 0.0], [-1.0, 0.0]])
+        h = np.array([0.0, -1.0])
+        with self.assertRaises(ValueError):
+            compute_chebyshev_center(G, h)
