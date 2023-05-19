@@ -45,26 +45,6 @@ def norm(v: np.ndarray) -> float:
     return np.sqrt(np.dot(v, v))
 
 
-def normalize(v: np.ndarray) -> np.ndarray:
-    """Normalize a vector.
-
-    Parameters
-    ----------
-    v :
-        Any vector.
-
-    Returns
-    -------
-    :
-        Unit vector directing `v`.
-
-    Notes
-    -----
-    This method doesn't catch ``ZeroDivisionError`` exceptions on purpose.
-    """
-    return v / norm(v)
-
-
 def warn(msg: str) -> None:
     """
     Log a warning message (in yellow) to stdout.
