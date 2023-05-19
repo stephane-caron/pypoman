@@ -242,7 +242,7 @@ def project_point_to_polytope(
     point: np.ndarray,
     ineq: Tuple[np.ndarray, np.ndarray],
     qpsolver: str,
-    **kwargs
+    **kwargs,
 ) -> np.ndarray:
     """
     Projet a point onto a polytope in H-representation.
