@@ -22,6 +22,12 @@ Then, install the library by:
 $ pip install pypoman
 ```
 
+Some functions in the library are optional and not installed by default. To enable all of them, run:
+
+```console
+$ pip install pypoman[all]
+```
+
 ## Examples
 
 ### Vertex enumeration

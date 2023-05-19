@@ -37,6 +37,11 @@ dependencies = [
 ]
 keywords = ["convex, polyhedron, polyhedra, polytope, projection, duality"]
 
+[project.optional-dependencies]
+all = [
+    "qpsolvers >=3.3.1",
+]
+
 [project.urls]
 Documentation = "https://scaron.info/doc/pypoman/"
 Source = "https://github.com/stephane-caron/pypoman"
