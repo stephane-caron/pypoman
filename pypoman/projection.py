@@ -241,7 +241,7 @@ def project_polytope_bretl(
 def project_point_to_polytope(
     point: np.ndarray,
     ineq: Tuple[np.ndarray, np.ndarray],
-    solver: str = "quadprog",
+    qpsolver: str,
     **kwargs
 ) -> np.ndarray:
     """
@@ -253,8 +253,9 @@ def project_point_to_polytope(
         Point to project.
     ineq :
         Pair (`A`, `b`) describing the inequality constraint.
-    solver :
-        Name of the quadratic programming solver to use.
+    qpsolver :
+        Name of the backend quadratic programming solver to use, to be picked
+        in ``qpsolvers.available_solvers``.
 
     Returns
     -------
@@ -273,4 +274,4 @@ def project_point_to_polytope(
         ) from e
 
     P = np.eye(len(point))
-    return solve_ls(P, point, G=ineq[0], h=ineq[1], solver=solver, **kwargs)
+    return solve_ls(P, point, G=ineq[0], h=ineq[1], solver=qpsolver, **kwargs)

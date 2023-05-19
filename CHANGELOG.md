@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+### Changed
+
+- Remove default QP solver when projecting a point to a polytope
+
 ## [1.0.0] - 2023/05/18
 
 ### Added
