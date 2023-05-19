@@ -23,7 +23,6 @@ from typing import List, Optional
 
 import numpy as np
 from matplotlib.patches import Polygon
-from numpy import array, dot, hstack
 from pylab import axis, gca
 from scipy.spatial import ConvexHull
 
@@ -70,7 +69,7 @@ def __compute_polygon_hull(B: np.ndarray, c: np.ndarray):
         c > 0
     ), "Polygon should contain the origin, but min(c) = %.2f" % min(c)
 
-    B_polar = hstack(
+    B_polar = np.hstack(
         [
             (B[:, column] * 1.0 / c).reshape((B.shape[0], 1))
             for column in range(2)
@@ -82,7 +81,7 @@ def __compute_polygon_hull(B: np.ndarray, c: np.ndarray):
         aj, bj = c[j], B[j]
         x = (ai * bj[1] - aj * bi[1]) * 1.0 / (bi[0] * bj[1] - bj[0] * bi[1])
         y = (bi[0] * aj - bj[0] * ai) * 1.0 / (bi[0] * bj[1] - bj[0] * bi[1])
-        return array([x, y])
+        return np.array([x, y])
 
     # QHULL OPTIONS:
     #
@@ -133,7 +132,7 @@ def compute_polygon_hull(B: np.ndarray, c: np.ndarray) -> List[np.ndarray]:
     x = None
     if not all(c > 0):
         x = compute_chebyshev_center(B, c)
-        c = c - dot(B, x)
+        c = c - np.dot(B, x)
     if not all(c > 0):
         raise ValueError("Polygon is empty (min. dist. to edge %.2f)" % min(c))
     vertices = __compute_polygon_hull(B, c)
@@ -143,7 +142,7 @@ def compute_polygon_hull(B: np.ndarray, c: np.ndarray) -> List[np.ndarray]:
 
 
 def plot_polygon(
-    points: List[np.ndarray],
+    points: np.ndarray,
     alpha: float = 0.4,
     color: str = "g",
     linestyle: str = "solid",
@@ -157,7 +156,7 @@ def plot_polygon(
     Parameters
     ----------
     points :
-        List of points.
+        Array or list of points.
     alpha :
         Transparency value.
     color :
@@ -171,8 +170,8 @@ def plot_polygon(
     resize :
         When ``True``, resets axis limits to center on the polygon.
     """
-    if type(points) is list:
-        points = array(points)
+    if isinstance(points, list):
+        points = np.array(points)
     ax = gca()
     hull = ConvexHull(points)
     points = points[hull.vertices, :]
