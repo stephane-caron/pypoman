@@ -177,12 +177,15 @@ class Polygon:
         minsd = 1e10
         ibottom = 0
         for i in range(len(self.vertices)):
-            v = self.vertices[i]
-            if (v.y + v.next.y) < minsd:
+            vertex = self.vertices[i]
+            next_vertex = vertex.next
+            if next_vertex is None:
+                raise ValueError("Invalid expanded vertex with no successor")
+            if (vertex.y + next_vertex.y) < minsd:
                 ibottom = i
-                minsd = v.y + v.next.y
-        for v in self.vertices:
-            v.checked = False
+                minsd = vertex.y + next_vertex.y
+        for vertex in self.vertices:
+            vertex.checked = False
         vcur = self.vertices[ibottom]
         newvertices = []
         while not vcur.checked:
