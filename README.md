@@ -1,7 +1,7 @@
 # Polyhedron manipulation in Python
 
-[![Build](https://img.shields.io/github/actions/workflow/status/stephane-caron/pypoman/test.yml?branch=master)](https://github.com/stephane-caron/pypoman/actions)
-[![Coverage](https://coveralls.io/repos/github/stephane-caron/pypoman/badge.svg?branch=master)](https://coveralls.io/github/stephane-caron/pypoman?branch=master)
+[![Build](https://img.shields.io/github/actions/workflow/status/stephane-caron/pypoman/test.yml?branch=main)](https://github.com/stephane-caron/pypoman/actions)
+[![Coverage](https://coveralls.io/repos/github/stephane-caron/pypoman/badge.svg?branch=main)](https://coveralls.io/github/stephane-caron/pypoman?branch=main)
 [![Documentation](https://img.shields.io/badge/docs-online-brightgreen?logo=read-the-docs&style=flat)](https://scaron.info/doc/pypoman/)
 [![PyPI version](https://img.shields.io/pypi/v/pypoman)](https://pypi.org/project/pypoman/)
 [![PyPI downloads](https://pepy.tech/badge/pypoman/month)](https://pepy.tech/project/pypoman)

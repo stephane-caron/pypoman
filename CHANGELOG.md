@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 
 - Raise ``ValueError`` exception when polyhedron is empty
 - Remove default QP solver when projecting a point to a polytope
+- Rename main branch from ``master`` to ``main``
 
 ### Fixed
 
