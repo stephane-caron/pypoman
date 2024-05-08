@@ -90,7 +90,7 @@ jobs:
                   python-version: "${{ matrix.python-version }}"
 
             - name: "Install Debian dependencies"
-              if: runner.os == "Linux"
+              if: runner.os == 'Linux'
               run: |
                   sudo apt install libgmp3-dev
 
