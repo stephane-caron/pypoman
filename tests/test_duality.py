@@ -22,10 +22,10 @@ class TestDuality(unittest.TestCase):
     """Test fixture for duality conversions."""
 
     def test_halfspace_enumeration(self):
-        vertices = map(
-            np.array,
-            [[1, 0, 0], [0, 1, 0], [1, 1, 0], [0, 0, 1], [0, 1, 1]],
-        )
+        vertices = [
+            np.array(a)
+            for a in [[1, 0, 0], [0, 1, 0], [1, 1, 0], [0, 0, 1], [0, 1, 1]]
+        ]
         A, b = compute_polytope_halfspaces(vertices)
         self.assertEqual(A.shape[0], b.shape[0])
         self.assertGreater(len(b), 4)
