@@ -28,11 +28,11 @@ classifiers = [
     "Intended Audience :: Science/Research",
 ]
 dependencies = [
-    "cvxopt",
-    "matplotlib",
-    "numpy",
-    "pycddlib",
-    "scipy",
+    "cvxopt >=1.2.6",
+    "matplotlib >=3.3.4",
+    "numpy >=1.15.4",
+    "pycddlib >=2.1.4",
+    "scipy >=1.7.0",
 ]
 keywords = ["convex, polyhedron, polyhedra, polytope, projection, duality"]
 
