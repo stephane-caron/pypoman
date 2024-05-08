@@ -19,6 +19,10 @@ All notable changes to this project will be documented in this file.
 - CICD: Install missing Linux dependency
 - CICD: Install missing macOS dependency
 
+### Removed
+
+- CICD: Drop macOS runners as upstream dependencies don't support that platform
+
 ## [1.0.0] - 2023/05/18
 
 ### Added
