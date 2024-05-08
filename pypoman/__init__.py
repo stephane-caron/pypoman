@@ -26,7 +26,7 @@ from .projection import (
     project_polytope_bretl,
 )
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 __all__ = [
     "compute_chebyshev_center",

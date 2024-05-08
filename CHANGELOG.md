@@ -2,7 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## [Unreleased]
+
+### [1.1.0] - 2023/05/08
 
 ### Added
 
@@ -41,3 +43,7 @@ All notable changes to this project will be documented in this file.
 - Figure axes are not resized by default any more when plotting a polygon
 - Remove repository-wide ``__init__.py``
 - Use ``pylab.show()`` rather than IPython in examples
+
+[unreleased]: https://github.com/qpsolvers/qpsolvers/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/qpsolvers/qpsolvers/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/qpsolvers/qpsolvers/releases/tag/v1.0.0
