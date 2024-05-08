@@ -16,7 +16,8 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-- CICD: Install missing Debian dependency
+- CICD: Install missing Linux dependency
+- CICD: Install missing macOS dependency
 
 ## [1.0.0] - 2023/05/18
 

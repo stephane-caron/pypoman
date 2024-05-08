@@ -94,6 +94,11 @@ jobs:
               run: |
                   sudo apt install libgmp3-dev
 
+            - name: "Install macOS dependencies"
+              if: runner.os == 'macOS'
+              run: |
+                  brew install gmp
+
             - name: "Install PyPI dependencies"
               run: |
                   python -m pip install --upgrade pip
