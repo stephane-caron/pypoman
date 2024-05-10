@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-### [1.1.0] - 2023/05/08
+### Changed
+
+- Use f-strings to shorten polygon assertion messages
+
+### [1.1.0] - 2023-05-08
 
 ### Added
 
@@ -25,7 +29,7 @@ All notable changes to this project will be documented in this file.
 
 - CICD: Drop macOS runners as upstream dependencies don't support that platform
 
-## [1.0.0] - 2023/05/18
+## [1.0.0] - 2023-05-18
 
 ### Added
 
