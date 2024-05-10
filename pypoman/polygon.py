@@ -49,12 +49,8 @@ def __compute_polygon_hull(B: np.ndarray, c: np.ndarray):
     be executed when some coordinates :math:`c_i < 0`, but the result would be
     wrong.
     """
-    assert (
-        B.shape[1] == 2
-    ), "Input (B, c) is not a polygon: B.shape = %s" % str(B.shape)
-    assert all(
-        c > 0
-    ), "Polygon should contain the origin, but min(c) = %.2f" % min(c)
+    assert B.shape[1] == 2, f"Input (B, c) is not a polygon: {B.shape = }"
+    assert all(c > 0), f"Polygon should contain the origin, but {min(c) = }"
 
     B_polar = np.hstack(
         [
