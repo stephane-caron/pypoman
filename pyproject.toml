@@ -54,8 +54,10 @@ line-length = 79
 [tool.coverage]
 report.include = ["pypoman/*"]
 
-[tool.lint]
+[tool.ruff]
 line-length = 79
+
+[tool.lint]
 select = [
     # pyflakes
     "F",
@@ -72,5 +74,5 @@ ignore = [
     "D405",  # British-style section names are also "proper"!
 ]
 
-[tool.ruff.lint.pydocstyle]
+[tool.lint.pydocstyle]
 convention = "numpy"
