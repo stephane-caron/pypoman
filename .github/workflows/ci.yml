@@ -8,6 +8,30 @@ on:
     workflow_dispatch:
 
 jobs:
+    lint:
+        name: "Code style"
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: "Checkout sources"
+              uses: actions/checkout@v3
+
+            - name: "Set up Python ${{ matrix.python-version }}"
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "${{ matrix.python-version }}"
+
+            - name: "Install dependencies"
+              run: |
+                  python -m pip install --upgrade pip
+                  python -m pip install tox
+
+            - name: "Test with tox for ${{ matrix.os }}"
+              run: |
+                  tox -e lint
+              env:
+                  PLATFORM: ubuntu-latest
+
     coverage:
         name: "Coverage"
         runs-on: ubuntu-latest
@@ -31,8 +55,6 @@ jobs:
                   python -m pip install coveralls tox
 
             - name: "Check code coverage"
-              env:
-                  MOSEKLM_LICENSE_FILE: ${{ secrets.MSK_LICENSE }}
               run: |
                   tox -e coverage
 
@@ -104,19 +126,18 @@ jobs:
                   python -m pip install --upgrade pip
                   python -m pip install tox tox-gh-actions
 
-            - name: Setup Homebrew
-              if: ${{ matrix.os == 'macos-latest' }}
+            - name: "Install GMP (Ubuntu)"
+              if: matrix.os == 'ubuntu-latest'
               run: |
-                  brew update
+                  sudo apt-get install -y libgmp-dev
 
-            - name: Install GMP
+            - name: "Install GMP (macOS)"
               if: ${{ matrix.os == 'macos-latest' }}
               run: |
                   brew install gmp
 
             - name: "Test with tox for ${{ matrix.os }}"
               env:
-                  MOSEKLM_LICENSE_FILE: ${{ secrets.MSK_LICENSE }}
                   PLATFORM: ${{ matrix.os }}
               run: |
                   tox
