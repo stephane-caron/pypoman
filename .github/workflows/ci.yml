@@ -104,6 +104,16 @@ jobs:
                   python -m pip install --upgrade pip
                   python -m pip install tox tox-gh-actions
 
+            - name: Setup Homebrew
+              if: ${{ matrix.os == 'macos-latest' }}
+              run: |
+                  brew update
+
+            - name: Install GMP
+              if: ${{ matrix.os == 'macos-latest' }}
+              run: |
+                  brew install gmp
+
             - name: "Test with tox for ${{ matrix.os }}"
               env:
                   MOSEKLM_LICENSE_FILE: ${{ secrets.MSK_LICENSE }}
