@@ -43,6 +43,7 @@ all = [
 ]
 
 [project.urls]
+Homepage = "https://github.com/stephane-caron/pypoman"
 Documentation = "https://scaron.info/doc/pypoman/"
 Source = "https://github.com/stephane-caron/pypoman"
 Tracker = "https://github.com/stephane-caron/pypoman/issues"
