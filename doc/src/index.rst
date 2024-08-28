@@ -1,6 +1,6 @@
 .. title:: Table of Contents
 
-Welcome to the documentation of pypoman, a PYthon module for POlyhedral
+Welcome to the documentation of **pypoman**, a PYthon module for POlyhedral
 MANipulations.
 
 Chebyshev center
