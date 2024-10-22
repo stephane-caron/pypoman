@@ -2,7 +2,7 @@
 
 ## Polytope projection
 
-<img src="https://github.com/user-attachments/assets/e809b4a9-0c60-47c6-8df2-aa011e674892" height=200 align="right">
+<img src="https://github.com/user-attachments/assets/e809b4a9-0c60-47c6-8df2-aa011e674892" height=300 align="right">
 
 In the `polytope_projection.py` example, we project the polytope $\mathcal{P} = \\{ x \ | \ A x \leq b, C x = d \\}$ defined by:
 
