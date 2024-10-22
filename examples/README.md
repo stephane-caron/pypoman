@@ -21,4 +21,4 @@ E & = \begin{bmatrix} I_2 \\ 0_{2 \times 8} \end{bmatrix} & f = 0_{2 \times 1}
 \end{align*}
 ```
 
-The output of the example is a list of vertices $V = \{ v_i \}$ such that $\pi(\mathcal{P}) = \mathrm{conv}(V)$.
+The output of the example is a list of vertices $V = \\{ v_i \\}$ such that $\pi(\mathcal{P}) = \mathrm{conv}(V)$.
