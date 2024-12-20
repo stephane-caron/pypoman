@@ -38,9 +38,9 @@ def compute_cone_face_matrix(S: np.ndarray) -> np.ndarray:
     # V-representation: first column is 0 for rays
     mat = cdd.matrix_from_array(V)
     mat.rep_type = cdd.RepType.GENERATOR
-    P = cdd.Polyhedron(mat)
-    ineq = P.get_inequalities()
-    H = np.array(ineq)
+    P = cdd.polyhedron_from_matrix(mat)
+    ineq = cdd.copy_inequalities(P)
+    H = np.array(ineq.array)
     if H.shape == (0,):  # H == []
         return H
     A = []
@@ -84,8 +84,8 @@ def compute_polytope_halfspaces(
     tV = np.hstack([t, V])
     mat = cdd.matrix_from_array(tV)
     mat.rep_type = cdd.RepType.GENERATOR
-    P = cdd.Polyhedron(mat)
-    bA = np.array(P.get_inequalities())
+    P = cdd.polyhedron_from_matrix(mat)
+    bA = np.array(cdd.copy_inequalities(P).array)
     if bA.shape == (0,):  # bA == []
         return bA
     # the polyhedron is given by b + A x >= 0 where bA = [b|A]
@@ -123,9 +123,9 @@ def compute_polytope_vertices(
     b = b.reshape((b.shape[0], 1))
     mat = cdd.matrix_from_array(np.hstack([b, -A]))
     mat.rep_type = cdd.RepType.INEQUALITY
-    P = cdd.Polyhedron(mat)
-    g = P.get_generators()
-    V = np.array(g)
+    P = cdd.polyhedron_from_matrix(mat)
+    g = cdd.copy_generators(P)
+    V = np.array(g.array)
     vertices = []
     for i in range(V.shape[0]):
         if V[i, 0] != 1:  # 1 = vertex, 0 = ray

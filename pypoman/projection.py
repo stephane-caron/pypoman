@@ -84,11 +84,11 @@ def project_polyhedron(
             cdd.matrix_canonicalize(linsys)
 
     # Convert from H- to V-representation
-    P = cdd.Polyhedron(linsys)
-    generators = P.get_generators()
+    P = cdd.polyhedron_from_matrix(linsys)
+    generators = cdd.copy_generators(P)
     if generators.lin_set:
         print("Generators have linear set: {}".format(generators.lin_set))
-    V = np.array(generators)
+    V = np.array(generators.array)
 
     # Project output wrenches to 2D set
     (E, f) = proj
