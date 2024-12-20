@@ -12,17 +12,17 @@ maintainers = [
     {name = "Stéphane Caron", email = "stephane.caron@normalesup.org"},
 ]
 dynamic = ['version', 'description']
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering :: Mathematics",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
@@ -31,7 +31,7 @@ dependencies = [
     "cvxopt >=1.2.6",
     "matplotlib >=3.3.4",
     "numpy >=1.15.4",
-    "pycddlib >=2.1.4,<3",
+    "pycddlib >=3.0.0",
     "scipy >=1.7.0",
 ]
 keywords = ["convex, polyhedron, polyhedra, polytope, projection, duality"]
