@@ -4,9 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.1.1] - 2024-12-20
+
 ### Changed
 
 - Use f-strings to shorten polygon assertion messages
+- Pin pycddlib dependency version to < 3
 
 ### [1.1.0] - 2023-05-08
 
@@ -48,6 +51,7 @@ All notable changes to this project will be documented in this file.
 - Remove repository-wide ``__init__.py``
 - Use ``pylab.show()`` rather than IPython in examples
 
-[unreleased]: https://github.com/qpsolvers/qpsolvers/compare/v1.1.0...HEAD
+[unreleased]: https://github.com/qpsolvers/qpsolvers/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/qpsolvers/qpsolvers/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/qpsolvers/qpsolvers/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/qpsolvers/qpsolvers/releases/tag/v1.0.0
