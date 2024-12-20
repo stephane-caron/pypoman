@@ -77,29 +77,14 @@ jobs:
                 os: [ubuntu-latest, windows-latest]
                 python-version: ["3.9", "3.10", "3.11", "3.12"]
 
+        defaults:
+            run:
+                # See https://github.com/mamba-org/setup-micromamba?tab=readme-ov-file#about-login-shells
+                shell: bash -leo pipefail {0}
+
         steps:
             - name: "Checkout sources"
               uses: actions/checkout@v3
-
-            - name: "Set up Python ${{ matrix.python-version }}"
-              uses: actions/setup-python@v4
-              with:
-                  python-version: "${{ matrix.python-version }}"
-
-            - name: "Install Debian dependencies"
-              if: matrix.os == 'ubuntu-latest'
-              run: |
-                  sudo apt install libgmp-dev
-
-            - name: "Install macOS dependencies"
-              if: matrix.os == 'macos-latest'
-              run: |
-                  brew install gmp
-
-            - name: "Install PyPI dependencies"
-              run: |
-                  python -m pip install --upgrade pip
-                  python -m pip install tox tox-gh-actions
 
             - name: "Install GMP (Ubuntu)"
               if: matrix.os == 'ubuntu-latest'
@@ -111,11 +96,25 @@ jobs:
               run: |
                   brew install gmp
 
-            - name: "Test with tox for ${{ matrix.os }}"
-              env:
-                  PLATFORM: ${{ matrix.os }}
+            - name: "Install Conda environment with Micromamba"
+              uses: mamba-org/setup-micromamba@v1
+              with:
+                  micromamba-version: '1.5.8-0'
+                  environment-name: upkie_test_env
+                  create-args: >-
+                      python=${{ matrix.python-version }}
+                      cvxopt >=1.2.6
+                      matplotlib >=3.3.4
+                      numpy >=1.15.4
+                      pyclipper >=1.3.0
+                      qpsolvers >=3.3.1
+                      scipy >=1.7.0
+                  cache-environment: true
+                  post-cleanup: 'all'
+
+            - name: "Run unit tests"
               run: |
-                  tox
+                  python -m unittest discover
 
     ci_success:
         name: "CI success"
