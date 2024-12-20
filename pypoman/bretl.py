@@ -69,8 +69,9 @@ class Vertex:
         if (
             abs(
                 np.cross(
-                    [xopt - v1.x, yopt - v1.y], [v1.x - v2.x, v1.y - v2.y]
-                )
+                    [xopt - v1.x, yopt - v1.y, 0],
+                    [v1.x - v2.x, v1.y - v2.y, 0],
+                )[2]
             )
             < 1e-4
         ):
