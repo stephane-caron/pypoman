@@ -115,7 +115,7 @@ jobs:
             - name: "Install cdd and pycddlib"
               if: ${{ matrix.os != 'windows-latest' }}
               run: |
-                  conda install cddlib
+                  # conda install cddlib
                   pip install pycddlib
 
             - name: "Run unit tests"
