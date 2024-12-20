@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Changed
+
+- Update pycddlib to version 3.0.0
+
 ## [1.1.1] - 2024-12-20
 
 ### Changed
