@@ -72,14 +72,16 @@ def project_polyhedron(
     linsys = cdd.matrix_from_array(np.hstack([b, -A]))
     linsys.rep_type = cdd.RepType.INEQUALITY
 
-    # the input [d, -C] to cdd.Matrix.extend represents (d - C * x == 0)
+    # the input [d, -C] to the cdd function represents (d - C * x == 0)
     # see ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cddlibman/node3.html
     if eq is not None:
         (C, d) = eq
         d = d.reshape((d.shape[0], 1))
-        linsys.extend(np.hstack([d, -C]), linear=True)
+        new_matrix = cdd.matrix_from_array(np.hstack([d, -C]))
+        cdd.matrix_append_to(linsys, new_matrix)
+        linsys.rep_type = cdd.RepType.INEQUALITY
         if canonicalize:
-            linsys.canonicalize()
+            cdd.matrix_canonicalize(linsys)
 
     # Convert from H- to V-representation
     P = cdd.Polyhedron(linsys)
