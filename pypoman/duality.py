@@ -36,7 +36,7 @@ def compute_cone_face_matrix(S: np.ndarray) -> np.ndarray:
         ]
     )
     # V-representation: first column is 0 for rays
-    mat = cdd.Matrix(V, number_type="float")
+    mat = cdd.matrix_from_array(V)
     mat.rep_type = cdd.RepType.GENERATOR
     P = cdd.Polyhedron(mat)
     ineq = P.get_inequalities()
@@ -82,7 +82,7 @@ def compute_polytope_halfspaces(
     V = np.vstack(vertices)
     t = np.ones((V.shape[0], 1))  # first column is 1 for vertices
     tV = np.hstack([t, V])
-    mat = cdd.Matrix(tV, number_type="float")
+    mat = cdd.matrix_from_array(tV)
     mat.rep_type = cdd.RepType.GENERATOR
     P = cdd.Polyhedron(mat)
     bA = np.array(P.get_inequalities())
@@ -121,7 +121,7 @@ def compute_polytope_vertices(
     <https://pycddlib.readthedocs.io/en/latest/matrix.html>`_.
     """
     b = b.reshape((b.shape[0], 1))
-    mat = cdd.Matrix(np.hstack([b, -A]), number_type="float")
+    mat = cdd.matrix_from_array(np.hstack([b, -A]))
     mat.rep_type = cdd.RepType.INEQUALITY
     P = cdd.Polyhedron(mat)
     g = P.get_generators()
