@@ -103,7 +103,6 @@ jobs:
                   environment-name: pypoman_test_env
                   create-args: >-
                       python=${{ matrix.python-version }}
-                      cddlib
                       cvxopt>=1.2.6
                       matplotlib>=3.3.4
                       numpy>=1.15.4
@@ -116,6 +115,7 @@ jobs:
             - name: "Install cdd and pycddlib"
               if: ${{ matrix.os != 'windows-latest' }}
               run: |
+                  conda install cddlib
                   pip install pycddlib
 
             - name: "Run unit tests"
