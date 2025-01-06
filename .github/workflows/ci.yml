@@ -74,7 +74,7 @@ jobs:
 
         strategy:
             matrix:
-                os: [ubuntu-latest, windows-latest]
+                os: [ubuntu-latest]
                 python-version: ["3.9", "3.10", "3.11", "3.12"]
 
         defaults:
@@ -89,7 +89,7 @@ jobs:
             - name: "Install GMP (Ubuntu)"
               if: matrix.os == 'ubuntu-latest'
               run: |
-                  sudo apt-get install -y libcdd-dev libgmp3-dev
+                  sudo apt-get install -y libgmp3-dev
 
             - name: "Install GMP (macOS)"
               if: ${{ matrix.os == 'macos-latest' }}
@@ -103,6 +103,7 @@ jobs:
                   environment-name: pypoman_test_env
                   create-args: >-
                       python=${{ matrix.python-version }}
+                      cddlib
                       cvxopt>=1.2.6
                       matplotlib>=3.3.4
                       numpy>=1.15.4
@@ -113,9 +114,7 @@ jobs:
                   post-cleanup: 'all'
 
             - name: "Install cdd and pycddlib"
-              if: ${{ matrix.os != 'windows-latest' }}
               run: |
-                  conda install cddlib
                   pip install pycddlib
 
             - name: "Run unit tests"

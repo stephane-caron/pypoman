@@ -9,6 +9,10 @@ All notable changes to this project will be documented in this file.
 - Bump minimum supported Python version to 3.9
 - Update pycddlib to version 3.0.0
 
+### Removed
+
+- CICD: Dropped Windows support
+
 ## [1.1.1] - 2024-12-20
 
 ### Changed
