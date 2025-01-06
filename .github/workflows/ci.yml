@@ -113,14 +113,6 @@ jobs:
                   cache-environment: true
                   post-cleanup: 'all'
 
-            - name: "List Conda packages"
-              run: |
-                  conda list
-
-            - name: "Additional Conda information"
-              run: |
-                  conda info
-
             - name: "Install cdd and pycddlib"
               run: |
                   pip install pycddlib
