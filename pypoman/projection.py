@@ -69,7 +69,7 @@ def project_polyhedron(
     # see ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cddlibman/node3.html
     (A, b) = ineq
     b = b.reshape((b.shape[0], 1))
-    linsys = cdd.matrix_from_array(np.hstack([b, -A]))
+    linsys = cdd.matrix_from_array(np.hstack([b, -A]))  # type: ignore
     linsys.rep_type = cdd.RepType.INEQUALITY
 
     # the input [d, -C] to the cdd function represents (d - C * x == 0)
@@ -77,7 +77,7 @@ def project_polyhedron(
     if eq is not None:
         (C, d) = eq
         d = d.reshape((d.shape[0], 1))
-        new_matrix = cdd.matrix_from_array(np.hstack([d, -C]))
+        new_matrix = cdd.matrix_from_array(np.hstack([d, -C]))  # type: ignore
         cdd.matrix_append_to(linsys, new_matrix)
         linsys.rep_type = cdd.RepType.INEQUALITY
         if canonicalize:
