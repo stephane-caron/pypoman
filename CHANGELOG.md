@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 ### Removed
 
 - CICD: Dropped Windows support
+- Remove cdd reference from polyhedron submodule
 
 ## [1.1.1] - 2024-12-20
 
