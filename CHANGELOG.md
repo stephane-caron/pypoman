@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.2.0] - 2025-01-06
+
 ### Changed
 
 - Bump minimum supported Python version to 3.9
@@ -65,7 +67,8 @@ All notable changes to this project will be documented in this file.
 - Remove repository-wide ``__init__.py``
 - Use ``pylab.show()`` rather than IPython in examples
 
-[unreleased]: https://github.com/qpsolvers/qpsolvers/compare/v1.1.1...HEAD
+[unreleased]: https://github.com/qpsolvers/qpsolvers/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/qpsolvers/qpsolvers/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/qpsolvers/qpsolvers/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/qpsolvers/qpsolvers/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/qpsolvers/qpsolvers/releases/tag/v1.0.0
