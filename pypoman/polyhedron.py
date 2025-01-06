@@ -16,13 +16,6 @@ from .lp import solve_lp
 from .misc import norm
 
 try:
-    import cdd
-except ImportError:
-    warn("Could not import cdd, some functions will not be available")
-    cdd = None
-
-
-try:
     import cvxopt
 except ImportError:
     warn("Could not import CVXOPT, some functions will not be available")
@@ -61,7 +54,6 @@ def compute_chebyshev_center(A: np.ndarray, b: np.ndarray) -> np.ndarray:
 
 
 __all__ = [
-    "cdd",
     "compute_chebyshev_center",
     "cvxopt",
 ]
