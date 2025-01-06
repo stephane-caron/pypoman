@@ -118,6 +118,7 @@ jobs:
                   conda list
 
             - name: "Additional Conda information"
+              run: |
                   conda info
 
             - name: "Install cdd and pycddlib"
