@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Removed
+
+- Remove cvxopt reference from polyhedron submodule
+
 ## [1.2.0] - 2025-01-06
 
 ### Changed
