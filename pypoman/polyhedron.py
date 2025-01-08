@@ -8,7 +8,6 @@
 
 from __future__ import division
 
-
 import numpy as np
 
 from .lp import solve_lp

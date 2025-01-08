@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright 2018 Stéphane Caron
 
-"""This submodule wraps around the linear programming solver of CVXOPT.
+"""The LP submodule wraps around the linear programming solver of CVXOPT.
 
 It is meant to be used internally within pypoman. You can check out for
 instance `lpsolvers <https://github.com/stephane-caron/lpsolvers>`__ to access
