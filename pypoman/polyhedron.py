@@ -8,18 +8,11 @@
 
 from __future__ import division
 
-from warnings import warn
 
 import numpy as np
 
 from .lp import solve_lp
 from .misc import norm
-
-try:
-    import cvxopt
-except ImportError:
-    warn("Could not import CVXOPT, some functions will not be available")
-    cvxopt = None
 
 
 def compute_chebyshev_center(A: np.ndarray, b: np.ndarray) -> np.ndarray:
@@ -55,5 +48,4 @@ def compute_chebyshev_center(A: np.ndarray, b: np.ndarray) -> np.ndarray:
 
 __all__ = [
     "compute_chebyshev_center",
-    "cvxopt",
 ]
