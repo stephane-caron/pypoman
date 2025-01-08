@@ -11,4 +11,5 @@ MANipulations.
     intersection.rst
     polygon.rst
     projection.rst
+    developer-notes.rst
     references.rst

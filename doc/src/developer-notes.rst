@@ -1,5 +1,10 @@
-******************
-Linear programming
-******************
+***************
+Developer notes
+***************
 
-.. autofunction:: pypoman.lp.solve_lp
+The following parts of the library are internal and documented for developers rather than users.
+
+Linear programming
+==================
+
+.. automodule:: pypoman.lp
