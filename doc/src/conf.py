@@ -22,11 +22,8 @@ from os.path import abspath, dirname, join
 
 sys.path.insert(0, abspath("../.."))
 
-# -- General configuration ------------------------------------------------
-
 # Add any Sphinx extension module names here, as strings. They can be
-# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
-# ones.
+# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.coverage",
@@ -54,7 +51,7 @@ author = "Stéphane Caron"
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
-#
+
 # The short X.Y version.
 version = None
 
@@ -89,8 +86,6 @@ pygments_style = "sphinx"
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
-# -- Options for HTML output ----------------------------------------------
-
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
@@ -103,33 +98,3 @@ html_static_path = [""]
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = "pypomandoc"
-
-# -- Options for LaTeX output ---------------------------------------------
-
-latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    "papersize": "a4paper",
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    "pointsize": "12pt",
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-}
-
-# Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title,
-#  author, documentclass [howto, manual, or own class]).
-latex_documents = [
-    (
-        master_doc,
-        project + ".tex",
-        project + " Documentation",
-        author,
-        "howto",
-    ),
-]
