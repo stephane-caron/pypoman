@@ -7,7 +7,7 @@ import re
 import sys
 from os.path import abspath, dirname, join
 
-sys.path.insert(0, abspath("../.."))
+sys.path.insert(0, abspath(".."))
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
