@@ -63,7 +63,7 @@ def project_polyhedron(
 
     See also
     --------
-    This webpage: https://scaron.info/teaching/projecting-polytopes.html
+    This webpage: https://scaron.info/blog/projecting-polytopes.html
     """
     # the input [b, -A] to cdd.Matrix represents (b - A * x >= 0)
     # see ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cddlibman/node3.html
