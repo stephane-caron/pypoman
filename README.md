@@ -10,13 +10,31 @@ This library interfaces common operations over [convex polyhedra](https://en.wik
 
 ## Installation
 
+### Using conda
+
+Install the cdd dependency first:
+
+```console
+$ conda install cddlib
+```
+
+Then install `pypoman` from PyPI:
+
+```console
+$ pip install pypoman
+```
+
+It won't need to build cdd from source as it is installed from conda-forge.
+
+### Building from source
+
 Install system packages for cdd and GLPK, for instance on Debian-based Linux distributions:
 
 ```console
 $ sudo apt-get install cython libcdd-dev libglpk-dev libgmp3-dev
 ```
 
-You can then install the library by:
+You can then install the library from PyPI as follows. This approach will likely require building cdd from source.
 
 ```console
 $ pip install pypoman
