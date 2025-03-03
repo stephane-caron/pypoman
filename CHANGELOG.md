@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- CICD: Documentation workflow
+
 ### Removed
 
 - Remove cvxopt reference from polyhedron submodule
