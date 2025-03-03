@@ -10,13 +10,13 @@ This library interfaces common operations over [convex polyhedra](https://en.wik
 
 ## Installation
 
-Install system packages for Python and GLPK, for instance for Debian-based Linux distributions:
+Install system packages for cdd and GLPK, for instance on Debian-based Linux distributions:
 
 ```console
-$ sudo apt-get install cython libglpk-dev python python-dev python-pip
+$ sudo apt-get install cython libcdd-dev libglpk-dev libgmp3-dev
 ```
 
-Then, install the library by:
+You can then install the library by:
 
 ```console
 $ pip install pypoman
