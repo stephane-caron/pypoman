@@ -6,7 +6,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/pypoman?color=blue)](https://pypi.org/project/pypoman/)
 [![PyPI downloads](https://img.shields.io/pypi/dm/pypoman?color=blue)](https://pypistats.org/packages/pypoman)
 
-This library allows common operations over [convex polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron) such as [polytope projection](https://scaron.info/doc/pypoman/index.html#module-pypoman.projection) and [vertex enumeration](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality). Check out the [API documentation](https://scaron.info/doc/pypoman/) for details.
+This library interfaces common operations over [convex polyhedra](https://en.wikipedia.org/wiki/Convex_polyhedron) such as [polytope projection](https://scaron.info/doc/pypoman/index.html#module-pypoman.projection) and [vertex enumeration](https://scaron.info/doc/pypoman/index.html#module-pypoman.duality). Check out the [API documentation](https://scaron.info/doc/pypoman/) for details.
 
 ## Installation
 
