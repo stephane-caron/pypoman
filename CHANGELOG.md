@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - CICD: Documentation workflow
 
+### Changed
+
+- CICD: Update checkout action to v4
+
 ### Removed
 
 - Remove cvxopt reference from polyhedron submodule
