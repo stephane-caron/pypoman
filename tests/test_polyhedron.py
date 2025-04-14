@@ -22,6 +22,12 @@ class TestPolyhedron(unittest.TestCase):
         x = compute_chebyshev_center(G, h)
         self.assertEqual(x.shape, (2,))
 
+    def test_polygon_chebyshev_center(self):
+        A = np.array([[1.0, 0.0], [-1.0, 0.0], [0.0, 1.0], [0.0, -1]])
+        b = np.array([1.0, 0.0, 1.0, 0.0])
+        x = compute_chebyshev_center(A, b)
+        self.assertTrue(np.allclose(x, [0.5, 0.5]))
+
     def test_chebyshev_center_unbounded(self):
         G = np.array([[1.0, 0.0], [0.0, 1.0]])
         h = np.zeros(2)
