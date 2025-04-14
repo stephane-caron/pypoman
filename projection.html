@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projection &mdash; pypoman 1.2.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=6efca38a"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Developer notes" href="developer-notes.html" />
+    <link rel="prev" title="Polygon manipulation" href="polygon.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            pypoman
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="chebyshev-center.html">Chebyshev center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="duality.html">Duality</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intersection.html">Intersection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polygon.html">Polygon manipulation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Projection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pypoman.projection.project_point_to_polytope"><code class="docutils literal notranslate"><span class="pre">project_point_to_polytope()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pypoman.projection.project_polyhedron"><code class="docutils literal notranslate"><span class="pre">project_polyhedron()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pypoman.projection.project_polytope"><code class="docutils literal notranslate"><span class="pre">project_polytope()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pypoman.projection.project_polytope_bretl"><code class="docutils literal notranslate"><span class="pre">project_polytope_bretl()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="developer-notes.html">Developer notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pypoman</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Projection</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/projection.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-pypoman.projection">
+<span id="projection"></span><h1>Projection<a class="headerlink" href="#module-pypoman.projection" title="Link to this heading"></a></h1>
+<p>Polytope projection functions.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pypoman.projection.project_point_to_polytope">
+<span class="sig-prename descclassname"><span class="pre">pypoman.projection.</span></span><span class="sig-name descname"><span class="pre">project_point_to_polytope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">point</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ineq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qpsolver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#pypoman.projection.project_point_to_polytope" title="Link to this definition"></a></dt>
+<dd><p>Projet a point onto a polytope in H-representation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>point</strong> – Point to project.</p></li>
+<li><p><strong>ineq</strong> – Pair (<cite>A</cite>, <cite>b</cite>) describing the inequality constraint.</p></li>
+<li><p><strong>qpsolver</strong> – Name of the backend quadratic programming solver to use, to be picked
+in <code class="docutils literal notranslate"><span class="pre">qpsolvers.available_solvers</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Projected point.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function requires <a class="reference external" href="https://pypi.org/project/qpsolvers/">qpsolvers</a>.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pypoman.projection.project_polyhedron">
+<span class="sig-prename descclassname"><span class="pre">pypoman.projection.</span></span><span class="sig-name descname"><span class="pre">project_polyhedron</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ineq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">canonicalize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypoman.projection.project_polyhedron" title="Link to this definition"></a></dt>
+<dd><p>Apply the affine projection <span class="math notranslate nohighlight">\(y = E x + f\)</span> to a polyhedron.</p>
+<p>The polyhedron is defined by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{split}\begin{array}{ll}
+    A x &amp; \leq b \\
+    C x &amp; = d
+\end{array}\end{split}\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>proj</strong> – Pair (<cite>E</cite>, <cite>f</cite>) describing the affine projection.</p></li>
+<li><p><strong>ineq</strong> (<em>pair</em><em> of </em><em>arrays</em>) – Pair (<cite>A</cite>, <cite>b</cite>) describing the inequality constraint.</p></li>
+<li><p><strong>eq</strong> (<em>pair</em><em> of </em><em>arrays</em><em>, </em><em>optional</em>) – Pair (<cite>C</cite>, <cite>d</cite>) describing the equality constraint.</p></li>
+<li><p><strong>canonicalize</strong> (<em>bool</em><em>, </em><em>optional</em>) – Apply equality constraints from <cite>eq</cite> to reduce the dimension of the
+input polyhedron. May be a blessing or a curse, see notes below.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>vertices</strong> (<em>list of arrays</em>) – List of vertices of the projection.</p></li>
+<li><p><strong>rays</strong> (<em>list of arrays</em>) – List of rays of the projection.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>When the equality set <cite>eq</cite> of the input polytope is not empty, it is
+usually faster to use these equality constraints to reduce the dimension of
+the input polytope (cdd function: <cite>canonicalize()</cite>) before enumerating
+vertices (cdd function: <cite>get_generators()</cite>). Yet, on some descriptions this
+operation may be problematic: if it fails, or if you get empty outputs when
+the output is supposed to be non-empty, you can try setting
+<cite>canonicalize=False</cite>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">This</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pypoman.projection.project_polytope">
+<span class="sig-prename descclassname"><span class="pre">pypoman.projection.</span></span><span class="sig-name descname"><span class="pre">project_polytope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ineq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cdd'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pypoman.projection.project_polytope" title="Link to this definition"></a></dt>
+<dd><p>Apply the affine projection <span class="math notranslate nohighlight">\(y = E x + f\)</span> to a polytope.</p>
+<p>The polytope is defined by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A x &amp; \leq b \\
+C x &amp; = d\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>proj</strong> (<em>pair</em><em> of </em><em>arrays</em>) – Pair (<cite>E</cite>, <cite>f</cite>) describing the affine projection.</p></li>
+<li><p><strong>ineq</strong> (<em>pair</em><em> of </em><em>arrays</em>) – Pair (<cite>A</cite>, <cite>b</cite>) describing the inequality constraint.</p></li>
+<li><p><strong>eq</strong> (<em>pair</em><em> of </em><em>arrays</em><em>, </em><em>optional</em>) – Pair (<cite>C</cite>, <cite>d</cite>) describing the equality constraint.</p></li>
+<li><p><strong>method</strong> (<em>string</em><em>, </em><em>optional</em>) – Choice between ‘bretl’ and ‘cdd’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>vertices</strong> – List of vertices of the projection.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of arrays</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Additional keyword arguments can be provided when the method is ‘bretl’.
+They are passed directly to the corresponding function
+<a class="reference internal" href="#pypoman.projection.project_polytope_bretl" title="pypoman.projection.project_polytope_bretl"><code class="xref py py-func docutils literal notranslate"><span class="pre">pypoman.projection.project_polytope_bretl()</span></code></a>.</p>
+</div>
+<p class="rubric">Notes</p>
+<p>The number of columns of all matrices <cite>A</cite>, <cite>C</cite> and <cite>E</cite> corresponds to the
+dimension of the input space, while the number of lines of <cite>E</cite> corresponds
+to the dimension of the output space.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pypoman.projection.project_polytope_bretl">
+<span class="sig-prename descclassname"><span class="pre">pypoman.projection.</span></span><span class="sig-name descname"><span class="pre">project_polytope_bretl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">proj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ineq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eq</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_radius</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_angle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pypoman.projection.project_polytope_bretl" title="Link to this definition"></a></dt>
+<dd><p>Project a polytope into a 2D polygon using the IP algorithm.</p>
+<p>The incremental projection algorithm is detailed in <a class="reference internal" href="references.html#bretl08" id="id1"><span>[Bretl08]</span></a>. The 2D
+affine projection <span class="math notranslate nohighlight">\(y = E x + f\)</span> is applied to the polyhedron defined
+by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A x &amp; \leq b \\
+C x &amp; = d\end{split}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>proj</strong> – Pair (<cite>E</cite>, <cite>f</cite>) describing the affine projection.</p></li>
+<li><p><strong>ineq</strong> – Pair (<cite>A</cite>, <cite>b</cite>) describing the inequality constraint.</p></li>
+<li><p><strong>eq</strong> – Pair (<cite>C</cite>, <cite>d</cite>) describing the equality constraint.</p></li>
+<li><p><strong>max_radius</strong> – Maximum distance from origin (in [m]) used to make sure the output
+is bounded.</p></li>
+<li><p><strong>max_iter</strong> – Maximum number of calls to the LP solver.</p></li>
+<li><p><strong>init_angle</strong> – Angle in [rad] giving the direction of the initial ray cast.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of vertices of the projected polygon.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="polygon.html" class="btn btn-neutral float-left" title="Polygon manipulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="developer-notes.html" class="btn btn-neutral float-right" title="Developer notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2018, Stéphane Caron.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
