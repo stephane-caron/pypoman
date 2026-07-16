@@ -50,11 +50,18 @@ Source = "https://github.com/stephane-caron/pypoman"
 Tracker = "https://github.com/stephane-caron/pypoman/issues"
 Changelog = "https://github.com/stephane-caron/pypoman/blob/main/CHANGELOG.md"
 
-[tool.black]
-line-length = 79
-
 [tool.coverage]
 report.include = ["pypoman/*"]
+
+[tool.mypy]
+disable_error_code = ["attr-defined", "name-defined"]
+ignore_missing_imports = true
+warn_no_return = true
+
+[tool.pylint.messages_control]
+# C0103: Argument name doesn't conform to snake_case naming style
+# (pypoman uses uppercase for matrices)
+disable = ["C0103", "import-error"]
 
 [tool.ruff]
 line-length = 79
