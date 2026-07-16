@@ -8,6 +8,7 @@ MANipulations.
 
     chebyshev-center.rst
     duality.rst
+    exceptions.rst
     intersection.rst
     polygon.rst
     projection.rst

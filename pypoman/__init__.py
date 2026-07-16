@@ -12,6 +12,13 @@ from .duality import (
     compute_polytope_vertices,
     convex_hull,
 )
+from .exceptions import (  # pylint: disable=redefined-builtin
+    ConversionError,
+    EmptyPolytopeError,
+    Exception,
+    SolverError,
+    ValueError,
+)
 from .intersection import (
     intersect_line_cylinder,
     intersect_line_polygon,
@@ -29,6 +36,11 @@ from .projection import (
 __version__ = "1.2.0"
 
 __all__ = [
+    "ConversionError",
+    "EmptyPolytopeError",
+    "Exception",
+    "SolverError",
+    "ValueError",
     "compute_chebyshev_center",
     "compute_cone_face_matrix",
     "compute_polygon_hull",
