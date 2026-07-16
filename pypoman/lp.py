@@ -19,6 +19,8 @@ import cvxopt.solvers
 import numpy as np
 from cvxopt.solvers import lp
 
+from .exceptions import SolverError
+
 cvxopt.solvers.options["show_progress"] = False  # disable cvxopt output
 
 GLPK_IF_AVAILABLE: Optional[str] = None
@@ -88,7 +90,7 @@ def solve_lp(
 
     Raises
     ------
-    ValueError
+    SolverError
         If the LP is not feasible.
     """
     args = [cvxmat(c), cvxmat(G), cvxmat(h)]
@@ -96,5 +98,5 @@ def solve_lp(
         args.extend([cvxmat(A), cvxmat(b)])
     sol = lp(*args, solver=solver)
     if "optimal" not in sol["status"]:
-        raise ValueError("LP optimum not found: %s" % sol["status"])
+        raise SolverError("LP optimum not found: %s" % sol["status"])
     return np.array(sol["x"]).reshape((np.array(c).shape[0],))

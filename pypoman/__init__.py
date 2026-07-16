@@ -17,7 +17,6 @@ from .exceptions import (  # pylint: disable=redefined-builtin
     EmptyPolytopeError,
     Exception,
     SolverError,
-    ValueError,
 )
 from .intersection import (
     intersect_line_cylinder,
@@ -40,7 +39,6 @@ __all__ = [
     "EmptyPolytopeError",
     "Exception",
     "SolverError",
-    "ValueError",
     "compute_chebyshev_center",
     "compute_cone_face_matrix",
     "compute_polygon_hull",

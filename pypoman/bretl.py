@@ -13,6 +13,7 @@ import numpy as np
 from numpy.random import random
 from scipy.linalg import norm
 
+from . import exceptions
 from .lp import GLPK_IF_AVAILABLE, solve_lp
 
 
@@ -54,14 +55,16 @@ class Vertex:
         v1 = self
         v2 = self.next
         if v2 is None:
-            raise ValueError("cannot expand vertex as it has no successor")
+            raise exceptions.Exception(
+                "cannot expand vertex as it has no successor"
+            )
         v = np.array(
             [v2.y - v1.y, v1.x - v2.x]
         )  # orthogonal direction to edge
         v /= norm(v)
         try:
             z = optimize_direction(v, lp)
-        except ValueError:
+        except exceptions.SolverError:
             self.expanded = True
             return None
         xopt: float = z[0]
@@ -144,7 +147,7 @@ class Polygon:
         while not self.all_expanded() and nb_iter < max_iter:
             if v.expanded:
                 if v.next is None:
-                    raise ValueError(
+                    raise exceptions.Exception(
                         "Invalid expanded vertex with no successor"
                     )
                 v = v.next
@@ -168,7 +171,9 @@ class Polygon:
             vertex = self.vertices[i]
             next_vertex = vertex.next
             if next_vertex is None:
-                raise ValueError("Invalid expanded vertex with no successor")
+                raise exceptions.Exception(
+                    "Invalid expanded vertex with no successor"
+                )
             if (vertex.y + next_vertex.y) < minsd:
                 ibottom = i
                 minsd = vertex.y + next_vertex.y
@@ -304,7 +309,7 @@ def compute_polygon(
             init_vertices.append(z)
         max_iter -= 1
     if len(init_vertices) < 3:
-        raise ValueError("problem is not linearly feasible")
+        raise exceptions.SolverError("problem is not linearly feasible")
     v0 = Vertex(init_vertices[0])
     v1 = Vertex(init_vertices[1])
     v2 = Vertex(init_vertices[2])

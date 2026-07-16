@@ -13,6 +13,7 @@ import cvxopt
 import numpy as np
 
 from .bretl import compute_polygon as bretl_compute_polygon
+from .exceptions import SolverError
 
 
 def project_polyhedron(
@@ -268,4 +269,9 @@ def project_point_to_polytope(
         ) from e
 
     P = np.eye(len(point))
-    return solve_ls(P, point, G=ineq[0], h=ineq[1], solver=qpsolver, **kwargs)
+    x = solve_ls(P, point, G=ineq[0], h=ineq[1], solver=qpsolver, **kwargs)
+    if x is None:
+        raise SolverError(
+            f"Projection failed: the {qpsolver} solver found no solution"
+        )
+    return x

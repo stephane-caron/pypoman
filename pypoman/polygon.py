@@ -13,6 +13,7 @@ from matplotlib.patches import Polygon
 from pylab import axis, gca
 from scipy.spatial import ConvexHull
 
+from .exceptions import EmptyPolytopeError
 from .polyhedron import compute_chebyshev_center
 
 
@@ -117,7 +118,9 @@ def compute_polygon_hull(B: np.ndarray, c: np.ndarray) -> List[np.ndarray]:
         x = compute_chebyshev_center(B, c)
         c = c - np.dot(B, x)
     if not all(c > 0):
-        raise ValueError("Polygon is empty (min. dist. to edge %.2f)" % min(c))
+        raise EmptyPolytopeError(
+            "Polygon is empty (min. dist. to edge %.2f)" % min(c)
+        )
     vertices = __compute_polygon_hull(B, c)
     if x is not None:
         vertices = [v + x for v in vertices]

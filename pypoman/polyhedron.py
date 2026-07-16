@@ -10,6 +10,7 @@ from __future__ import division
 
 import numpy as np
 
+from .exceptions import EmptyPolytopeError
 from .lp import solve_lp
 from .misc import norm
 
@@ -41,7 +42,9 @@ def compute_chebyshev_center(A: np.ndarray, b: np.ndarray) -> np.ndarray:
     A_cheby = np.hstack([A, a_cheby.reshape((A.shape[0], 1))])
     z = solve_lp(cost, A_cheby, b)
     if z[-1] < -1e-1:  # last coordinate is distance to boundaries
-        raise ValueError("Polytope is empty (margin violation %.2f)" % z[-1])
+        raise EmptyPolytopeError(
+            "Polytope is empty (margin violation %.2f)" % z[-1]
+        )
     return z[:-1]
 
 
