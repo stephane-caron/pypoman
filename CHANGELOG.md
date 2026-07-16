@@ -8,13 +8,25 @@ All notable changes to this project will be documented in this file.
 
 - CICD: Documentation workflow
 - Example: Chebyshev center of a polygon
+- Exceptions: ``ConversionError``, ``EmptyPolytopeError`` and ``SolverError``
+- Exceptions: ``pypoman.Exception`` base class
+- Support for Python 3.13 and 3.14
+- Tooling: pixi manifest to run the CI locally (`pixi run tests`, `pixi run lint`)
 
 ### Changed
 
+- CICD: Migrate development tooling from tox to pixi
 - CICD: Update checkout action to v4
+- CICD: Use ruff as code formatter in place of black
+- **Breaking:** All library errors now derive from ``pypoman.Exception``
+
+### Fixed
+
+- **Breaking:** Raise an error when point-to-polytope projection finds no solution, rather than returning ``None``
 
 ### Removed
 
+- Drop support for Python 3.8 and 3.9 (reached end of life)
 - Remove cvxopt reference from polyhedron submodule
 
 ## [1.2.0] - 2025-01-06
