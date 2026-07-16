@@ -10,7 +10,11 @@ import unittest
 
 import numpy as np
 
-from pypoman import compute_chebyshev_center
+from pypoman import (
+    EmptyPolytopeError,
+    SolverError,
+    compute_chebyshev_center,
+)
 
 
 class TestPolyhedron(unittest.TestCase):
@@ -31,11 +35,11 @@ class TestPolyhedron(unittest.TestCase):
     def test_chebyshev_center_unbounded(self):
         G = np.array([[1.0, 0.0], [0.0, 1.0]])
         h = np.zeros(2)
-        with self.assertRaises(ValueError):
+        with self.assertRaises(SolverError):
             compute_chebyshev_center(G, h)
 
     def test_chebyshev_center_empty(self):
         G = np.array([[1.0, 0.0], [-1.0, 0.0]])
         h = np.array([0.0, -1.0])
-        with self.assertRaises(ValueError):
+        with self.assertRaises(EmptyPolytopeError):
             compute_chebyshev_center(G, h)

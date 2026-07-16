@@ -10,7 +10,11 @@ import unittest
 
 import numpy as np
 
-from pypoman import compute_polygon_hull, plot_polygon
+from pypoman import (
+    EmptyPolytopeError,
+    compute_polygon_hull,
+    plot_polygon,
+)
 
 
 class TestPolygon(unittest.TestCase):
@@ -33,7 +37,7 @@ class TestPolygon(unittest.TestCase):
     def test_compute_polygon_hull_empty(self):
         B = np.array([[1.0, 0.0], [0.0, 1.0], [-1.0, 0.0], [0.0, -2.0]])
         c = np.array([1.0, 1.0, -1.0, 2.0])
-        with self.assertRaises(ValueError):
+        with self.assertRaises(EmptyPolytopeError):
             compute_polygon_hull(B, c)
 
     def test_plot_polygon(self):

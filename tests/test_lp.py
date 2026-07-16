@@ -10,6 +10,7 @@ import unittest
 
 import numpy as np
 
+from pypoman import SolverError
 from pypoman.lp import solve_lp
 
 
@@ -27,5 +28,5 @@ class TestLP(unittest.TestCase):
         c = np.array([1.0, 0.0])
         G = np.array([[1.0, 0.0], [0.0, 1.0]])
         h = np.zeros(2)
-        with self.assertRaises(ValueError):
+        with self.assertRaises(SolverError):
             solve_lp(c, G, h)
