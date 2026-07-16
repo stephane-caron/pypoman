@@ -1,8 +1,9 @@
 *.pyc
 *.pyo
 .coverage
+.pixi
+.pytype
 .ropeproject
-.tox
 MANIFEST
 _build
 build/
