@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (C) 2016 Quang-Cuong Pham
-# Copyright (C) 2017 Stéphane Caron
 
 """Iterative projection algorithm by [Bretl08]_."""
 

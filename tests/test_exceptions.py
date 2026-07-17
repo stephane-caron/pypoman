@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright 2018 Stéphane Caron
 
 """Unit tests for the exceptions submodule."""
 

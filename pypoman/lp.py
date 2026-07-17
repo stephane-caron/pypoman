@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright 2018 Stéphane Caron
 
 """The LP submodule wraps around the linear programming solver of CVXOPT.
 

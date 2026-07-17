@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright 2021 Stéphane Caron
 
 import pylab
 from numpy import arange, array, cos, pi, sin
