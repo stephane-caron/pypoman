@@ -53,6 +53,18 @@ Changelog = "https://github.com/stephane-caron/pypoman/blob/main/CHANGELOG.md"
 [tool.coverage]
 report.include = ["pypoman/*"]
 
+[tool.flit.sdist]
+exclude = [
+    ".git*",
+    "CONTRIBUTING.md",
+    "doc/",
+    "examples/",
+    "pixi.lock",
+    "pixi.toml",
+    "tests/",
+    "uv.lock",
+]
+
 [tool.mypy]
 disable_error_code = ["attr-defined", "name-defined"]
 ignore_missing_imports = true
