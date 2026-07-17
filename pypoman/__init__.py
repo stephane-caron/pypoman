@@ -31,7 +31,7 @@ from .projection import (
     project_polytope_bretl,
 )
 
-__version__ = "1.2.0"
+__version__ = "2.0.0"
 
 __all__ = [
     "ConversionError",
