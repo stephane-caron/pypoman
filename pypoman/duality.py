@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 """Functions to switch between halfspace and vertex representations."""

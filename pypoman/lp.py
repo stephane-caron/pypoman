@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 """The LP submodule wraps around the linear programming solver of CVXOPT.

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # pypoman documentation build configuration file, created by
 # sphinx-quickstart on Fri Jan 13 14:41:18 2017.
 
