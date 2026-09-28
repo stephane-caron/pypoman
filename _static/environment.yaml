@@ -1,0 +1,17 @@
+channels:
+    - conda-forge
+dependencies:
+    - cddlib
+    - cvxopt
+    - matplotlib
+    - numpy
+    - pip >= 21.3.1
+    - python = 3.10
+    - scipy
+    - sphinx >= 7.2.2
+    - sphinx-autodoc-typehints
+    - sphinx-favicon
+    - sphinx-rtd-theme
+    - pip:
+        - pycddlib >= 3.0.0
+        - sphinx-mathjax-offline
