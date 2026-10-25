@@ -15,6 +15,9 @@ cython = "*"
 # PyPI (conda-forge only ships pycddlib 1.x).
 cddlib = "*"
 gmp = "*"
+# cvxopt from conda-forge ships prebuilt for all supported Pythons and links
+# GLPK, the LP solver used by pypoman when available.
+cvxopt = "*"
 
 [pypi-dependencies]
 pypoman = { path = ".", editable = true }
