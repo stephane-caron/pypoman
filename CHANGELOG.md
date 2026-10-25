@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Tooling: install cvxopt from conda-forge in pixi environments
+- Tooling: move pixi manifest from `pixi.toml` to `pyproject.toml`
 
 ### Removed
 

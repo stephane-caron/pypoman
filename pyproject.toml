@@ -60,7 +60,6 @@ exclude = [
     "doc/",
     "examples/",
     "pixi.lock",
-    "pixi.toml",
     "tests/",
     "uv.lock",
 ]
@@ -69,6 +68,84 @@ exclude = [
 disable_error_code = ["attr-defined", "name-defined"]
 ignore_missing_imports = true
 warn_no_return = true
+
+# Pixi reads the Python version from `requires-python` above, and turns each
+# entry of `[project.optional-dependencies]` into a feature (e.g. `all`).
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64"]
+
+[tool.pixi.dependencies]
+pip = "*"
+# Toolchain to build the PyPI packages that ship no wheels (pycddlib, pyclipper)
+# from source.
+c-compiler = "*"
+cxx-compiler = "*"
+cython = "*"
+# cddlib and gmp are build dependencies for pycddlib, which is installed from
+# PyPI (conda-forge only ships pycddlib 1.x).
+cddlib = "*"
+gmp = "*"
+# cvxopt from conda-forge ships prebuilt for all supported Pythons and links
+# GLPK, the LP solver used by pypoman when available.
+cvxopt = "*"
+
+[tool.pixi.pypi-dependencies]
+pypoman = { path = ".", editable = true }
+
+# Unit tests and coverage. Test environments also include the `all` feature so
+# that the optional extras (pyclipper, qpsolvers) are covered by the test suite.
+[tool.pixi.feature.test.dependencies]
+coverage = ">=5.5"
+coveralls = ">=3.3.1"
+
+[tool.pixi.feature.test.tasks]
+tests = "python -m unittest discover"
+coverage = "coverage erase && coverage run -m unittest discover && coverage report --rcfile=pyproject.toml"
+
+# Code style. pytype only supports up to Python 3.12, so the lint environment is
+# pinned to that version (see the `[tool.pixi.environments]` table below).
+[tool.pixi.feature.lint.dependencies]
+mypy = ">=0.812"
+pylint = ">=2.8.2"
+ruff = ">=0.5.4"
+
+[tool.pixi.feature.lint.pypi-dependencies]
+pytype = ">=2023.5.24"
+
+[tool.pixi.feature.lint.tasks]
+ruff-check = "ruff check pypoman"
+ruff-format = "ruff format --check --diff pypoman"
+mypy = "mypy pypoman"
+pylint = "pylint pypoman --exit-zero"
+pytype = "pytype pypoman"
+lint = { depends-on = ["ruff-check", "ruff-format", "mypy", "pylint", "pytype"] }
+
+# One feature per supported Python version, combined into test environments in
+# the `[tool.pixi.environments]` table.
+[tool.pixi.feature.py311.dependencies]
+python = "3.11.*"
+
+[tool.pixi.feature.py312.dependencies]
+python = "3.12.*"
+
+[tool.pixi.feature.py313.dependencies]
+python = "3.13.*"
+
+[tool.pixi.feature.py314.dependencies]
+python = "3.14.*"
+
+[tool.pixi.feature.py315.dependencies]
+python = "3.15.*"
+
+[tool.pixi.environments]
+# `pixi run tests` / `pixi run lint` use this environment.
+default = { features = ["py312", "test", "all", "lint"] }
+py311 = ["py311", "test", "all"]
+py312 = ["py312", "test", "all"]
+py313 = ["py313", "test", "all"]
+py314 = ["py314", "test", "all"]
+py315 = ["py315", "test", "all"]
 
 [tool.pylint.messages_control]
 # C0103: Argument name doesn't conform to snake_case naming style
