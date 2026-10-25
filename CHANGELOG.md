@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Support for Python 3.15
+
+### Changed
+
+- Tooling: install cvxopt from conda-forge in pixi environments
+
+### Removed
+
+- Drop support for Python 3.10 (reached end of life)
+
 ## [2.0.0] - 2026-07-17
 
 ### Added

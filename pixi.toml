@@ -4,7 +4,7 @@ channels = ["conda-forge"]
 platforms = ["linux-64", "osx-64"]
 
 [dependencies]
-python = ">=3.10"
+python = ">=3.11"
 pip = "*"
 # Toolchain to build the PyPI packages that ship no wheels (pycddlib, pyclipper)
 # from source.
@@ -53,9 +53,6 @@ lint = { depends-on = ["ruff-check", "ruff-format", "mypy", "pylint", "pytype"] 
 
 # One feature per supported Python version, combined into test environments in
 # the `[environments]` table.
-[feature.py310.dependencies]
-python = "3.10.*"
-
 [feature.py311.dependencies]
 python = "3.11.*"
 
@@ -68,11 +65,14 @@ python = "3.13.*"
 [feature.py314.dependencies]
 python = "3.14.*"
 
+[feature.py315.dependencies]
+python = "3.15.*"
+
 [environments]
 # `pixi run tests` / `pixi run lint` use this environment.
 default = { features = ["py312", "test", "lint"] }
-py310 = ["py310", "test"]
 py311 = ["py311", "test"]
 py312 = ["py312", "test"]
 py313 = ["py313", "test"]
 py314 = ["py314", "test"]
+py315 = ["py315", "test"]
