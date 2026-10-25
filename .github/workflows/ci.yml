@@ -14,7 +14,7 @@ jobs:
 
         steps:
             - name: "Checkout sources"
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
 
             - name: "Set up pixi"
               uses: prefix-dev/setup-pixi@v0
@@ -35,7 +35,7 @@ jobs:
 
         steps:
             - name: "Checkout sources"
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
 
             - name: "Set up pixi"
               uses: prefix-dev/setup-pixi@v0
@@ -56,7 +56,7 @@ jobs:
 
         steps:
             - name: "Checkout sources"
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
 
             - name: "Set up pixi"
               uses: prefix-dev/setup-pixi@v0

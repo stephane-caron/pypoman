@@ -10,6 +10,9 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- CICD: Update actions-gh-pages to v4
+- CICD: Update checkout actions to v7
+- CICD: Update setup-micromamba actions to v3,
 - Tooling: install cvxopt from conda-forge in pixi environments
 - Tooling: move pixi manifest from `pixi.toml` to `pyproject.toml`
 
