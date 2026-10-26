@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- CICD: Run macOS tests on `macos-latest`
 - CICD: Update actions-gh-pages to v4
 - CICD: Update checkout actions to v7
 - CICD: Update setup-micromamba actions to v3,
