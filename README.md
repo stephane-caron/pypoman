@@ -10,41 +10,34 @@ This library interfaces common operations over [convex polyhedra](https://en.wik
 
 ## Installation
 
-### Using conda
+```console
+$ pip install pypoman
+```
 
-Install the cdd dependency first:
+This installs the core library, covering for instance polytope projection with the Bretl method, Chebyshev centers and polygon operations. The following features rely on optional dependencies:
+
+| Extra | Dependency | Features |
+|-------|------------|----------|
+| `cdd` | [pycddlib](https://pypi.org/project/pycddlib/) | Vertex and halfspace enumeration, polytope projection with `method="cdd"` |
+| `all` | All of the above, plus [pyclipper](https://pypi.org/project/pyclipper/) and [qpsolvers](https://pypi.org/project/qpsolvers/) | Everything, including polygon intersection and point-to-polytope projection |
+
+### Installing cdd
+
+The `cdd` and `all` extras depend on pycddlib, which is built from source against [cddlib](https://github.com/cddlib/cddlib) and [GMP](https://gmplib.org/). The simplest way is to get these libraries from conda-forge:
 
 ```console
 $ conda install cddlib
+$ pip install pypoman[cdd]
 ```
 
-Then install `pypoman` from PyPI:
+Alternatively, install them as system packages, for instance on Debian-based Linux distributions:
 
 ```console
-$ pip install pypoman
+$ sudo apt-get install libcdd-dev libgmp3-dev
+$ pip install pypoman[cdd]
 ```
 
-It won't need to build cdd from source as it is installed from conda-forge.
-
-### Building from source
-
-Install system packages for cdd and GLPK, for instance on Debian-based Linux distributions:
-
-```console
-$ sudo apt-get install cython libcdd-dev libglpk-dev libgmp3-dev
-```
-
-You can then install the library from PyPI as follows. This approach will likely require building cdd from source.
-
-```console
-$ pip install pypoman
-```
-
-Some functions, such as point-polytope projection and polygon intersection, are optional and not installed by default. To enable all of them, run:
-
-```console
-$ pip install pypoman[all]
-```
+Replace `pypoman[cdd]` with `pypoman[all]` to enable all optional features.
 
 ## Examples
 
