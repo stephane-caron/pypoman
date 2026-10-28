@@ -1,5 +1,13 @@
 # Examples
 
+You can run examples from the root of the repository using [uv](https://docs.astral.sh/uv/):
+
+```console
+$ uv run examples/polytope_projection.py
+```
+
+Some examples rely on optional dependencies, which you can enable as extras. See the readme for installation instructions.
+
 ## Polytope projection
 
 <img src="https://github.com/user-attachments/assets/e809b4a9-0c60-47c6-8df2-aa011e674892" height=300 align="right">

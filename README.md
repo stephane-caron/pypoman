@@ -41,9 +41,15 @@ Replace `pypoman[cdd]` with `pypoman[all]` to enable all optional features.
 
 ## Examples
 
+The [examples](examples/) can be run from a clone of the repository using [uv](https://docs.astral.sh/uv/), for instance:
+
+```console
+$ uv run examples/polytope_projection.py
+```
+
 ### Vertex enumeration
 
-We can compute the list of vertices of a polytope described in halfspace representation by $A x \leq b$:
+This example requires the `cdd` extra. We can compute the list of vertices of a polytope described in halfspace representation by $A x \leq b$:
 
 ```python
 import numpy as np
@@ -76,7 +82,7 @@ vertices = compute_polytope_vertices(A, b)
 
 ### Halfspace enumeration
 
-The other way round, assume we know the vertices of a polytope, and want to get its halfspace representation $A x \leq b$.
+This example requires the `cdd` extra. The other way round, assume we know the vertices of a polytope, and want to get its halfspace representation $A x \leq b$.
 
 ```python
 import numpy as np
