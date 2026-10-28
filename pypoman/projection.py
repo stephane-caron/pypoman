@@ -4,12 +4,12 @@
 
 from typing import List, Optional, Tuple
 
-import cdd
 import cvxopt
 import numpy as np
 
 from .bretl import compute_polygon as bretl_compute_polygon
 from .exceptions import SolverError
+from .misc import import_cdd
 
 
 def project_polyhedron(
@@ -50,6 +50,9 @@ def project_polyhedron(
 
     Notes
     -----
+    This function requires `pycddlib <https://pypi.org/project/pycddlib/>`_,
+    which can be installed by ``pip install pypoman[cdd]``.
+
     When the equality set `eq` of the input polytope is not empty, it is
     usually faster to use these equality constraints to reduce the dimension of
     the input polytope (cdd function: `canonicalize()`) before enumerating
@@ -62,6 +65,8 @@ def project_polyhedron(
     --------
     This webpage: https://scaron.info/blog/projecting-polytopes.html
     """
+    cdd = import_cdd()
+
     # the input [b, -A] to cdd.Matrix represents (b - A * x >= 0)
     # see ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cddlibman/node3.html
     (A, b) = ineq
@@ -120,7 +125,9 @@ def project_polytope(proj, ineq, eq=None, method="cdd", **kwargs):
     eq : pair of arrays, optional
         Pair (`C`, `d`) describing the equality constraint.
     method : string, optional
-        Choice between 'bretl' and 'cdd'.
+        Choice between 'bretl' and 'cdd'. The 'cdd' method requires
+        `pycddlib <https://pypi.org/project/pycddlib/>`_, which can be
+        installed by ``pip install pypoman[cdd]``.
 
     Returns
     -------
