@@ -4,12 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-10-28
+
 ### Added
 
 - CICD: Test examples with uv
 - CICD: Test the base install without cdd
 - Optional `cdd` extra to install pycddlib: `pip install pypoman[cdd]`
-- Support for Python 3.15
+- Support for Python 3.15 (assuming cvxopt is installed from conda-forge or built from source)
 
 ### Changed
 
@@ -123,9 +125,10 @@ All notable changes to this project will be documented in this file.
 - Remove repository-wide ``__init__.py``
 - Use ``pylab.show()`` rather than IPython in examples
 
-[unreleased]: https://github.com/qpsolvers/qpsolvers/compare/v2.0.0...HEAD
-[2.0.0]: https://github.com/qpsolvers/qpsolvers/releases/tag/v2.0.0
-[1.2.0]: https://github.com/qpsolvers/qpsolvers/releases/tag/v1.2.0
-[1.1.1]: https://github.com/qpsolvers/qpsolvers/releases/tag/v1.1.1
-[1.1.0]: https://github.com/qpsolvers/qpsolvers/releases/tag/v1.1.0
-[1.0.0]: https://github.com/qpsolvers/qpsolvers/releases/tag/v1.0.0
+[unreleased]: https://github.com/stephane-caron/pypoman/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/stephane-caron/pypoman/releases/tag/v3.0.0
+[2.0.0]: https://github.com/stephane-caron/pypoman/releases/tag/v2.0.0
+[1.2.0]: https://github.com/stephane-caron/pypoman/releases/tag/v1.2.0
+[1.1.1]: https://github.com/stephane-caron/pypoman/releases/tag/v1.1.1
+[1.1.0]: https://github.com/stephane-caron/pypoman/releases/tag/v1.1.0
+[1.0.0]: https://github.com/stephane-caron/pypoman/releases/tag/v1.0.0
