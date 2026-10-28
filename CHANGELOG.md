@@ -17,6 +17,10 @@ All notable changes to this project will be documented in this file.
 - Tooling: install cvxopt from conda-forge in pixi environments
 - Tooling: move pixi manifest from `pixi.toml` to `pyproject.toml`
 
+### Fixed
+
+- Tooling: remove leftover `pixi.toml`
+
 ### Removed
 
 - Drop support for Python 3.10 (reached end of life)
