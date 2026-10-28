@@ -59,6 +59,7 @@ report.include = ["pypoman/*"]
 [tool.flit.sdist]
 exclude = [
     ".git*",
+    ".python-version",
     "CONTRIBUTING.md",
     "doc/",
     "examples/",
