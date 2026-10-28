@@ -6,14 +6,21 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- CICD: Test examples with uv
+- CICD: Test the base install without cdd
+- Optional `cdd` extra to install pycddlib: `pip install pypoman[cdd]`
 - Support for Python 3.15
 
 ### Changed
 
+- **Breaking:** functions that require pycddlib now raise an `ImportError` when it is missing
+- **Breaking:** pycddlib is now an optional dependency
+- CICD: Do not install cdd in the documentation environment
 - CICD: Run macOS tests on `macos-latest`
 - CICD: Update actions-gh-pages to v4
 - CICD: Update checkout actions to v7
 - CICD: Update setup-micromamba actions to v3,
+- Tooling: The `all` extra now includes pycddlib
 - Tooling: install cvxopt from conda-forge in pixi environments
 - Tooling: move pixi manifest from `pixi.toml` to `pyproject.toml`
 
