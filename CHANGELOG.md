@@ -23,6 +23,7 @@ All notable changes to this project will be documented in this file.
 - Tooling: The `all` extra now includes pycddlib
 - Tooling: install cvxopt from conda-forge in pixi environments
 - Tooling: move pixi manifest from `pixi.toml` to `pyproject.toml`
+- Tooling: pin Python 3.14 for uv in `.python-version`, as cvxopt has no Python 3.15 wheels yet
 
 ### Fixed
 
