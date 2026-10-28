@@ -66,9 +66,35 @@ jobs:
             - name: "Run unit tests"
               run: pixi run -e ${{ matrix.python-version }} tests
 
+    uv:
+        name: "Test ${{ matrix.os }} without cdd"
+        runs-on: ${{ matrix.os }}
+
+        strategy:
+            matrix:
+                os: [ubuntu-latest, macos-latest]
+
+        env:
+            MPLBACKEND: Agg
+
+        steps:
+            - name: "Checkout sources"
+              uses: actions/checkout@v7
+
+            - name: "Set up uv"
+              uses: astral-sh/setup-uv@v7
+
+            - name: "Run unit tests"
+              run: uv run --locked python -m unittest discover
+
+            - name: "Run examples that don't require cdd"
+              run: |
+                  uv run --locked examples/polygon_chebyshev_center.py
+                  uv run --locked examples/polytope_projection.py
+
     ci_success:
         name: "CI success"
         runs-on: ubuntu-latest
-        needs: [coverage, lint, test]
+        needs: [coverage, lint, test, uv]
         steps:
             - run: echo "CI workflow completed successfully"
