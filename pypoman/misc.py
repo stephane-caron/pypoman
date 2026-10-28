@@ -2,7 +2,31 @@
 
 """Other utility functions."""
 
+from types import ModuleType
+
 import numpy as np
+
+
+def import_cdd() -> ModuleType:
+    """Import pycddlib, which is an optional dependency of pypoman.
+
+    Returns
+    -------
+    :
+        The ``cdd`` module.
+
+    Raises
+    ------
+    ImportError
+        If pycddlib is not installed.
+    """
+    try:
+        import cdd  # pylint: disable=import-outside-toplevel
+    except ImportError as e:
+        raise ImportError(
+            "This function requires pycddlib: pip install pypoman[cdd]"
+        ) from e
+    return cdd
 
 
 def norm(v: np.ndarray) -> float:
