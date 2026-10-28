@@ -1,7 +1,6 @@
 channels:
     - conda-forge
 dependencies:
-    - cddlib
     - cvxopt
     - matplotlib
     - numpy
@@ -13,5 +12,4 @@ dependencies:
     - sphinx-favicon
     - sphinx-rtd-theme
     - pip:
-        - pycddlib >= 3.0.0
         - sphinx-mathjax-offline
