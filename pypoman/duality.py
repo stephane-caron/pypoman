@@ -4,12 +4,11 @@
 
 from typing import List, Tuple, Union
 
-import cdd
 import numpy as np
 from scipy.spatial import ConvexHull
 
 from .exceptions import ConversionError
-from .misc import norm
+from .misc import import_cdd, norm
 
 
 def compute_cone_face_matrix(S: np.ndarray) -> np.ndarray:
@@ -25,6 +24,11 @@ def compute_cone_face_matrix(S: np.ndarray) -> np.ndarray:
     -------
     :
         Face matrix defining the cone equivalently by :math:`F x \leq 0`.
+
+    Note
+    ----
+    This function requires `pycddlib <https://pypi.org/project/pycddlib/>`_,
+    which can be installed by ``pip install pypoman[cdd]``.
     """
     V = np.vstack(
         [
@@ -33,6 +37,7 @@ def compute_cone_face_matrix(S: np.ndarray) -> np.ndarray:
         ]
     )
     # V-representation: first column is 0 for rays
+    cdd = import_cdd()
     mat = cdd.matrix_from_array(V)  # type: ignore
     mat.rep_type = cdd.RepType.GENERATOR
     P = cdd.polyhedron_from_matrix(mat)
@@ -75,10 +80,16 @@ def compute_polytope_halfspaces(
     :
         Tuple ``(A, b)`` of the halfspace representation, or empty array if it
         is empty.
+
+    Note
+    ----
+    This function requires `pycddlib <https://pypi.org/project/pycddlib/>`_,
+    which can be installed by ``pip install pypoman[cdd]``.
     """
     V = np.vstack(vertices)
     t = np.ones((V.shape[0], 1))  # first column is 1 for vertices
     tV = np.hstack([t, V])
+    cdd = import_cdd()
     mat = cdd.matrix_from_array(tV)  # type: ignore
     mat.rep_type = cdd.RepType.GENERATOR
     P = cdd.polyhedron_from_matrix(mat)
@@ -111,12 +122,16 @@ def compute_polytope_vertices(
 
     Notes
     -----
+    This function requires `pycddlib <https://pypi.org/project/pycddlib/>`_,
+    which can be installed by ``pip install pypoman[cdd]``.
+
     This method won't work well if your halfspace representation includes
     equality constraints :math:`A x = b` written as :math:`(A x \leq b \wedge
     -A x \leq -b)`. If this is your use case, consider using directly the
     linear set ``lin_set`` of `equality-constraint generatorsin pycddlib
     <https://pycddlib.readthedocs.io/en/latest/matrix.html>`_.
     """
+    cdd = import_cdd()
     b = b.reshape((b.shape[0], 1))
     mat = cdd.matrix_from_array(np.hstack([b, -A]))  # type: ignore
     mat.rep_type = cdd.RepType.INEQUALITY
