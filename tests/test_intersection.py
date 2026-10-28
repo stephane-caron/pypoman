@@ -12,6 +12,8 @@ from pypoman import (
     intersect_polygons,
 )
 
+from . import requires
+
 
 class TestIntersection(unittest.TestCase):
     """Test fixture for intersection algorithms."""
@@ -43,6 +45,7 @@ class TestIntersection(unittest.TestCase):
         inter = intersect_line_cylinder(line, vertices)
         self.assertEqual(len(inter), 1)
 
+    @requires("pyclipper")
     def test_intersect_polygons(self):
         polygon1 = [
             np.array([0.0, 0.0]),
@@ -59,6 +62,7 @@ class TestIntersection(unittest.TestCase):
         inter = intersect_polygons(polygon1, polygon2)
         self.assertEqual(len(inter), 4)
 
+    @requires("pyclipper")
     def test_empty_polygon_intersection(self):
         polygon1 = [
             np.array([0.0, 0.0]),

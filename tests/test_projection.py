@@ -12,12 +12,15 @@ from pypoman import (
     project_polytope,
 )
 
+from . import requires
+
 
 class TestProjection(unittest.TestCase):
     """Test fixture for projection algorithms."""
 
-    def test_project_polytope(self, n: int = 10, p: int = 2):
-        r"""Test polytope projection.
+    @staticmethod
+    def get_problem(n: int = 10, p: int = 2):
+        r"""Get a polytope projection problem.
 
         The original polytope is defined by:
 
@@ -44,14 +47,22 @@ class TestProjection(unittest.TestCase):
         E[1, 1] = 1.0
         f = np.zeros(p)
         proj = (E, f)  # proj(x) = E * x + f
+        return proj, ineq, eq
 
-        vertices_bretl = project_polytope(proj, ineq, eq, method="bretl")
-        vertices_cdd = project_polytope(proj, ineq, eq, method="cdd")
-        self.assertGreater(len(vertices_bretl), 3)
-        self.assertGreater(len(vertices_cdd), 3)
-        self.assertLess(len(vertices_bretl), 20)
-        self.assertLess(len(vertices_cdd), 1000)
+    def test_project_polytope_bretl(self):
+        proj, ineq, eq = self.get_problem()
+        vertices = project_polytope(proj, ineq, eq, method="bretl")
+        self.assertGreater(len(vertices), 3)
+        self.assertLess(len(vertices), 20)
 
+    @requires("cdd")
+    def test_project_polytope_cdd(self):
+        proj, ineq, eq = self.get_problem()
+        vertices = project_polytope(proj, ineq, eq, method="cdd")
+        self.assertGreater(len(vertices), 3)
+        self.assertLess(len(vertices), 1000)
+
+    @requires("cdd", "qpsolvers")
     def test_project_point_to_polytope(self):
         vertices = [
             (np.cos(theta), np.sin(theta))
