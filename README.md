@@ -19,7 +19,7 @@ This installs the core library, covering for instance polytope projection with t
 | Extra | Dependency | Features |
 |-------|------------|----------|
 | `cdd` | [pycddlib](https://pypi.org/project/pycddlib/) | Vertex and halfspace enumeration, polytope projection with `method="cdd"` |
-| `all` | All of the above, plus [pyclipper](https://pypi.org/project/pyclipper/) and [qpsolvers](https://pypi.org/project/qpsolvers/) | Everything, including polygon intersection and point-to-polytope projection |
+| `all` | [pycddlib](https://pypi.org/project/pycddlib/), [pyclipper](https://pypi.org/project/pyclipper/), [qpsolvers](https://pypi.org/project/qpsolvers/) | Everything, including polygon intersection and point-to-polytope projection |
 
 ### Installing cdd
 
